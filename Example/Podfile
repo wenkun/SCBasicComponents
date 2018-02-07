@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'SCBasicComponents_Example' do
+  pod 'SCBasicComponents', :path => '../'
+
+  target 'SCBasicComponents_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
