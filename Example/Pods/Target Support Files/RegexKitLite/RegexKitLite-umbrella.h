@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "RegexKitLite.h"
 
-FOUNDATION_EXPORT double SCBasicComponentsVersionNumber;
-FOUNDATION_EXPORT const unsigned char SCBasicComponentsVersionString[];
+FOUNDATION_EXPORT double RegexKitLiteVersionNumber;
+FOUNDATION_EXPORT const unsigned char RegexKitLiteVersionString[];
 

@@ -1,6 +1,0 @@
-framework module SCBasicComponents {
-  umbrella header "SCBasicComponents-umbrella.h"
-
-  export *
-  module * { export * }
-}

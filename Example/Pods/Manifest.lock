@@ -1,16 +1,27 @@
 PODS:
-  - SCBasicComponents (0.1.0)
+  - RegexKitLite (4.0)
+  - STopAlertView (0.0.1):
+    - RegexKitLite (~> 4.0)
+    - YYText (~> 1.0.7)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
-  - SCBasicComponents (from `../`)
+  - STopAlertView (from `https://10.159.46.130/iOS_pods/STopAlertView.git`)
 
 EXTERNAL SOURCES:
-  SCBasicComponents:
-    :path: ../
+  STopAlertView:
+    :git: https://10.159.46.130/iOS_pods/STopAlertView.git
+
+CHECKOUT OPTIONS:
+  STopAlertView:
+    :commit: b08f4930b8b9b674f30885c92caf2f4d551b2c61
+    :git: https://10.159.46.130/iOS_pods/STopAlertView.git
 
 SPEC CHECKSUMS:
-  SCBasicComponents: 034af3b4508de4d25bc95381e11e82570cb3b5f1
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  STopAlertView: f36696e9d09b707f776af1a4ee63c6f49c4d5847
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 9f2617888e60795bc2ac4ee776e8aec04f1473b3
+PODFILE CHECKSUM: d194363870c5a18e6313bc12af386704cb1359e4
 
 COCOAPODS: 1.4.0

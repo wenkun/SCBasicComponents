@@ -1,7 +1,9 @@
-use_frameworks!
+#use_frameworks!
 
 target 'SCBasicComponents_Example' do
-  pod 'SCBasicComponents', :path => '../'
+#  pod 'SCBasicComponents', :path => '../'
+
+  pod 'STopAlertView', :git => 'https://10.159.46.130/iOS_pods/STopAlertView.git'
 
   target 'SCBasicComponents_Tests' do
     inherit! :search_paths

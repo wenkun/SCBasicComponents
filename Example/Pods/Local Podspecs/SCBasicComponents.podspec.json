@@ -1,22 +1,26 @@
 {
   "name": "SCBasicComponents",
-  "version": "0.1.0",
-  "summary": "A short description of SCBasicComponents.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/wenkun/SCBasicComponents",
+  "version": "0.0.1",
+  "summary": "项目使用的基础组件",
+  "description": "该组件整合了项目中经常使用的一些基础的宏和类的扩展，及自定义的一些类的集合",
+  "homepage": "https://10.159.46.130/iOS_pods/SCBasicComponents.git",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "wenkun": "ken.bug@qq.com"
+    "wenkun": "duwenkun@haier.com"
   },
   "source": {
-    "git": "https://github.com/wenkun/SCBasicComponents.git",
-    "tag": "0.1.0"
+    "git": "https://10.159.46.130/iOS_pods/SCBasicComponents.git",
+    "tag": "0.0.1"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "SCBasicComponents/Classes/**/*"
+  "source_files": "SCBasicComponents/Classes/**/*.{h,m}",
+  "frameworks": [
+    "UIKit",
+    "Foundation"
+  ]
 }

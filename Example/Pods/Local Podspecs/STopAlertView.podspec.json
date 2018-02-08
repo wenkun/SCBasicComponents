@@ -1,0 +1,32 @@
+{
+  "name": "STopAlertView",
+  "version": "0.0.1",
+  "summary": "Top Alart View",
+  "description": "顶部弹出框，弹出框内容可图文混编",
+  "homepage": "https://10.159.46.130/iOS_pods/STopAlertView.git",
+  "license": "MIT",
+  "authors": {
+    "文堃 杜": "duwenkun@haier.com"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source": {
+    "git": "https://10.159.46.130/iOS_pods/STopAlertView.git",
+    "tag": "0.0.1"
+  },
+  "source_files": [
+    "SCTopAlertViewDemo/Source",
+    "*.{h,m}"
+  ],
+  "public_header_files": "SCTopAlertViewDemo/Source/*.h",
+  "resources": "SCTopAlertViewDemo/Source/SCAssets.xcassets",
+  "dependencies": {
+    "YYText": [
+      "~> 1.0.7"
+    ],
+    "RegexKitLite": [
+      "~> 4.0"
+    ]
+  }
+}

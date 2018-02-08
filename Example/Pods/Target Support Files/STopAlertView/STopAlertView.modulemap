@@ -1,0 +1,6 @@
+framework module STopAlertView {
+  umbrella header "STopAlertView-umbrella.h"
+
+  export *
+  module * { export * }
+}
