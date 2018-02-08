@@ -1,0 +1,16 @@
+PODS:
+  - SCBasicComponents (0.1.0)
+
+DEPENDENCIES:
+  - SCBasicComponents (from `../`)
+
+EXTERNAL SOURCES:
+  SCBasicComponents:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SCBasicComponents: 034af3b4508de4d25bc95381e11e82570cb3b5f1
+
+PODFILE CHECKSUM: 9f2617888e60795bc2ac4ee776e8aec04f1473b3
+
+COCOAPODS: 1.4.0

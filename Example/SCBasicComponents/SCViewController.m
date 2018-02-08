@@ -7,6 +7,7 @@
 //
 
 #import "SCViewController.h"
+#import "SCBasicComponents.h"
 
 @interface SCViewController ()
 
@@ -18,6 +19,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSLog(@"%@", @(ScreenHeight));
+    NSLog(@"%@", @(self.view.frame.size.height));
+    
+//    UIColor *color = RGBA(110, 110, 110, 1);
+    UIColor *color = ColorWithHex(@"000000");
+    self.view.backgroundColor = color;
 }
 
 - (void)didReceiveMemoryWarning

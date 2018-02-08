@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
+		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
 		45AA0F6326AF1A06AAF112E2 /* Pods_SCBasicComponents_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7821FF9C7AFA5F2AE1A826D4 /* Pods_SCBasicComponents_Example.framework */; };
 		47134DB2420698205C11EEF5 /* Pods_SCBasicComponents_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A89F388CAF8D586582401B7C /* Pods_SCBasicComponents_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -37,8 +39,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0054CB1AB52E5FAFF13A3F94 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		02AB4EF962CE2E2A371BB1A0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		0054CB1AB52E5FAFF13A3F94 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		02AB4EF962CE2E2A371BB1A0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		25BA0487202B40D1004461ED /* SCDefaultsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDefaultsUI.h; sourceTree = "<group>"; };
+		25BA0489202B40D1004461ED /* UIColor+SCHexadecimal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SCHexadecimal.h"; sourceTree = "<group>"; };
+		25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SCHexadecimal.m"; sourceTree = "<group>"; };
+		25BA048B202B40D1004461ED /* SCBasicComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBasicComponents.h; sourceTree = "<group>"; };
+		25DD9734202B4F66000874D4 /* UIImage+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+SCExtension.h"; sourceTree = "<group>"; };
+		25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SCExtension.m"; sourceTree = "<group>"; };
 		55D79F809DD81F5F17215986 /* Pods-SCBasicComponents_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SCBasicComponents_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SCBasicComponents_Tests/Pods-SCBasicComponents_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* SCBasicComponents_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCBasicComponents_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -59,7 +67,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		67E9F3B7A256BC67B6CB6AEF /* SCBasicComponents.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SCBasicComponents.podspec; path = ../SCBasicComponents.podspec; sourceTree = "<group>"; };
+		67E9F3B7A256BC67B6CB6AEF /* SCBasicComponents.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SCBasicComponents.podspec; path = ../SCBasicComponents.podspec; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7821FF9C7AFA5F2AE1A826D4 /* Pods_SCBasicComponents_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SCBasicComponents_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -95,6 +103,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25BA0484202B40D1004461ED /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				25BA0486202B40D1004461ED /* Maceos */,
+				25BA0488202B40D1004461ED /* UIExtension */,
+				25BA048B202B40D1004461ED /* SCBasicComponents.h */,
+			);
+			name = Classes;
+			path = ../SCBasicComponents/Classes;
+			sourceTree = "<group>";
+		};
+		25BA0486202B40D1004461ED /* Maceos */ = {
+			isa = PBXGroup;
+			children = (
+				25BA0487202B40D1004461ED /* SCDefaultsUI.h */,
+			);
+			path = Maceos;
+			sourceTree = "<group>";
+		};
+		25BA0488202B40D1004461ED /* UIExtension */ = {
+			isa = PBXGroup;
+			children = (
+				25BA0489202B40D1004461ED /* UIColor+SCHexadecimal.h */,
+				25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */,
+				25DD9734202B4F66000874D4 /* UIImage+SCExtension.h */,
+				25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */,
+			);
+			path = UIExtension;
+			sourceTree = "<group>";
+		};
 		48214E71C6077AB586DAFFCA /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +227,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				25BA0484202B40D1004461ED /* Classes */,
 				67E9F3B7A256BC67B6CB6AEF /* SCBasicComponents.podspec */,
 				0054CB1AB52E5FAFF13A3F94 /* README.md */,
 				02AB4EF962CE2E2A371BB1A0 /* LICENSE */,
@@ -250,6 +289,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = wenkun;
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = GM33XASWMZ;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -404,8 +446,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,
+				25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */,
 				6003F5A7195388D20070C39A /* SCViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +577,7 @@
 			baseConfigurationReference = C1D6B52CB94E45EAAF8770E5 /* Pods-SCBasicComponents_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GM33XASWMZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";
@@ -548,6 +593,7 @@
 			baseConfigurationReference = DC531748A39F955B8918F69B /* Pods-SCBasicComponents_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = GM33XASWMZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";
