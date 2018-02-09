@@ -2,6 +2,7 @@
 ## Installation
 
 ```ruby
+source 'https://10.159.46.130/iOS_pods/PodSpecRepo.git'
 pod 'SCBasicComponents', :git=>'https://10.159.46.130/iOS_pods/SCBasicComponents.git'
 ```
 
