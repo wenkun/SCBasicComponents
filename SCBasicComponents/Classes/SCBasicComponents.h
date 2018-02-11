@@ -16,6 +16,7 @@
 //UIExtension
 #import "UIDevice+SCExtension.h"
 #import "UIImage+SCExtension.h"
+#import "UILabel+AutoFrame.h"
 
 //Tools
 #import "SCLogManager.h"

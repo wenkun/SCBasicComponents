@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   #   'SCBasicComponents' => ['SCBasicComponents/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+  s.public_header_files = 'SCBasicComponents/Classes/**/*.h'
   s.frameworks = 'UIKit', 'Foundation'
   # s.dependency 'STopAlertView'
 end
