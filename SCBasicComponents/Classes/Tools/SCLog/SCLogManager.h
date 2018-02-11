@@ -13,7 +13,7 @@
 #if (SCLogWriteToFile && !DEBUG)
 #define SCDebugLog(FORMAT, ...)
 #else
-#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(FORMAT), ##__VA_ARGS__]
+#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DEBUG]"FORMAT), ##__VA_ARGS__]
 #endif
 
 #import <Foundation/Foundation.h>
@@ -21,9 +21,9 @@
 /**
  Log打印管理类。
  使用说明：
-    1、开启Log写入本地沙盒功能，需先设置SCLogWriteToFile为1，然后调用[startLogAndWriteToFile]方法启动Log写入本地功能
-    2、用户隐私信息请不要使用SCLog打印
-    3、Log里请手动添加事件的标签，例如添加Error标签：FLog(@"[uSDK][ERROR] = %@", error)，[uSDK]为模块标签，常用标签有：[ERROR][DEBUG][WARN][INFO]
+    1、开启Log写入本地沙盒功能，需先设置SCLogWriteToFile为1，然后调用[startLogAndWriteToFile]方法启动Log写入本地功能。
+    2、用户隐私信息请不要使用SCLog打印。
+    3、Log里请手动添加事件的标签，例如添加Error标签：SCLog(@"[uSDK][ERROR] = %@", error)，[uSDK]为模块标签，常用标签有：[ERROR][DEBUG][WARN][INFO]。便签功能是为了方便Log检索。
  */
 @interface SCLogManager : NSObject
 
