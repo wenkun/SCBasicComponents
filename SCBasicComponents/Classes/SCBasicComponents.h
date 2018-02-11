@@ -10,6 +10,7 @@
 #define SCBasicComponents_h
 
 #import "SCDefaultsUI.h"
+#import "SCDefaultResources.h"
 #import "UIImage+SCExtension.h"
 
 #endif /* SCBasicComponents_h */
