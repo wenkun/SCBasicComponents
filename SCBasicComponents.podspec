@@ -47,7 +47,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "Tools" do |ss|
-    ss.source_files = 'SCBasicComponents/Classes/Tools/*.{h,m}'
+    ss.source_files = 'SCBasicComponents/Classes/Tools/**/*.{h,m}'
   end
 
   s.subspec "Maceos" do |ss|
