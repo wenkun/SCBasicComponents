@@ -107,7 +107,6 @@
     if (error) {
         SCLog(@"[Log][ERROR] %@",error);
     }
-//    if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) [[NSFileManager defaultManager] createDirectoryAtPath:logFilePath withIntermediateDirectories:YES attributes:nil error:&error];
     return logFilePath;
 }
 
