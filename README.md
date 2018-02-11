@@ -17,4 +17,15 @@ SCBasicComponents is available under the MIT license. See the LICENSE file for m
 
 ## Example
 
+    //SCDefaultsUI.h 提供系统版本、手机屏幕尺寸、十六进制颜色等一些宏
+    //SCDefaultResources.h 提供资源文件相关一些宏
+    //UIExtension 对UIKit框架的一些类进行扩展
 
+    //SCLogExample
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test");
+    SCDebugLog(@"Can you find me?");
+    [SCLogManager startLogAndWriteToFile]; //Log写入本地
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test");
+    SCDebugLog(@"Can you find me?");

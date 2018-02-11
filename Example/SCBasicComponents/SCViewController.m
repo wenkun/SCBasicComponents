@@ -54,12 +54,14 @@
 
 -(void)testLog
 {
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test");
+    SCDebugLog(@"Can you find me?");
+    //Log写入本地
     [SCLogManager startLogAndWriteToFile];
     SCLog(@"[APP]%@", [UIDevice deviceMode]);
     SCLog(@"[TEST] Just a Test");
     SCDebugLog(@"Can you find me?");
-    
-    [NSString stringWithFormat:@"%@",@"tes"];
 }
 
 @end
