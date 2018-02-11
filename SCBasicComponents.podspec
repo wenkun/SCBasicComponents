@@ -30,10 +30,11 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SCBasicComponents/Classes/**/*.{h,m}'
-  s.exclude_files = "Classes/UIExtension"
-  s.exclude_files = "Classes/Maceos"
-  s.exclude_files = "Classes/Tools/SCLog"
+  s.source_files = 'Classes', 'Classes/**/*.{h,m}'
+  s.exclude_files = "Classes/Exclude"
+  # s.exclude_files = "Classes/UIExtension"
+  # s.exclude_files = "Classes/Maceos"
+  # s.exclude_files = "Classes/Tools/SCLog"
   # s.source_files = {
   #   'SCBasicComponents' => ['SCBasicComponents/Classes/*.{h,m}']
   #   'SCBasicComponents' => ['SCBasicComponents/Classes/UIExtension/*.{h,m}']
