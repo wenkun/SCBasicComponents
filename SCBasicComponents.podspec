@@ -30,7 +30,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SCBasicComponents/Classes/**/*.{h,m}'
+  s.source_files = 'SCBasicComponents/Classes/*.{h,m}'
+  s.source_files = 'SCBasicComponents/Classes/Tools/SCLog/*.{h,m}'
+  s.source_files = 'SCBasicComponents/Classes/UIExtension/*.{h,m}'
+  s.source_files = 'SCBasicComponents/Classes/Maceos/*.{h,m}'
   
   # s.resource_bundles = {
   #   'SCBasicComponents' => ['SCBasicComponents/Assets/*.png']
