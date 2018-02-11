@@ -101,6 +101,13 @@
 -(NSString *)logFilePath
 {
     NSString *logFilePath = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
+    NSError *error = nil;
+    SCFilePathCreate(logFilePath, error);
+    SCLog(@"[Log] path = %@",logFilePath);
+    if (error) {
+        SCLog(@"[Log][ERROR] %@",error);
+    }
+//    if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) [[NSFileManager defaultManager] createDirectoryAtPath:logFilePath withIntermediateDirectories:YES attributes:nil error:&error];
     return logFilePath;
 }
 

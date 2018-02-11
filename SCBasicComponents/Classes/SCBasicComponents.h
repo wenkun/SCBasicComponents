@@ -9,8 +9,15 @@
 #ifndef SCBasicComponents_h
 #define SCBasicComponents_h
 
+//Moceos
 #import "SCDefaultsUI.h"
 #import "SCDefaultResources.h"
+
+//UIExtension
+#import "UIDevice+SCExtension.h"
 #import "UIImage+SCExtension.h"
+
+//Tools
+#import "SCLogManager.h"
 
 #endif /* SCBasicComponents_h */

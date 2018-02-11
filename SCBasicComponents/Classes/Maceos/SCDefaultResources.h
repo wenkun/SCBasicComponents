@@ -35,6 +35,8 @@
 #define SCPathCaches [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
 //沙盒tmp目录路径
 #define SCPathTmp NSTemporaryDirectory()
+//在沙盒路径中创建路径文件夹
+#define SCFilePathCreate(filePath, error) if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) [[NSFileManager defaultManager] createDirectoryAtPath:logFilePath withIntermediateDirectories:YES attributes:nil error:&error];
 
 
 

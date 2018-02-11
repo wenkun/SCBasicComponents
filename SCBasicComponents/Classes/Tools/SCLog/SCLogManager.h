@@ -33,10 +33,18 @@
 ///单例
 +(instancetype)share;
 
-///log打印，对于长度长于1024字节的进行循环打印
+/**
+ 重定义log打印，对于长度长于1024字节的进行循环打印
+
+ @param format :A format string. See Formatting String Objects for examples of how to use this method, and String Format Specifiers for a list of format specifiers. This value must not be nil.
+
+ */
 +(void)logWithFormat:(NSString *)format, ...;
 
-///开始log写入本地文件
+/**
+ 开始log写入本地文件。
+ 一旦启用改方法，请勿使用SCLog和SCDebugLog之外的log打印方法！！！
+ */
 +(void)startLogAndWriteToFile;
 
 @end

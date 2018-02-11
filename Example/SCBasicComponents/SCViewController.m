@@ -24,12 +24,13 @@
     NSLog(@"%@", @(self.view.frame.size.height));
     
 //    UIColor *color = RGBA(110, 110, 110, 1);
-    UIColor *color = ColorWithHex(@"000000");
+    UIColor *color = ColorWithHex(@"123456");
     self.view.backgroundColor = color;
     
 //    [NSUserDefaults standardUserDefaults]
 
     [self testPath];
+    [self testLog];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +50,16 @@
     NSLog(@"%@",SCPathTmp);
     
     
+}
+
+-(void)testLog
+{
+    [SCLogManager startLogAndWriteToFile];
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test");
+    SCDebugLog(@"Can you find me?");
+    
+    [NSString stringWithFormat:@"%@",@"tes"];
 }
 
 @end
