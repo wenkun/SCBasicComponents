@@ -29,18 +29,8 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-
-  s.source_files = 'SCBasicComponents/Classes/*.{h,m}', "SCBasicComponents/Classes/UIExtension/*.{h,m}", "SCBasicComponents/Classes/Tools/**/*.{h,m}", "SCBasicComponents/Classes/Maceos/*.h"
-  # s.exclude_files = "SCBasicComponents/Classes/UIExtension/*.{h,m}"
-  # s.exclude_files = "SCBasicComponents/Classes/Tools/**/*.{h,m}"
-  # s.exclude_files = "SCBasicComponents/Classes/Maceos/*.h"
-  # s.exclude_files = "Classes/Tools/SCLog"
-  # s.source_files = {
-  #   'SCBasicComponents' => ['SCBasicComponents/Classes/*.{h,m}']
-  #   'SCBasicComponents' => ['SCBasicComponents/Classes/UIExtension/*.{h,m}']
-  #   'SCBasicComponents' => ['SCBasicComponents/Classes/Maceos/*.{h,m}']
-  #   'SCBasicComponents' => ['SCBasicComponents/Classes/Tools/SCLog/*.{h,m}']
-  # }
+  
+  s.source_files = 'SCBasicComponents/Classes/**/*.{h,m}'
 
   # s.subspec "UIExtension" do |ss|
   #   ss.source_files = 'SCBasicComponents/Classes/UIExtension/*.{h,m}'

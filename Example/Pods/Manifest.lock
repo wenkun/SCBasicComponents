@@ -1,27 +1,12 @@
 PODS:
-  - RegexKitLite (4.0)
-  - STopAlertView (0.0.1):
-    - RegexKitLite (~> 4.0)
-    - YYText (~> 1.0.7)
-  - YYText (1.0.7)
+  - MBProgressHUD (1.1.0)
 
 DEPENDENCIES:
-  - STopAlertView (from `https://10.159.46.130/iOS_pods/STopAlertView.git`)
-
-EXTERNAL SOURCES:
-  STopAlertView:
-    :git: https://10.159.46.130/iOS_pods/STopAlertView.git
-
-CHECKOUT OPTIONS:
-  STopAlertView:
-    :commit: b08f4930b8b9b674f30885c92caf2f4d551b2c61
-    :git: https://10.159.46.130/iOS_pods/STopAlertView.git
+  - MBProgressHUD
 
 SPEC CHECKSUMS:
-  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
-  STopAlertView: f36696e9d09b707f776af1a4ee63c6f49c4d5847
-  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
 
-PODFILE CHECKSUM: d194363870c5a18e6313bc12af386704cb1359e4
+PODFILE CHECKSUM: 41310779e517408dabe4ac6511c73befcae01818
 
 COCOAPODS: 1.4.0
