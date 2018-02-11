@@ -30,10 +30,10 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'SCBasicComponents/Classes/*.{h,m}'
-  # s.exclude_files = "SCBasicComponents/Classes/Exclude"
-  # s.exclude_files = "Classes/UIExtension"
-  # s.exclude_files = "Classes/Maceos"
+  s.source_files = 'SCBasicComponents/Classes/*.{h,m}', "SCBasicComponents/Classes/UIExtension/*.{h,m}", "SCBasicComponents/Classes/Tools/**/*.{h,m}", "SCBasicComponents/Classes/Maceos/*.h"
+  # s.exclude_files = "SCBasicComponents/Classes/UIExtension/*.{h,m}"
+  # s.exclude_files = "SCBasicComponents/Classes/Tools/**/*.{h,m}"
+  # s.exclude_files = "SCBasicComponents/Classes/Maceos/*.h"
   # s.exclude_files = "Classes/Tools/SCLog"
   # s.source_files = {
   #   'SCBasicComponents' => ['SCBasicComponents/Classes/*.{h,m}']
@@ -42,17 +42,20 @@ Pod::Spec.new do |s|
   #   'SCBasicComponents' => ['SCBasicComponents/Classes/Tools/SCLog/*.{h,m}']
   # }
 
-  s.subspec "UIExtension" do |ss|
-    ss.source_files = 'SCBasicComponents/Classes/UIExtension/*.{h,m}'
-  end
+  # s.subspec "UIExtension" do |ss|
+  #   ss.source_files = 'SCBasicComponents/Classes/UIExtension/*.{h,m}'
+  #   ss.public_header_files = 'SCBasicComponents/Classes/UIExtension/*.h'
+  # end
 
-  s.subspec "Tools" do |ss|
-    ss.source_files = 'SCBasicComponents/Classes/Tools/**/*.{h,m}'
-  end
+  # s.subspec "Tools" do |ss|
+  #   ss.source_files = 'SCBasicComponents/Classes/Tools/**/*.{h,m}'
+  #   ss.public_header_files = 'SCBasicComponents/Classes/Tools/**/*.h'
+  # end
 
-  s.subspec "Maceos" do |ss|
-    ss.source_files = 'SCBasicComponents/Classes/Maceos/*.h'
-  end
+  # s.subspec "Maceos" do |ss|
+  #   ss.source_files = 'SCBasicComponents/Classes/Maceos/*.h'
+  #   ss.public_header_files = 'SCBasicComponents/Classes/Maceos/*.h'
+  # end
 
   # s.resource_bundles = {
   #   'SCBasicComponents' => ['SCBasicComponents/Assets/*.png']
