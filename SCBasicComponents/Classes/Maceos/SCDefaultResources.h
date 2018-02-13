@@ -39,5 +39,8 @@
 #define SCFilePathCreate(filePath, error) if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) [[NSFileManager defaultManager] createDirectoryAtPath:logFilePath withIntermediateDirectories:YES attributes:nil error:&error];
 
 
+//从storyboard里获取ViewController
+#define ViewControllerFromStoryboard(storyboardName, viewControllerId) [[UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerId]
+
 
 #endif /* SCDefaultResources_h */

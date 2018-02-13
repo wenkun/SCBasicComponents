@@ -30,10 +30,6 @@
 #define IsScreen_5_8 (ScreenHeight == 812)
 
 
-//从storyboard里获取ViewController
-#define ViewControllerFromStoryboard(storyboardName, viewControllerId) [[UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerId]
-
-
 //颜色和透明度设置
 #define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
 //十六进制颜色
