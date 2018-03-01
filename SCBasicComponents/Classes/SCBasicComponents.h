@@ -17,6 +17,13 @@
 #import "UIDevice+SCExtension.h"
 #import "UIImage+SCExtension.h"
 #import "UILabel+AutoFrame.h"
+#import "UIImage+SCExtension.h"
+#import "UIView+SCRotate.h"
+#import "UIView+SCExtension.h"
+#import "UIColor+SCExtension.h"
+#import "NSString+SCExtension.h"
+#import "NSData+SCExtension.h"
+#import "NSNumber+SCExtension.h"
 
 //Tools
 #import "SCLogManager.h"

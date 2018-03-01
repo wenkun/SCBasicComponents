@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
-
   s.description      = <<-DESC
 该组件整合了项目中经常使用的一些基础的宏和类的扩展，及自定义的一些类的集合
                        DESC

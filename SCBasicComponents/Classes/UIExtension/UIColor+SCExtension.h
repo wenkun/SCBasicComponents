@@ -10,4 +10,10 @@
 
 @interface UIColor (SCExtension)
 
+/**
+ 获取随机颜色
+
+ @return 随机颜色
+ */
++ (UIColor *)randomColor;
 @end

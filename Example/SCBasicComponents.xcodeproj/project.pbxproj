@@ -16,6 +16,8 @@
 		33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D32046955E00EA4C49 /* UIView+SCExtension.m */; };
 		33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D62046957500EA4C49 /* UIColor+SCExtension.m */; };
 		33EBA4DA2046963E00EA4C49 /* NSString+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D92046963E00EA4C49 /* NSString+SCExtension.m */; };
+		33FB57332047EF7100A4944F /* NSData+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FB57322047EF7100A4944F /* NSData+SCExtension.m */; };
+		33FB57362047EF8500A4944F /* NSNumber+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FB57352047EF8500A4944F /* NSNumber+SCExtension.m */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -68,6 +70,10 @@
 		33EBA4D62046957500EA4C49 /* UIColor+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SCExtension.m"; sourceTree = "<group>"; };
 		33EBA4D82046963E00EA4C49 /* NSString+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+SCExtension.h"; sourceTree = "<group>"; };
 		33EBA4D92046963E00EA4C49 /* NSString+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+SCExtension.m"; sourceTree = "<group>"; };
+		33FB57312047EF7100A4944F /* NSData+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+SCExtension.h"; sourceTree = "<group>"; };
+		33FB57322047EF7100A4944F /* NSData+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+SCExtension.m"; sourceTree = "<group>"; };
+		33FB57342047EF8500A4944F /* NSNumber+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSNumber+SCExtension.h"; sourceTree = "<group>"; };
+		33FB57352047EF8500A4944F /* NSNumber+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+SCExtension.m"; sourceTree = "<group>"; };
 		5FB6D526ED29AE2C1CC4D24F /* libPods-SCBasicComponents_Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SCBasicComponents_Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* SCBasicComponents_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCBasicComponents_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -161,6 +167,10 @@
 				33EBA4D62046957500EA4C49 /* UIColor+SCExtension.m */,
 				33EBA4D82046963E00EA4C49 /* NSString+SCExtension.h */,
 				33EBA4D92046963E00EA4C49 /* NSString+SCExtension.m */,
+				33FB57312047EF7100A4944F /* NSData+SCExtension.h */,
+				33FB57322047EF7100A4944F /* NSData+SCExtension.m */,
+				33FB57342047EF8500A4944F /* NSNumber+SCExtension.h */,
+				33FB57352047EF8500A4944F /* NSNumber+SCExtension.m */,
 			);
 			path = UIExtension;
 			sourceTree = "<group>";
@@ -334,7 +344,7 @@
 				ORGANIZATIONNAME = wenkun;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = GM33XASWMZ;
+						DevelopmentTeam = PP27UD8NYZ;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -455,11 +465,13 @@
 				2533F6E0203085E500ED6358 /* UILabel+AutoFrame.m in Sources */,
 				6003F5A7195388D20070C39A /* SCViewController.m in Sources */,
 				2533F6B7202FE79300ED6358 /* UIDevice+SCExtension.m in Sources */,
+				33FB57362047EF8500A4944F /* NSNumber+SCExtension.m in Sources */,
 				33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */,
 				33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				25AA70622033CD30008E835D /* UIView+SCRotate.m in Sources */,
 				25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */,
+				33FB57332047EF7100A4944F /* NSData+SCExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,7 +621,7 @@
 			baseConfigurationReference = C1D6B52CB94E45EAAF8770E5 /* Pods-SCBasicComponents_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GM33XASWMZ;
+				DEVELOPMENT_TEAM = PP27UD8NYZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";
@@ -625,7 +637,7 @@
 			baseConfigurationReference = DC531748A39F955B8918F69B /* Pods-SCBasicComponents_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = GM33XASWMZ;
+				DEVELOPMENT_TEAM = PP27UD8NYZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";
