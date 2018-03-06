@@ -78,5 +78,10 @@
  @return 裁剪出来的图片
  */
 -(UIImage*)getSubImage:(CGRect)rect;
-
+/**
+ Tint the image in alpha channel with the given color.
+ 
+ @param color  The color.
+ */
+- (UIImage *)imageByTintColor:(UIColor *)color;
 @end
