@@ -13,6 +13,7 @@
 		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
 		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
 		25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD976E202D73FD000874D4 /* SCLogManager.m */; };
+		335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */; };
 		33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D32046955E00EA4C49 /* UIView+SCExtension.m */; };
 		33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D62046957500EA4C49 /* UIColor+SCExtension.m */; };
 		33EBA4DA2046963E00EA4C49 /* NSString+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D92046963E00EA4C49 /* NSString+SCExtension.m */; };
@@ -64,6 +65,8 @@
 		25DD976C202D6478000874D4 /* SCDefaultResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDefaultResources.h; sourceTree = "<group>"; };
 		25DD976D202D73FD000874D4 /* SCLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLogManager.h; sourceTree = "<group>"; };
 		25DD976E202D73FD000874D4 /* SCLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLogManager.m; sourceTree = "<group>"; };
+		335B645D20565CDA009BD7F8 /* NSDate+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SCExtension.h"; sourceTree = "<group>"; };
+		335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SCExtension.m"; sourceTree = "<group>"; };
 		33EBA4D22046955E00EA4C49 /* UIView+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SCExtension.h"; sourceTree = "<group>"; };
 		33EBA4D32046955E00EA4C49 /* UIView+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SCExtension.m"; sourceTree = "<group>"; };
 		33EBA4D52046957500EA4C49 /* UIColor+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+SCExtension.h"; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				33FB57322047EF7100A4944F /* NSData+SCExtension.m */,
 				33FB57342047EF8500A4944F /* NSNumber+SCExtension.h */,
 				33FB57352047EF8500A4944F /* NSNumber+SCExtension.m */,
+				335B645D20565CDA009BD7F8 /* NSDate+SCExtension.h */,
+				335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */,
 			);
 			path = UIExtension;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */,
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,
 				25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */,
+				335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */,
 				33EBA4DA2046963E00EA4C49 /* NSString+SCExtension.m in Sources */,
 				2533F6E0203085E500ED6358 /* UILabel+AutoFrame.m in Sources */,
 				6003F5A7195388D20070C39A /* SCViewController.m in Sources */,
