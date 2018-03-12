@@ -24,7 +24,7 @@
 #import "NSString+SCExtension.h"
 #import "NSData+SCExtension.h"
 #import "NSNumber+SCExtension.h"
-
+#import "NSDate+SCExtension.h"
 //Tools
 #import "SCLogManager.h"
 
