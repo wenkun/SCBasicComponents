@@ -9,6 +9,7 @@
 #ifndef SCDefaultsUI_h
 #define SCDefaultsUI_h
 
+#ifdef __OBJC__
 #import "UIColor+SCHexadecimal.h"
 
 //system
@@ -34,5 +35,7 @@
 #define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]
 //十六进制颜色
 #define ColorWithHex(hexString) [UIColor colorWithHexString:hexString]
+
+#endif
 
 #endif /* SCDefaultsUI_h */
