@@ -13,6 +13,7 @@
 		258E20DD20A2E5980024B997 /* SCButton_Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20DB20A2E5980024B997 /* SCButton_Badge.m */; };
 		258E20E020A2E6850024B997 /* SCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20DF20A2E6850024B997 /* SCModel.m */; };
 		258E20E320A2E6A20024B997 /* SCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20E120A2E6A20024B997 /* SCAlertController.m */; };
+		258E20E620A2EBD10024B997 /* SCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20E520A2EBD10024B997 /* SCButton.m */; };
 		25AA70622033CD30008E835D /* UIView+SCRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AA70602033CD2F008E835D /* UIView+SCRotate.m */; };
 		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
 		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
@@ -66,6 +67,8 @@
 		258E20DF20A2E6850024B997 /* SCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCModel.m; sourceTree = "<group>"; };
 		258E20E120A2E6A20024B997 /* SCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAlertController.m; sourceTree = "<group>"; };
 		258E20E220A2E6A20024B997 /* SCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAlertController.h; sourceTree = "<group>"; };
+		258E20E420A2EBD10024B997 /* SCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCButton.h; sourceTree = "<group>"; };
+		258E20E520A2EBD10024B997 /* SCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCButton.m; sourceTree = "<group>"; };
 		25AA70602033CD2F008E835D /* UIView+SCRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SCRotate.m"; sourceTree = "<group>"; };
 		25AA70612033CD2F008E835D /* UIView+SCRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SCRotate.h"; sourceTree = "<group>"; };
 		25BA0487202B40D1004461ED /* SCDefaultsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDefaultsUI.h; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */,
 				258E20D920A2E58B0024B997 /* SCAreaChoiseView.h */,
 				258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */,
+				258E20E420A2EBD10024B997 /* SCButton.h */,
+				258E20E520A2EBD10024B997 /* SCButton.m */,
 				258E20DC20A2E5980024B997 /* SCButton_Badge.h */,
 				258E20DB20A2E5980024B997 /* SCButton_Badge.m */,
 				258E20E220A2E6A20024B997 /* SCAlertController.h */,
@@ -328,8 +333,6 @@
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
-				92684185E8150429F9AAD40D /* [CP] Embed Pods Frameworks */,
-				28CDEA685198C2CE4A6A66BE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -418,46 +421,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		28CDEA685198C2CE4A6A66BE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SCBasicComponents_Example/Pods-SCBasicComponents_Example-resources.sh",
-				"${PODS_ROOT}/STopAlertView/SCTopAlertViewDemo/Source/SCAssets.xcassets",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SCAssets.xcassets",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SCBasicComponents_Example/Pods-SCBasicComponents_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92684185E8150429F9AAD40D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SCBasicComponents_Example/Pods-SCBasicComponents_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RegexKitLite/RegexKitLite.framework",
-				"${BUILT_PRODUCTS_DIR}/STopAlertView/STopAlertView.framework",
-				"${BUILT_PRODUCTS_DIR}/YYText/YYText.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RegexKitLite.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STopAlertView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YYText.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SCBasicComponents_Example/Pods-SCBasicComponents_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		9C11E2FF8A4D97DDE7D5D97F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -494,6 +457,7 @@
 				6003F5A7195388D20070C39A /* SCViewController.m in Sources */,
 				2533F6B7202FE79300ED6358 /* UIDevice+SCExtension.m in Sources */,
 				33FB57362047EF8500A4944F /* NSNumber+SCExtension.m in Sources */,
+				258E20E620A2EBD10024B997 /* SCButton.m in Sources */,
 				33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */,
 				33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */,
 				258E20E020A2E6850024B997 /* SCModel.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "SCAreaChoiseView.h"
+#import "SCDefaultsUI.h"
 
 @interface SCAreaChoiseView ()
 
