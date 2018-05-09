@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2533F6B7202FE79300ED6358 /* UIDevice+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2533F6B6202FE79300ED6358 /* UIDevice+SCExtension.m */; };
 		2533F6E0203085E500ED6358 /* UILabel+AutoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2533F6DF203085E500ED6358 /* UILabel+AutoFrame.m */; };
+		258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */; };
+		258E20DD20A2E5980024B997 /* SCButton_Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20DB20A2E5980024B997 /* SCButton_Badge.m */; };
+		258E20E020A2E6850024B997 /* SCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20DF20A2E6850024B997 /* SCModel.m */; };
+		258E20E320A2E6A20024B997 /* SCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20E120A2E6A20024B997 /* SCAlertController.m */; };
 		25AA70622033CD30008E835D /* UIView+SCRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AA70602033CD2F008E835D /* UIView+SCRotate.m */; };
 		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
 		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
@@ -54,6 +58,14 @@
 		2533F6B6202FE79300ED6358 /* UIDevice+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SCExtension.m"; sourceTree = "<group>"; };
 		2533F6DE203085E500ED6358 /* UILabel+AutoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AutoFrame.h"; sourceTree = "<group>"; };
 		2533F6DF203085E500ED6358 /* UILabel+AutoFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AutoFrame.m"; sourceTree = "<group>"; };
+		258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAreaChoiseView.m; sourceTree = "<group>"; };
+		258E20D920A2E58B0024B997 /* SCAreaChoiseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAreaChoiseView.h; sourceTree = "<group>"; };
+		258E20DB20A2E5980024B997 /* SCButton_Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCButton_Badge.m; sourceTree = "<group>"; };
+		258E20DC20A2E5980024B997 /* SCButton_Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCButton_Badge.h; sourceTree = "<group>"; };
+		258E20DE20A2E6850024B997 /* SCModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCModel.h; sourceTree = "<group>"; };
+		258E20DF20A2E6850024B997 /* SCModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCModel.m; sourceTree = "<group>"; };
+		258E20E120A2E6A20024B997 /* SCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAlertController.m; sourceTree = "<group>"; };
+		258E20E220A2E6A20024B997 /* SCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAlertController.h; sourceTree = "<group>"; };
 		25AA70602033CD2F008E835D /* UIView+SCRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SCRotate.m"; sourceTree = "<group>"; };
 		25AA70612033CD2F008E835D /* UIView+SCRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SCRotate.h"; sourceTree = "<group>"; };
 		25BA0487202B40D1004461ED /* SCDefaultsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDefaultsUI.h; sourceTree = "<group>"; };
@@ -176,6 +188,12 @@
 				33FB57352047EF8500A4944F /* NSNumber+SCExtension.m */,
 				335B645D20565CDA009BD7F8 /* NSDate+SCExtension.h */,
 				335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */,
+				258E20D920A2E58B0024B997 /* SCAreaChoiseView.h */,
+				258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */,
+				258E20DC20A2E5980024B997 /* SCButton_Badge.h */,
+				258E20DB20A2E5980024B997 /* SCButton_Badge.m */,
+				258E20E220A2E6A20024B997 /* SCAlertController.h */,
+				258E20E120A2E6A20024B997 /* SCAlertController.m */,
 			);
 			path = UIExtension;
 			sourceTree = "<group>";
@@ -191,6 +209,8 @@
 		25DD976B202D5EA5000874D4 /* SCLog */ = {
 			isa = PBXGroup;
 			children = (
+				258E20DE20A2E6850024B997 /* SCModel.h */,
+				258E20DF20A2E6850024B997 /* SCModel.m */,
 				25DD976D202D73FD000874D4 /* SCLogManager.h */,
 				25DD976E202D73FD000874D4 /* SCLogManager.m */,
 			);
@@ -465,7 +485,9 @@
 			files = (
 				25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */,
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,
+				258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */,
 				25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */,
+				258E20DD20A2E5980024B997 /* SCButton_Badge.m in Sources */,
 				335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */,
 				33EBA4DA2046963E00EA4C49 /* NSString+SCExtension.m in Sources */,
 				2533F6E0203085E500ED6358 /* UILabel+AutoFrame.m in Sources */,
@@ -474,6 +496,8 @@
 				33FB57362047EF8500A4944F /* NSNumber+SCExtension.m in Sources */,
 				33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */,
 				33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */,
+				258E20E020A2E6850024B997 /* SCModel.m in Sources */,
+				258E20E320A2E6A20024B997 /* SCAlertController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				25AA70622033CD30008E835D /* UIView+SCRotate.m in Sources */,
 				25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */,
