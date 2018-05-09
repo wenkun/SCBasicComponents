@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SCBasicComponents'
-  s.version          = '0.1.1'
+  s.version          = '0.2.0'
   s.summary          = '项目使用的基础组件'
 
 
