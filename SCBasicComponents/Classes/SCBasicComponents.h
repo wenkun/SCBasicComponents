@@ -25,7 +25,14 @@
 #import "NSData+SCExtension.h"
 #import "NSNumber+SCExtension.h"
 #import "NSDate+SCExtension.h"
+//UI
+#import "SCAreaChoiseView.h"
+#import "SCButton.h"
+#import "SCButton_Badge.h"
+#import "SCAlertController.h"
 //Tools
 #import "SCLogManager.h"
+//Model
+#import "SCModel.h"
 
 #endif /* SCBasicComponents_h */
