@@ -9,6 +9,14 @@
 #import "UIView+SCExtension.h"
 
 @implementation UIView (SCExtension)
+
++ (instancetype)viewWithBackgroundColor:(UIColor *)backgroundColor{
+    UIView *view = [[[self class] alloc] init];
+    if (backgroundColor) {
+        view.backgroundColor = backgroundColor;
+    }
+    return view;
+}
 - (UIImage *)snapshotImage {
     UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];

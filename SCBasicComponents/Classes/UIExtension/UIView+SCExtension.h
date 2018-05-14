@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (SCExtension)
+
+/**
+ creat new view with specified backgroundColor
+
+ @param backgroundColor backgroundColor;
+ @return new view
+ */
++ (nullable instancetype)viewWithBackgroundColor:(nullable UIColor *)backgroundColor;
 /**
  Create a snapshot image of the complete view hierarchy.
  */
