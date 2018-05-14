@@ -36,6 +36,15 @@
 //十六进制颜色
 #define ColorWithHex(hexString) [UIColor colorWithHexString:hexString]
 
+//字符串 数字类型转换
+#define IntegerToString(a) [[NSNumber numberWithInteger:a] stringValue]
+#define IntegerToFloat(a)  [[NSNumber numberWithInteger:a] floatValue]
+#define FloatToString(a)   [[NSNumber numberWithFloat:a] stringValue]
+#define DoubleToString(a)  [[NSNumber numberWithDouble:a] stringValue]
+#define StringToDouble(a)  [[NSNumber numberWithString:a] doubleValue]
+#define StringToFloat(a)   [[NSNumber numberWithString:a] floatValue]
+#define StringToInteger(a) [[NSNumber numberWithString:a] integerValue]
+
 #endif
 
 #endif /* SCDefaultsUI_h */
