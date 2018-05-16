@@ -25,6 +25,7 @@
 #import "NSData+SCExtension.h"
 #import "NSNumber+SCExtension.h"
 #import "NSDate+SCExtension.h"
+#import "UIApplication+SCExtension.h"
 //UI
 #import "SCAreaChoiseView.h"
 #import "SCButton.h"

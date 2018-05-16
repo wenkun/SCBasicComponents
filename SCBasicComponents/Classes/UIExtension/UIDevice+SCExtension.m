@@ -11,6 +11,14 @@
 
 @implementation UIDevice (SCExtension)
 
+- (BOOL)isSimulator {
+    static dispatch_once_t one;
+    static BOOL simu;
+    dispatch_once(&one, ^{
+        simu = NSNotFound != [[self model] rangeOfString:@"Simulator"].location;
+    });
+    return simu;
+}
 +(NSString *)deviceMode
 {
     struct utsname systemInfo;

@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIDevice (SCExtension)
-
+/// Whether the device is a simulator.
+@property (nonatomic, readonly) BOOL isSimulator;
 /**
  获取设备型号，例如：iPhone 7
 
