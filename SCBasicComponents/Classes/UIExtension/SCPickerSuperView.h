@@ -1,5 +1,5 @@
 //
-//  SCPickerView.h
+//  SCPickerSuperView.h
 //  Robot
 //
 //  Created by 星星 on 2018/5/19.
@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SCPickerView;
-typedef void (^SCPickerViewBlock)(SCPickerView *pickerView);
+@class SCPickerSuperView;
+typedef void (^SCPickerSuperViewBlock)(SCPickerSuperView *pickerSuperView);
 
 ///自定义覆盖全屏的PickView弹出View
-@interface SCPickerView : UIView
+@interface SCPickerSuperView : UIView
 ///PickerView，需设置其代理方法
 @property (nonatomic, strong) UIPickerView *pickerView;
 
 ///取消按钮点击回调
-@property (nonatomic, copy) SCPickerViewBlock doCancelButtonBlock;
+@property (nonatomic, copy) SCPickerSuperViewBlock doCancelButtonBlock;
 ///确定按钮点击回调
-@property (nonatomic, copy) SCPickerViewBlock doFinishButtonBlock;
+@property (nonatomic, copy) SCPickerSuperViewBlock doFinishButtonBlock;
 ///灰色背景点击回调
-@property (nonatomic, copy) SCPickerViewBlock touchBackgroundBlock;
+@property (nonatomic, copy) SCPickerSuperViewBlock touchBackgroundBlock;
 
 /**
  添加到当前window上。
@@ -30,7 +30,7 @@ typedef void (^SCPickerViewBlock)(SCPickerView *pickerView);
 /**
  添加到指定的view
 
- @param view super view of SCPickerView
+ @param view super view of SCPickerSuperView
  */
 -(void)showInView:(UIView *)view;
 

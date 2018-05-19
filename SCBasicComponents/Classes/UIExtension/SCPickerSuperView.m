@@ -1,15 +1,15 @@
 //
-//  SCPickerView.m
+//  SCPickerSuperView.m
 //  Robot
 //
 //  Created by 星星 on 2018/5/19.
 //  Copyright © 2018年 Haier. All rights reserved.
 //
 
-#import "SCPickerView.h"
+#import "SCPickerSuperView.h"
 #import "SCDefaultsUI.h"
 
-@interface SCPickerView ()
+@interface SCPickerSuperView ()
 @property (nonatomic, strong) UIControl *backgroudView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *topBar;
@@ -20,7 +20,7 @@
 @property (nonatomic, assign) BOOL hadShow;
 
 @end
-@implementation SCPickerView
+@implementation SCPickerSuperView
 
 
 -(instancetype)initWithFrame:(CGRect)frame

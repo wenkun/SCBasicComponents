@@ -28,7 +28,7 @@
 #import "UIApplication+SCExtension.h"
 //UI
 #import "SCAreaChoiseView.h"
-#import "SCPickerView.h"
+#import "SCPickerSuperView.h"
 #import "SCButton.h"
 #import "SCButton_Badge.h"
 #import "SCAlertController.h"
