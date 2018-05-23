@@ -78,7 +78,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@> %@",self, [self conversionToDictionaryWithSpecailPropertyReplaced:NO]];
+    return [NSString stringWithFormat:@"%@ : %@",[super description], [self conversionToDictionaryWithSpecailPropertyReplaced:NO]];
 }
 
 -(NSDictionary *)descDictionary
@@ -88,68 +88,70 @@
 
 -(NSDictionary *)conversionToDictionaryWithSpecailPropertyReplaced:(BOOL)needReplace
 {
-    NSMutableDictionary *desc = [[NSMutableDictionary alloc] init];
-    NSArray *propArray = [SCModel getAllPropertiesWithClass:self.class];
-    NSMutableDictionary *replaceForm = [[NSMutableDictionary alloc] init];
-    if (needReplace) {
-        [replaceForm addEntriesFromDictionary:[self specialPropertyReplaceForm]];
-    }
-    for (NSString *realP in propArray) {
-        SEL aSel = NSSelectorFromString(realP);
-        if ([self respondsToSelector:aSel]) {
-            //p为转换后key值
-            NSString *p = realP;
-            //获取value
-            id value = [self performSelector:aSel];
-            
-            //是否转换成数据原有的key值到字典中
-            if (needReplace) {
-                //查询原数据的key值若有替换，使用元数据的key值
-                BOOL hasReplace = NO;
-                for (NSString *replaceProperty in replaceForm.allKeys) {
-                    if ([replaceProperty isEqualToString:realP]) {
-                        p = [replaceForm objectForKey:replaceProperty];
-                        hasReplace = YES;
-                        [replaceForm removeObjectForKey:replaceProperty];
-                        break;
+    @synchronized (self) {
+        NSMutableDictionary *desc = [[NSMutableDictionary alloc] init];
+        NSArray *propArray = [SCModel getAllPropertiesWithClass:self.class];
+        NSMutableDictionary *replaceForm = [[NSMutableDictionary alloc] init];
+        if (needReplace) {
+            [replaceForm addEntriesFromDictionary:[self specialPropertyReplaceForm]];
+        }
+        for (NSString *realP in propArray) {
+            SEL aSel = NSSelectorFromString(realP);
+            if ([self respondsToSelector:aSel] && [[self getPropertyClass:realP] isKindOfClass:[NSObject class]]) {
+                //p为转换后key值
+                NSString *p = realP;
+                //获取value
+                id value = [self performSelector:aSel];
+                
+                //是否转换成数据原有的key值到字典中
+                if (needReplace) {
+                    //查询原数据的key值若有替换，使用元数据的key值
+                    BOOL hasReplace = NO;
+                    for (NSString *replaceProperty in replaceForm.allKeys) {
+                        if ([replaceProperty isEqualToString:realP]) {
+                            p = [replaceForm objectForKey:replaceProperty];
+                            hasReplace = YES;
+                            [replaceForm removeObjectForKey:replaceProperty];
+                            break;
+                        }
+                    }
+                    //判断后缀是‘_’的情况
+                    if (!hasReplace && [[p substringFromIndex:p.length-1] isEqualToString:@"_"]) {
+                        p = [p substringToIndex:p.length-1];
                     }
                 }
-                //判断后缀是‘_’的情况
-                if (!hasReplace && [[p substringFromIndex:p.length-1] isEqualToString:@"_"]) {
-                    p = [p substringToIndex:p.length-1];
+                
+                //NSString和NSNumber类型
+                if ([value isKindOfClass:[NSString class]] ||
+                    [value isKindOfClass:[NSNumber class]]) {
+                    [desc setObject:value forKey:p];
                 }
-            }
-            
-            //NSString和NSNumber类型
-            if ([value isKindOfClass:[NSString class]] ||
-                [value isKindOfClass:[NSNumber class]]) {
-                [desc setObject:value forKey:p];
-            }
-            //SCModel类型
-            else if ([value isKindOfClass:[SCModel class]]) {
-                NSDictionary *newValue = [(SCModel *)value descDictionary];
-                [desc setObject:newValue forKey:p];
-            }
-            //数组类型
-            else if ([value isKindOfClass:[NSArray class]]) {
-                NSMutableArray *newArray = [[NSMutableArray alloc] init];
-                for (NSObject *obj in value) {
-                    if ([obj isKindOfClass:[SCModel class]]) {
-                        NSDictionary *newObj = [(SCModel *)obj descDictionary];
-                        [newArray addObject:newObj];
+                //SCModel类型
+                else if ([value isKindOfClass:[SCModel class]]) {
+                    NSDictionary *newValue = [(SCModel *)value descDictionary];
+                    [desc setObject:newValue forKey:p];
+                }
+                //数组类型
+                else if ([value isKindOfClass:[NSArray class]]) {
+                    NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                    for (NSObject *obj in value) {
+                        if ([obj isKindOfClass:[SCModel class]]) {
+                            NSDictionary *newObj = [(SCModel *)obj descDictionary];
+                            [newArray addObject:newObj];
+                        }
+                        else if ([obj isKindOfClass:[NSString class]] ||
+                                 [obj isKindOfClass:[NSNumber class]] ||
+                                 [obj isKindOfClass:[NSDictionary class]] ||
+                                 [obj isKindOfClass:[NSArray class]]) {
+                            [newArray addObject:obj];
+                        }
+                        [desc setObject:newArray forKey:p];
                     }
-                    else if ([obj isKindOfClass:[NSString class]] ||
-                             [obj isKindOfClass:[NSNumber class]] ||
-                             [obj isKindOfClass:[NSDictionary class]] ||
-                             [obj isKindOfClass:[NSArray class]]) {
-                        [newArray addObject:obj];
-                    }
-                    [desc setObject:newArray forKey:p];
                 }
             }
         }
+        return desc;
     }
-    return desc;
 }
 
 #pragma mark - 获取属性
@@ -157,71 +159,53 @@
 ///获取本类的所有属性，不包含父类的属性
 - (NSArray *)getAllProperties
 {
-    u_int count;
-    objc_property_t *properties  =class_copyPropertyList([self class], &count);
-    NSMutableArray *propertiesArray = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++)
-    {
-        const char *propertyName = property_getName(properties[i]);
-        [propertiesArray addObject: [NSString stringWithUTF8String: propertyName]];
+    @synchronized (self) {
+        u_int count;
+        objc_property_t *properties  =class_copyPropertyList([self class], &count);
+        NSMutableArray *propertiesArray = [NSMutableArray arrayWithCapacity:count];
+        for (int i = 0; i<count; i++)
+        {
+            const char *propertyName = property_getName(properties[i]);
+            [propertiesArray addObject: [NSString stringWithUTF8String: propertyName]];
+        }
+        free(properties);
+        
+        return propertiesArray;
     }
-    free(properties);
-    
-    return propertiesArray;
 }
 
 ///获取cla类的所有属性，包含派生自SCModel的所有成员的所有属性
 +(NSArray *)getAllPropertiesWithClass:(Class)cla
 {
-    u_int count;
-    objc_property_t *properties  =class_copyPropertyList(cla, &count);
-    NSMutableArray *propertiesArray = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++)
-    {
-        const char *propertyName = property_getName(properties[i]);
-        [propertiesArray addObject: [NSString stringWithUTF8String: propertyName]];
+    @synchronized (self) {
+        u_int count;
+        objc_property_t *properties  =class_copyPropertyList(cla, &count);
+        NSMutableArray *propertiesArray = [NSMutableArray arrayWithCapacity:count];
+        for (int i = 0; i<count; i++)
+        {
+            const char *propertyName = property_getName(properties[i]);
+            NSString *pStr = [NSString stringWithUTF8String: propertyName];
+            if (pStr) {
+                [propertiesArray addObject: pStr];
+            }
+        }
+        free(properties);
+        
+        Class superClass = class_getSuperclass(cla);
+        if (class_respondsToSelector(superClass, @selector(isKindOfSCModelClass))) {
+            [propertiesArray addObjectsFromArray:[SCModel getAllPropertiesWithClass:superClass]];
+        }
+        
+        return propertiesArray;
     }
-    free(properties);
-    
-    Class superClass = class_getSuperclass(cla);
-    if (class_respondsToSelector(superClass, @selector(isKindOfSCModelClass))) {
-        [propertiesArray addObjectsFromArray:[SCModel getAllPropertiesWithClass:superClass]];
-    }
-    
-    return propertiesArray;
 }
 
 -(Class)getPropertyClass:(NSString *)propertyName
 {
-    objc_property_t property = class_getProperty([self class], propertyName.UTF8String);
-    NSString *attClass = nil;
-    NSString *att = [NSString stringWithUTF8String:property_getAttributes(property)];
-    
-    NSError *error;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T@\".*\"," options:0 error:&error];
-    if (error) {
-        NSLog(@"NSRegularExpression error: %@", error);
-    }
-    else {
-        NSTextCheckingResult *check = [regex firstMatchInString:att options:0 range:NSMakeRange(0, att.length)];
-        if (check) {
-            attClass = [att substringWithRange:NSMakeRange(check.range.location+3, check.range.length-5)];
-        }
-    }
-    
-    return NSClassFromString(attClass);
-}
-
-+(NSArray *)getAllAttributesWithObject:(NSObject *)object
-{
-    u_int count;
-    objc_property_t *properties  =class_copyPropertyList([object class], &count);
-    NSMutableArray *attributes = [NSMutableArray arrayWithCapacity:count];
-    for (int i = 0; i<count; i++)
-    {
-        NSString *attName = [NSString stringWithUTF8String:property_getName(properties[i])];
+    @synchronized (self) {
+        objc_property_t property = class_getProperty([self class], propertyName.UTF8String);
         NSString *attClass = nil;
-        NSString *att = [NSString stringWithUTF8String:property_getAttributes(properties[i])];
+        NSString *att = [NSString stringWithUTF8String:property_getAttributes(property)];
         
         NSError *error;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T@\".*\"," options:0 error:&error];
@@ -234,13 +218,44 @@
                 attClass = [att substringWithRange:NSMakeRange(check.range.location+3, check.range.length-5)];
             }
         }
-        if ((attClass && attClass.length > 0) && (attName && attName.length > 0)) {
-            [attributes addObject:@{@"name" : attName, @"class" : attClass}];
-        }
+        
+        return NSClassFromString(attClass);
     }
-    free(properties);
-    
-    return [NSArray arrayWithArray:attributes];
+}
+
++(NSArray *)getAllAttributesWithObject:(NSObject *)object
+{
+    @synchronized (self) {
+        u_int count;
+        objc_property_t *properties  =class_copyPropertyList([object class], &count);
+        NSMutableArray *attributes = [NSMutableArray arrayWithCapacity:count];
+        for (int i = 0; i<count; i++)
+        {
+            @autoreleasepool {
+                NSString *attName = [NSString stringWithUTF8String:property_getName(properties[i])];
+                NSString *attClass = nil;
+                NSString *att = [NSString stringWithUTF8String:property_getAttributes(properties[i])];
+                
+                NSError *error;
+                NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T@\".*\"," options:0 error:&error];
+                if (error) {
+                    NSLog(@"NSRegularExpression error: %@", error);
+                }
+                else {
+                    NSTextCheckingResult *check = [regex firstMatchInString:att options:0 range:NSMakeRange(0, att.length)];
+                    if (check) {
+                        attClass = [att substringWithRange:NSMakeRange(check.range.location+3, check.range.length-5)];
+                    }
+                }
+                if ((attClass && attClass.length > 0) && (attName && attName.length > 0)) {
+                    [attributes addObject:@{@"name" : attName, @"class" : attClass}];
+                }
+            }
+        }
+        free(properties);
+        
+        return [NSArray arrayWithArray:attributes];
+    }
 }
 
 #pragma mark - 重写setValue方法
