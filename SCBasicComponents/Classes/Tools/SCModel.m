@@ -16,6 +16,8 @@
     return YES;
 }
 
+#pragma mark - Interface
+
 -(instancetype)initWithData:(NSDictionary *)data
 {
     if (self = [super init]) {
@@ -31,14 +33,27 @@
         return;
     }
     
+    NSMutableDictionary *replaceForm = [[NSMutableDictionary alloc] initWithDictionary:[self specialPropertyReplaceForm]];
     NSArray *allProperties = [SCModel getAllPropertiesWithClass:self.class];
     for (NSString *key in allProperties) {
-        if ([[key substringFromIndex:key.length-1] isEqualToString:@"_"]) {
+        if (replaceForm.count > 0) {
+            //自定义属性与数据key的一一对应转换
+            for (NSString *replaceProperty in replaceForm.allKeys) {
+                if ([replaceProperty isEqualToString:key]) {
+                    NSString *realKey = [replaceForm objectForKey:replaceProperty];
+                    [self setValue:data[realKey] forKey:key];
+                    [replaceForm removeObjectForKey:replaceProperty];
+                    break;
+                }
+            }
+        }
+        else if ([[key substringFromIndex:key.length-1] isEqualToString:@"_"]) {
             //“id_”类的属性
             NSString *realKey = [key substringToIndex:key.length-1];
             [self setValue:data[realKey] forKey:key];
         }
         else {
+            //默认属性名称与数据key相同，直接赋值
             [self setValue:data[key] forKey:key];
         }
     }
@@ -52,6 +67,89 @@
         [array addObject:object];
     }
     return array;
+}
+
+-(NSDictionary *)specialPropertyReplaceForm
+{
+    return [NSDictionary dictionary];
+}
+
+#pragma mark 转换为NSDictionary
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@> %@",self, [self conversionToDictionaryWithSpecailPropertyReplaced:NO]];
+}
+
+-(NSDictionary *)descDictionary
+{
+    return [self conversionToDictionaryWithSpecailPropertyReplaced:YES];
+}
+
+-(NSDictionary *)conversionToDictionaryWithSpecailPropertyReplaced:(BOOL)needReplace
+{
+    NSMutableDictionary *desc = [[NSMutableDictionary alloc] init];
+    NSArray *propArray = [SCModel getAllPropertiesWithClass:self.class];
+    NSMutableDictionary *replaceForm = [[NSMutableDictionary alloc] init];
+    if (needReplace) {
+        [replaceForm addEntriesFromDictionary:[self specialPropertyReplaceForm]];
+    }
+    for (NSString *realP in propArray) {
+        SEL aSel = NSSelectorFromString(realP);
+        if ([self respondsToSelector:aSel]) {
+            //p为转换后key值
+            NSString *p = realP;
+            //获取value
+            id value = [self performSelector:aSel];
+            
+            //是否转换成数据原有的key值到字典中
+            if (needReplace) {
+                //查询原数据的key值若有替换，使用元数据的key值
+                BOOL hasReplace = NO;
+                for (NSString *replaceProperty in replaceForm.allKeys) {
+                    if ([replaceProperty isEqualToString:realP]) {
+                        p = [replaceForm objectForKey:replaceProperty];
+                        hasReplace = YES;
+                        [replaceForm removeObjectForKey:replaceProperty];
+                        break;
+                    }
+                }
+                //判断后缀是‘_’的情况
+                if (!hasReplace && [[p substringFromIndex:p.length-1] isEqualToString:@"_"]) {
+                    p = [p substringToIndex:p.length-1];
+                }
+            }
+            
+            //NSString和NSNumber类型
+            if ([value isKindOfClass:[NSString class]] ||
+                [value isKindOfClass:[NSNumber class]]) {
+                [desc setObject:value forKey:p];
+            }
+            //SCModel类型
+            else if ([value isKindOfClass:[SCModel class]]) {
+                NSDictionary *newValue = [(SCModel *)value descDictionary];
+                [desc setObject:newValue forKey:p];
+            }
+            //数组类型
+            else if ([value isKindOfClass:[NSArray class]]) {
+                NSMutableArray *newArray = [[NSMutableArray alloc] init];
+                for (NSObject *obj in value) {
+                    if ([obj isKindOfClass:[SCModel class]]) {
+                        NSDictionary *newObj = [(SCModel *)obj descDictionary];
+                        [newArray addObject:newObj];
+                    }
+                    else if ([obj isKindOfClass:[NSString class]] ||
+                             [obj isKindOfClass:[NSNumber class]] ||
+                             [obj isKindOfClass:[NSDictionary class]] ||
+                             [obj isKindOfClass:[NSArray class]]) {
+                        [newArray addObject:obj];
+                    }
+                    [desc setObject:newArray forKey:p];
+                }
+            }
+        }
+    }
+    return desc;
 }
 
 #pragma mark - 获取属性
@@ -145,46 +243,7 @@
     return [NSArray arrayWithArray:attributes];
 }
 
-#pragma mark - 转换为NSDictionary
-
--(NSDictionary *)descDictionary
-{
-    NSMutableDictionary *desc = [[NSMutableDictionary alloc] init];
-    NSArray *propArray = [SCModel getAllPropertiesWithClass:self.class];
-    for (NSString *p in propArray) {
-        SEL aSel = NSSelectorFromString(p);
-        if ([self respondsToSelector:aSel]) {
-            id value = [self performSelector:aSel];
-            if ([value isKindOfClass:[NSString class]] ||
-                [value isKindOfClass:[NSNumber class]]) {
-                [desc setObject:value forKey:p];
-            }
-            else if ([value isKindOfClass:[SCModel class]]) {
-                NSDictionary *newValue = [(SCModel *)value descDictionary];
-                [desc setObject:newValue forKey:p];
-            }
-            else if ([value isKindOfClass:[NSArray class]]) {
-                NSMutableArray *newArray = [[NSMutableArray alloc] init];
-                for (NSObject *obj in value) {
-                    if ([obj isKindOfClass:[SCModel class]]) {
-                        NSDictionary *newObj = [(SCModel *)obj descDictionary];
-                        [newArray addObject:newObj];
-                    }
-                    else if ([obj isKindOfClass:[NSString class]] ||
-                             [obj isKindOfClass:[NSNumber class]] ||
-                             [obj isKindOfClass:[NSDictionary class]] ||
-                             [obj isKindOfClass:[NSArray class]]) {
-                        [newArray addObject:obj];
-                    }
-                    [desc setObject:newArray forKey:p];
-                }
-            }
-        }
-    }
-    return desc;
-}
-
-#pragma mark - 
+#pragma mark - 重写setValue方法
 
 -(void)setValue:(id)value forKey:(NSString *)key
 {
@@ -212,6 +271,8 @@
 }
 
 @end
+
+#pragma mark - NSArray类别
 
 @implementation NSArray (SCModel)
 

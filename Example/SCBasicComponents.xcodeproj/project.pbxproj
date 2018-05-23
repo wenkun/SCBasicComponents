@@ -211,6 +211,8 @@
 		25DD9767202D5D03000874D4 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				258E20DE20A2E6850024B997 /* SCModel.h */,
+				258E20DF20A2E6850024B997 /* SCModel.m */,
 				25DD976B202D5EA5000874D4 /* SCLog */,
 			);
 			path = Tools;
@@ -219,8 +221,6 @@
 		25DD976B202D5EA5000874D4 /* SCLog */ = {
 			isa = PBXGroup;
 			children = (
-				258E20DE20A2E6850024B997 /* SCModel.h */,
-				258E20DF20A2E6850024B997 /* SCModel.m */,
 				25DD976D202D73FD000874D4 /* SCLogManager.h */,
 				25DD976E202D73FD000874D4 /* SCLogManager.m */,
 			);
