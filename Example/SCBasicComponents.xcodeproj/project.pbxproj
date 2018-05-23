@@ -18,6 +18,7 @@
 		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
 		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
 		25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD976E202D73FD000874D4 /* SCLogManager.m */; };
+		3341977520AFED69004E4A26 /* SCPickerSuperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3341977320AFED68004E4A26 /* SCPickerSuperView.m */; };
 		335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */; };
 		33BB0BD420ABC5DF0009B3DE /* UIApplication+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BB0BD320ABC5DF0009B3DE /* UIApplication+SCExtension.m */; };
 		33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D32046955E00EA4C49 /* UIView+SCExtension.m */; };
@@ -81,6 +82,8 @@
 		25DD976C202D6478000874D4 /* SCDefaultResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCDefaultResources.h; sourceTree = "<group>"; };
 		25DD976D202D73FD000874D4 /* SCLogManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLogManager.h; sourceTree = "<group>"; };
 		25DD976E202D73FD000874D4 /* SCLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLogManager.m; sourceTree = "<group>"; };
+		3341977320AFED68004E4A26 /* SCPickerSuperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPickerSuperView.m; sourceTree = "<group>"; };
+		3341977420AFED69004E4A26 /* SCPickerSuperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPickerSuperView.h; sourceTree = "<group>"; };
 		335B645D20565CDA009BD7F8 /* NSDate+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+SCExtension.h"; sourceTree = "<group>"; };
 		335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SCExtension.m"; sourceTree = "<group>"; };
 		33BB0BD220ABC5DF0009B3DE /* UIApplication+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+SCExtension.h"; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */,
 				258E20D920A2E58B0024B997 /* SCAreaChoiseView.h */,
 				258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */,
+				3341977420AFED69004E4A26 /* SCPickerSuperView.h */,
+				3341977320AFED68004E4A26 /* SCPickerSuperView.m */,
 				258E20E420A2EBD10024B997 /* SCButton.h */,
 				258E20E520A2EBD10024B997 /* SCButton.m */,
 				258E20DC20A2E5980024B997 /* SCButton_Badge.h */,
@@ -451,6 +456,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3341977520AFED69004E4A26 /* SCPickerSuperView.m in Sources */,
 				25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */,
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,
 				258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */,
