@@ -36,25 +36,33 @@
     NSMutableDictionary *replaceForm = [[NSMutableDictionary alloc] initWithDictionary:[self specialPropertyReplaceForm]];
     NSArray *allProperties = [SCModel getAllPropertiesWithClass:self.class];
     for (NSString *key in allProperties) {
-        if (replaceForm.count > 0) {
-            //自定义属性与数据key的一一对应转换
-            for (NSString *replaceProperty in replaceForm.allKeys) {
-                if ([replaceProperty isEqualToString:key]) {
-                    NSString *realKey = [replaceForm objectForKey:replaceProperty];
-                    [self setValue:data[realKey] forKey:key];
-                    [replaceForm removeObjectForKey:replaceProperty];
-                    break;
+        @autoreleasepool {
+            NSString *realKey = nil;
+            if (replaceForm.count > 0) {
+                //自定义属性与数据key的一一对应转换
+                for (NSString *replaceProperty in replaceForm.allKeys) {
+                    if ([replaceProperty isEqualToString:key]) {
+                        realKey = [NSString stringWithString:[replaceForm objectForKey:replaceProperty]];
+                        [replaceForm removeObjectForKey:replaceProperty];
+                        break;
+                    }
                 }
             }
-        }
-        else if ([[key substringFromIndex:key.length-1] isEqualToString:@"_"]) {
-            //“id_”类的属性
-            NSString *realKey = [key substringToIndex:key.length-1];
-            [self setValue:data[realKey] forKey:key];
-        }
-        else {
-            //默认属性名称与数据key相同，直接赋值
-            [self setValue:data[key] forKey:key];
+            
+            //有自定义的对应关系
+            if (realKey) {
+                [self setValue:data[realKey] forKey:key];
+            }
+            //默认属性名称后缀为‘_’的处理
+            else if ([[key substringFromIndex:key.length-1] isEqualToString:@"_"]) {
+                //“id_”类的属性
+                realKey = [key substringToIndex:key.length-1];
+                [self setValue:data[realKey] forKey:key];
+            }
+            else {
+                //默认属性名称与数据key相同，直接赋值
+                [self setValue:data[key] forKey:key];
+            }
         }
     }
 }
