@@ -22,6 +22,7 @@
 		335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B645E20565CDA009BD7F8 /* NSDate+SCExtension.m */; };
 		33740B2120B7F78000886009 /* NSDictionary+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33740B2020B7F78000886009 /* NSDictionary+SCExtension.m */; };
 		33740B2420B7FB2000886009 /* NSArray+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33740B2320B7FB2000886009 /* NSArray+SCExtension.m */; };
+		33A68B1B20BFD9100077ECB8 /* NSError+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A68B1A20BFD90F0077ECB8 /* NSError+SCExtension.m */; };
 		33BB0BD420ABC5DF0009B3DE /* UIApplication+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BB0BD320ABC5DF0009B3DE /* UIApplication+SCExtension.m */; };
 		33EBA4D42046955E00EA4C49 /* UIView+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D32046955E00EA4C49 /* UIView+SCExtension.m */; };
 		33EBA4D72046957500EA4C49 /* UIColor+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EBA4D62046957500EA4C49 /* UIColor+SCExtension.m */; };
@@ -92,6 +93,8 @@
 		33740B2020B7F78000886009 /* NSDictionary+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SCExtension.m"; sourceTree = "<group>"; };
 		33740B2220B7FB2000886009 /* NSArray+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+SCExtension.h"; sourceTree = "<group>"; };
 		33740B2320B7FB2000886009 /* NSArray+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SCExtension.m"; sourceTree = "<group>"; };
+		33A68B1920BFD90F0077ECB8 /* NSError+SCExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+SCExtension.h"; sourceTree = "<group>"; };
+		33A68B1A20BFD90F0077ECB8 /* NSError+SCExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+SCExtension.m"; sourceTree = "<group>"; };
 		33BB0BD220ABC5DF0009B3DE /* UIApplication+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+SCExtension.h"; sourceTree = "<group>"; };
 		33BB0BD320ABC5DF0009B3DE /* UIApplication+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+SCExtension.m"; sourceTree = "<group>"; };
 		33EBA4D22046955E00EA4C49 /* UIView+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SCExtension.h"; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 		25BA0488202B40D1004461ED /* UIExtension */ = {
 			isa = PBXGroup;
 			children = (
+				33A68B1920BFD90F0077ECB8 /* NSError+SCExtension.h */,
+				33A68B1A20BFD90F0077ECB8 /* NSError+SCExtension.m */,
 				25BA0489202B40D1004461ED /* UIColor+SCHexadecimal.h */,
 				25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */,
 				2533F6B5202FE79300ED6358 /* UIDevice+SCExtension.h */,
@@ -472,6 +477,7 @@
 				258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */,
 				25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */,
 				258E20DD20A2E5980024B997 /* SCButton_Badge.m in Sources */,
+				33A68B1B20BFD9100077ECB8 /* NSError+SCExtension.m in Sources */,
 				33740B2420B7FB2000886009 /* NSArray+SCExtension.m in Sources */,
 				335B645F20565CDA009BD7F8 /* NSDate+SCExtension.m in Sources */,
 				33EBA4DA2046963E00EA4C49 /* NSString+SCExtension.m in Sources */,
