@@ -301,6 +301,10 @@
 
 +(NSArray *)analyzingWithArrayData:(NSArray *)data withMenberClass:(Class)cla
 {
+    if (data && (data.count == 0 || [data.firstObject isKindOfClass:cla])) {
+        return data;
+    }
+    
     if (!data.firstObject ||
         ![data.firstObject isKindOfClass:[NSDictionary class]] ||
         !cla ||
