@@ -26,6 +26,10 @@
 #import "NSNumber+SCExtension.h"
 #import "NSDate+SCExtension.h"
 #import "UIApplication+SCExtension.h"
+#import "NSDictionary+SCExtension.h"
+#import "NSArray+SCExtension.h"
+#import "NSError+SCExtension.h"
+
 //UI
 #import "SCAreaChoiseView.h"
 #import "SCPickerSuperView.h"
