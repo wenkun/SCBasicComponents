@@ -8,7 +8,7 @@
 
 
 extern NSString * const SErrorCodeStringKey;
-
+extern NSString *const SErrorCodeNotIntValue;
 #import <Foundation/Foundation.h>
 
 @interface NSError (SCExtension)

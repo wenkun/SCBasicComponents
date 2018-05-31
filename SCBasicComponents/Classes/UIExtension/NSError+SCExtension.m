@@ -8,7 +8,7 @@
 
 
 NSString * const SErrorCodeStringKey = @"SCodeStringKey";
-
+NSString *const SErrorCodeNotIntValue = @"-111111";
 
 #import "NSError+SCExtension.h"
 
