@@ -38,6 +38,7 @@
 #import "SCAlertController.h"
 //Tools
 #import "SCLogManager.h"
+#import "SCAppJump.h"
 //Model
 #import "SCModel.h"
 
