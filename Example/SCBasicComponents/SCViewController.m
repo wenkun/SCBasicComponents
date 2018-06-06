@@ -32,6 +32,10 @@
     [self testPath];
     [self testLog];
     [self testUIApplication];
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SCAppJump telPhone:@"18612032019"];
+//    });
 }
 
 - (void)didReceiveMemoryWarning

@@ -38,9 +38,9 @@ SCBasicComponents is available under the MIT license. See the LICENSE file for m
     
 ## Update
 
-0.2.2 ：
+``` <0.2.2 版本>
  新增SCAppJump类：1、封装系统的openUrl方法，添加回到主线程处理。
-                                    2、封装跳转WIFI设置页及其他系统设置页的方法，以绕过苹果审核。
-                                    3、封装拨打电话方法
-
+                2、封装跳转WIFI设置页及其他系统设置页的方法，以绕过苹果审核。
+                3、封装拨打电话方法
+```
 
