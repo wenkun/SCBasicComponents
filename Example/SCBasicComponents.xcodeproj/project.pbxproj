@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25228DBA20C77696003998A9 /* SCAppJump.m in Sources */ = {isa = PBXBuildFile; fileRef = 25228DB920C77696003998A9 /* SCAppJump.m */; };
 		2533F6B7202FE79300ED6358 /* UIDevice+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2533F6B6202FE79300ED6358 /* UIDevice+SCExtension.m */; };
 		2533F6E0203085E500ED6358 /* UILabel+AutoFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 2533F6DF203085E500ED6358 /* UILabel+AutoFrame.m */; };
 		258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20D820A2E58B0024B997 /* SCAreaChoiseView.m */; };
@@ -60,6 +61,8 @@
 /* Begin PBXFileReference section */
 		0054CB1AB52E5FAFF13A3F94 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		02AB4EF962CE2E2A371BB1A0 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		25228DB820C77696003998A9 /* SCAppJump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAppJump.h; sourceTree = "<group>"; };
+		25228DB920C77696003998A9 /* SCAppJump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAppJump.m; sourceTree = "<group>"; };
 		2533F6B5202FE79300ED6358 /* UIDevice+SCExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+SCExtension.h"; sourceTree = "<group>"; };
 		2533F6B6202FE79300ED6358 /* UIDevice+SCExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SCExtension.m"; sourceTree = "<group>"; };
 		2533F6DE203085E500ED6358 /* UILabel+AutoFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AutoFrame.h"; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 		25DD9767202D5D03000874D4 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				25228DB820C77696003998A9 /* SCAppJump.h */,
+				25228DB920C77696003998A9 /* SCAppJump.m */,
 				258E20DE20A2E6850024B997 /* SCModel.h */,
 				258E20DF20A2E6850024B997 /* SCModel.m */,
 				25DD976B202D5EA5000874D4 /* SCLog */,
@@ -476,6 +481,7 @@
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,
 				258E20DA20A2E58C0024B997 /* SCAreaChoiseView.m in Sources */,
 				25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */,
+				25228DBA20C77696003998A9 /* SCAppJump.m in Sources */,
 				258E20DD20A2E5980024B997 /* SCButton_Badge.m in Sources */,
 				33A68B1B20BFD9100077ECB8 /* NSError+SCExtension.m in Sources */,
 				33740B2420B7FB2000886009 /* NSArray+SCExtension.m in Sources */,
