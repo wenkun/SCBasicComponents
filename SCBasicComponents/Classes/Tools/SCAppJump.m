@@ -104,14 +104,30 @@ static NSString *sv = nil;
 
 +(void)jumpToW
 {
+    NSString *name = [@"bWbIbFbI" stringByReplacingOccurrencesOfString:@"b" withString:@""];
+    [SCAppJump jumpToSettingSectionName:name];
+}
+
++(void)jumpToSettingSectionName:(NSString *)name
+{
     if ([SCAppJump canJump]) {
-        NSString *w = [@"bWbIbFbI" stringByReplacingOccurrencesOfString:@"b" withString:@""];
-        NSString *str = [NSString stringWithFormat:@"%@%@", [SCAppJump prefixion], w];
+        NSString *str = [NSString stringWithFormat:@"%@%@", [SCAppJump prefixion], name];
         [SCAppJump openUrlString:str];
     }
     else {
         [SCAppJump openUrlString:UIApplicationOpenSettingsURLString];
     }
+}
+
++(void)telPhone:(NSString *)phoneNumber
+{
+    static NSDate *lastDate = nil;
+    if (lastDate && [[NSDate date] timeIntervalSinceDate:lastDate] < 0.6) {
+        return;
+    }
+    
+    [SCAppJump openUrlString:[NSString stringWithFormat:@"%@:%@", @"tel", phoneNumber]];
+    lastDate = [NSDate date];
 }
 
 @end

@@ -10,12 +10,16 @@
 
 @interface SCAppJump : NSObject
 
-///获取版本
+///获取版本，若使用jumpToW和jumpToSettingSectionName:需在APP启动时调用
 +(void)checkVersion;
-/** 跳转 **/
+/** 系统openUrl:封装 **/
 +(void)openUrlString:(NSString *)urlString;
 +(void)openUrl:(NSURL *)url;
-/** 特殊跳转 **/
+/// 跳转到设置的wifi页面
 +(void)jumpToW;
+/// 跳转到设置的某一功能模块，name传入实例：wifi
++(void)jumpToSettingSectionName:(NSString *)name;
+/// 拨打电话，防止连续点击弹出多个alertView
++(void)telPhone:(NSString *)phoneNumber;
 
 @end
