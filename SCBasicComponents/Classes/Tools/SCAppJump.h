@@ -21,5 +21,7 @@
 +(void)jumpToSettingSectionName:(NSString *)name;
 /// 拨打电话，防止连续点击弹出多个alertView
 +(void)telPhone:(NSString *)phoneNumber;
+/// 设置跳转的在dateString时间后执行，dateInteger格式为‘yyyyMMddHH’
++(void)setDelayDate:(NSInteger)dateInteger;
 
 @end

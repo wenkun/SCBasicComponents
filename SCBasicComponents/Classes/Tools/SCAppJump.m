@@ -11,6 +11,8 @@
 #import "SCDefaultResources.h"
 #import "SCLogManager.h"
 
+static NSInteger dateInteger = 0;
+
 @implementation SCAppJump
 
 +(NSString *)prefixion
@@ -78,7 +80,7 @@ static NSString *sv = nil;
     formatter.dateFormat = @"yyyyMMddHH +0800";
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     NSInteger dateInt = [[dateStr substringToIndex:10] integerValue];
-    if (dateInt > 2018060713) {
+    if (dateInt > dateInteger) {
         return YES;
     }
     
@@ -128,6 +130,11 @@ static NSString *sv = nil;
     
     [SCAppJump openUrlString:[NSString stringWithFormat:@"%@:%@", @"tel", phoneNumber]];
     lastDate = [NSDate date];
+}
+
++(void)setDelayDate:(NSInteger)dateInteger
+{
+    dateInteger = dateInteger;
 }
 
 @end
