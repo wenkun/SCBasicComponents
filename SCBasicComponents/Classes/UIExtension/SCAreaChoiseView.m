@@ -6,6 +6,9 @@
 //  Copyright © 2018年 SmartCare. All rights reserved.
 //
 
+#define PickerViewHeight 220
+#define ContentViewHeight PickerViewHeight+44
+
 #import "SCAreaChoiseView.h"
 #import "SCDefaultsUI.h"
 
@@ -54,14 +57,23 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    if (self.constraints.count == 0) {
-        [self layoutSelfSubviews];
-    }
+//    if (self.constraints.count == 0) {
+//        [self layoutSelfSubviews];
+//    }
+}
+
+-(void)updateConstraints
+{
+    [super updateConstraints];
+    [self layoutSelfSubviews];
 }
 
 -(void)layoutSelfSubviews;
 {
+    NSNumber *pickerHeight = @(PickerViewHeight);
+    NSNumber *contentHeight = IsScreen_5_8 ? @(ContentViewHeight+35) : @(ContentViewHeight);
+    NSNumber *pickerBottomDistance = IsScreen_5_8 ? @(35) : @(0);
+    NSDictionary *metrics = NSDictionaryOfVariableBindings(pickerHeight, contentHeight, pickerBottomDistance);
     NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _topBar, _pickerView, _backgroudView);
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.backgroudView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -71,11 +83,11 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_backgroudView]-0-|" options:0 metrics:nil views:views]];
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_contentView]-0-|" options:0 metrics:nil views:views]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_contentView(245)]-0-|" options:0 metrics:nil views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_contentView(contentHeight)]-0-|" options:0 metrics:metrics views:views]];
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_topBar]-0-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_pickerView]-0-|" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_topBar(44)]-0-[_pickerView(200)]-0-|" options:0 metrics:nil views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_topBar(44)]-0-[_pickerView(pickerHeight)]-pickerBottomDistance-|" options:0 metrics:metrics views:views]];
     
     [self layoutTopBarSubviews];
 }
@@ -110,7 +122,7 @@
 {
     if (!_contentView) {
         _contentView = [[UIView alloc] init];
-        _contentView.backgroundColor = [UIColor clearColor];
+        _contentView.backgroundColor = [UIColor whiteColor];
     }
     return _contentView;
 }
@@ -209,10 +221,10 @@
     self.hadShow = NO;
     self.backgroudView.alpha = 0.001;
     self.frame = view.bounds;
-    self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, 245);
+    self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, ContentViewHeight);
     [UIView animateWithDuration:0.35 animations:^{
         self.backgroudView.alpha = 1;
-        self.contentView.frame = CGRectMake(0, self.frame.size.height-245, self.frame.size.width, 245);
+        self.contentView.frame = CGRectMake(0, self.frame.size.height-ContentViewHeight, self.frame.size.width, ContentViewHeight);
     } completion:^(BOOL finished) {
         self.hadShow = YES;
     }];
@@ -223,7 +235,7 @@
     self.hadShow = NO;
     self.backgroudView.alpha = 0;
     [UIView animateWithDuration:0.35 animations:^{
-        self.frame = CGRectMake(0, 260, ScreenWidth, ScreenHeight);
+        self.frame = CGRectMake(0, ContentViewHeight+20, ScreenWidth, ScreenHeight);
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
     }];
