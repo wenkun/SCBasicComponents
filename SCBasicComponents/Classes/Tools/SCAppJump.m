@@ -29,9 +29,9 @@ static NSInteger dateInteger = 0;
 
 static NSString *sv = nil;
 ///获取版本
-+(void)checkVersion
++(void)checkVersion:(NSString *)appid
 {
-    NSURL *url = [NSURL URLWithString:@"https://itunes.apple.com/lookup?id=1191431366"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?id=%@", appid]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:15];
     request.HTTPMethod = @"POST";
     [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-type"];
@@ -95,12 +95,7 @@ static NSString *sv = nil;
 +(void)openUrl:(NSURL *)url
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        //        if (IsIOS10) {
-        //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:string] options:@{} completionHandler:nil];
-        //        }
-        //        else {
         [[UIApplication sharedApplication] openURL:url];
-        //        }
     });
 }
 

@@ -11,7 +11,7 @@
 @interface SCAppJump : NSObject
 
 ///获取版本，若使用jumpToW和jumpToSettingSectionName:需在APP启动时调用
-+(void)checkVersion;
++(void)checkVersion:(NSString *)appid;
 /** 系统openUrl:封装 **/
 +(void)openUrlString:(NSString *)urlString;
 +(void)openUrl:(NSURL *)url;

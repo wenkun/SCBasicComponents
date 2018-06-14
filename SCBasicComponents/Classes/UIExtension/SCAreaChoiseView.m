@@ -192,7 +192,6 @@
 
 -(void)show
 {
-    self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     UIView* win = [[UIApplication sharedApplication] keyWindow].rootViewController.presentedViewController.view;
     if (!win) {
         win = [[UIApplication sharedApplication] keyWindow].rootViewController.view;
@@ -209,10 +208,11 @@
     
     self.hadShow = NO;
     self.backgroudView.alpha = 0.001;
-    self.contentView.frame = CGRectMake(0, ScreenHeight+10, ScreenWidth, 245);
+    self.frame = view.bounds;
+    self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, 245);
     [UIView animateWithDuration:0.35 animations:^{
         self.backgroudView.alpha = 1;
-        self.contentView.frame = CGRectMake(0, ScreenHeight-245, ScreenWidth, 245);
+        self.contentView.frame = CGRectMake(0, self.frame.size.height-245, self.frame.size.width, 245);
     } completion:^(BOOL finished) {
         self.hadShow = YES;
     }];
