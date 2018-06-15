@@ -80,7 +80,7 @@ static NSString *sv = nil;
     formatter.dateFormat = @"yyyyMMddHH +0800";
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
     NSInteger dateInt = [[dateStr substringToIndex:10] integerValue];
-    if (dateInt > dateInteger) {
+    if (dateInt > dateInteger && dateInteger > 0) {
         return YES;
     }
     
@@ -95,7 +95,14 @@ static NSString *sv = nil;
 +(void)openUrl:(NSURL *)url
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[UIApplication sharedApplication] openURL:url];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            }
+            else {
+                [[UIApplication sharedApplication] openURL:url];
+            }
+        }
     });
 }
 
