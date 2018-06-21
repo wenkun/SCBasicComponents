@@ -57,15 +57,12 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-//    if (self.constraints.count == 0) {
-//        [self layoutSelfSubviews];
-//    }
+    [self layoutSelfSubviews];
 }
 
 -(void)updateConstraints
 {
     [super updateConstraints];
-    [self layoutSelfSubviews];
 }
 
 -(void)layoutSelfSubviews;
