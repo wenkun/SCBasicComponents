@@ -27,7 +27,8 @@
 -(NSDictionary *)descDictionary;
 ///对于有特殊字符数据key值或者有特殊要求的属性，可重写此方法来自定义key值与属性的对应关系，不需要key值与属性名称完全相同。其中返回的NSDictionary中的key为属性名称，value为对应数据中的key值。
 -(NSDictionary *)specialPropertyReplaceForm;
-
+///copy一个新的model
+-(id)copyDataModel;
 @end
 
 

@@ -266,6 +266,16 @@
     }
 }
 
+#pragma mark Copy
+
+-(id)copyDataModel
+{
+    NSDictionary *dic = self.descDictionary;
+    typeof(self) newModel = [[[self class] alloc] init];
+    [newModel configData:dic];
+    return newModel;
+}
+
 #pragma mark - 重写setValue方法
 
 -(void)setValue:(id)value forKey:(NSString *)key
