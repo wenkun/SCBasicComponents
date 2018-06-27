@@ -23,6 +23,11 @@
 #define ScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define ScreenHeight ([UIScreen mainScreen].bounds.size.height)
 
+#define TopSafeHeight (IsScreen_5_8 ? 44 : 20)
+#define BottomSafeHeight (IsScreen_5_8 ? 34 : 0)
+#define NavigationHeight (IsScreen_5_8 ? 88 : 64)
+#define TabBarHeight (IsScreen_5_8 ? 83 : 49)
+
 //屏幕尺寸
 #define IsScreen_3_5 (ScreenHeight == 480)
 #define IsScreen_4_0 (ScreenHeight == 568)

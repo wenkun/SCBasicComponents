@@ -276,6 +276,37 @@
     return newModel;
 }
 
+- (id)copyWithZone:(nullable NSZone *)zone
+{
+    return [NSKeyedUnarchiver unarchiveObjectWithData:
+            [NSKeyedArchiver archivedDataWithRootObject:self]
+            ];
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.descDictionary forKey:[self codingKey]];
+}
+
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    NSDictionary* json;
+    if ([aDecoder respondsToSelector:@selector(decodeObjectOfClass:forKey:)]) {
+        json = [aDecoder decodeObjectOfClass:[NSString class] forKey:[self codingKey]];
+    } else {
+        json = [aDecoder decodeObjectForKey:[self codingKey]];
+    }
+    self = [[[self class] alloc] initWithData:json];
+    return self;
+}
+
+-(NSString *)codingKey
+{
+    NSString *key = [NSString stringWithFormat:@"%@", [self class]];
+    return key;
+}
+
+
 #pragma mark - 重写setValue方法
 
 -(void)setValue:(id)value forKey:(NSString *)key

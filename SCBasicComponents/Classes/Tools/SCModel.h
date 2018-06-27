@@ -15,7 +15,7 @@
             ② 其他需要自定义的属性名称，可重写specialPropertyReplaceForm方法设置model的property与字典的key的对应关系。
             ③ 前面两种情况可同时支持，②的优先级高于①
  */
-@interface SCModel : NSObject
+@interface SCModel : NSObject <NSCopying, NSCoding>
 
 ///初始化
 -(instancetype)initWithData:(NSDictionary *)data;
