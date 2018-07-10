@@ -8,7 +8,7 @@
 
 #import "UIDevice+SCExtension.h"
 #import "sys/utsname.h"
-
+#import <SystemConfiguration/CaptiveNetwork.h>
 @implementation UIDevice (SCExtension)
 
 - (BOOL)isSimulator {
@@ -19,7 +19,7 @@
     });
     return simu;
 }
-+(NSString *)deviceMode
++ (NSString *)deviceMode
 {
     struct utsname systemInfo;
     uname(&systemInfo);
@@ -126,6 +126,26 @@
     if ([platform isEqualToString:@"x86_64"]) return @"iPhone Simulator";
     
     return platform;
+}
+/**
+ 获取当前连接的wifi名字
+ 
+ @return 当前的WiFi名字
+ */
++ (NSString *)currentSSID
+{
+    id info = nil;
+    NSArray *ifs = (__bridge id)CNCopySupportedInterfaces();
+    for (NSString *ifnam in ifs) {
+        info = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        
+        if (info && [info count]) {
+            break;
+        }
+    }
+    NSDictionary *dctySSID = (NSDictionary *)info;
+    NSString *ssid = [dctySSID objectForKey:@"SSID"];
+    return ssid;
 }
 
 @end

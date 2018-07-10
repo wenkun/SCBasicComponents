@@ -16,6 +16,11 @@
 
  @return 设备型号
  */
-+(NSString *)deviceMode;
-
++ (NSString *)deviceMode;
+/**
+ 获取当前连接的wifi名字
+ 
+ @return 当前的WiFi名字
+ */
++ (NSString *)currentSSID;
 @end
