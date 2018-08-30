@@ -13,13 +13,18 @@
 
 -(void)updateLayoutConstraint:(NSLayoutConstraint *)layoutConstraint
 {
+    BOOL update = NO;
     for (NSLayoutConstraint *constraint in self.constraints) {
-        if ([layoutConstraint isSamePositionTo:constraint]) {
+        if ([layoutConstraint isSamePositionAndRelotionTo:constraint]) {
             [self removeConstraint:constraint];
-            break;
+            update = YES;
         }
     }
     layoutConstraint.active = YES;
+    if (update) {
+        [self needsUpdateConstraints];
+        [self updateFocusIfNeeded];
+    }
 }
 
 @end
