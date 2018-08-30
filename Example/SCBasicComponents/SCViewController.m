@@ -92,4 +92,9 @@
     SCDebugLog(@"Can you find me?");
 }
 
+-(void)test
+{
+    [self.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
+}
+
 @end
