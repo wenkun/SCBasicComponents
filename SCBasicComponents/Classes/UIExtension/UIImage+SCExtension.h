@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (SCExtension)
-
+#pragma mark - 透明度
+- (UIImage *)imageByApplyingAlpha:(CGFloat )alpha;
 #pragma mark - color
 
 /**
