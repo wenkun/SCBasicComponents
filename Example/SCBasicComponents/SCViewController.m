@@ -9,7 +9,7 @@
 #import "SCViewController.h"
 #import "SCBasicComponents.h"
 
-@interface SCViewController ()
+@interface SCViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end
 
@@ -24,24 +24,40 @@
     NSLog(@"%@", @(self.view.frame.size.height));
     
 //    UIColor *color = RGBA(110, 110, 110, 1);
-    UIColor *color = ColorWithHex(@"123456");
-    self.view.backgroundColor = color;
+//    UIColor *color = ColorWithHex(@"123456");
+//    self.view.backgroundColor = color;
     
 //    [NSUserDefaults standardUserDefaults]
 
-    [self testPath];
-    [self testLog];
-    [self testUIApplication];
+//    [self testPath];
+//    [self testLog];
+//    [self testUIApplication];
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [SCAppJump telPhone:@"18612032019"];
-//    });
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+    return 2;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+    return 10;
+}
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component __TVOS_PROHIBITED
+{
+    return [NSString stringWithFormat:@"%ld", row];
 }
 
 #pragma mark - test
@@ -95,6 +111,15 @@
 -(void)test
 {
     [self.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
+}
+- (IBAction)popPickerView:(id)sender
+{
+    SCPickerSuperView *pv = [[SCPickerSuperView alloc] init];
+    pv.pickerView.dataSource = self;
+    pv.pickerView.delegate = self;
+//    pv.backgroudView.hidden = YES;
+//    pv.topBar.hidden = YES;
+    [pv showInView:self.view];
 }
 
 @end

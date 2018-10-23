@@ -15,6 +15,13 @@ typedef void (^SCPickerSuperViewBlock)(SCPickerSuperView *pickerSuperView);
 ///PickerView，需设置其代理方法
 @property (nonatomic, strong) UIPickerView *pickerView;
 
+@property (nonatomic, readonly) UIControl *backgroudView;
+@property (nonatomic, readonly) UIView *contentView;
+@property (nonatomic, readonly) UIView *topBar;
+@property (nonatomic, readonly) UIButton *leftButton;
+@property (nonatomic, readonly) UIButton *rightButton;
+@property (nonatomic, readonly) UIView *line;
+
 ///取消按钮点击回调
 @property (nonatomic, copy) SCPickerSuperViewBlock doCancelButtonBlock;
 ///确定按钮点击回调

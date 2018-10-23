@@ -202,6 +202,7 @@
 -(void)showInView:(UIView *)view
 {
     if (!self.superview) {
+        self.frame = view.bounds;
         [view addSubview:self];
     }
     [view bringSubviewToFront:self];
