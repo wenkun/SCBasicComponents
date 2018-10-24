@@ -25,6 +25,8 @@
 @property (nonatomic, readonly) UIButton *rightButton;
 ///topBar上的顶部分割线
 @property (nonatomic, readonly) UIView *line;
+///pickerViewHeight的高度，默认220，需在SCAreaChoiseView show之前前设置
+@property (nonatomic, assign) CGFloat pickerViewHeight;
 
 ///取消按钮点击回调
 @property (nonatomic, copy) void (^ doCancelButton)(SCAreaChoiseView *areaChoiseView);

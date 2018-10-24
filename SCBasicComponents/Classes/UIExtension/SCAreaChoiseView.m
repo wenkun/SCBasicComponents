@@ -7,7 +7,8 @@
 //
 
 #define PickerViewHeight 220
-#define ContentViewHeight PickerViewHeight+44
+#define TopBarHeight 44
+//#define ContentViewHeight(pickerViewHeight) (pickerViewHeight+44)
 
 #import "SCAreaChoiseView.h"
 #import "SCDefaultsUI.h"
@@ -67,10 +68,11 @@
 
 -(void)layoutSelfSubviews;
 {
-    NSNumber *pickerHeight = @(PickerViewHeight);
-    NSNumber *contentHeight = IsScreen_5_8 ? @(ContentViewHeight+35) : @(ContentViewHeight);
+    NSNumber *pickerHeight = @(self.pickerViewHeight);
+    NSNumber *contentHeight = IsScreen_5_8 ? @(self.contentViewHeight+35) : @(self.contentViewHeight);
     NSNumber *pickerBottomDistance = IsScreen_5_8 ? @(35) : @(0);
-    NSDictionary *metrics = NSDictionaryOfVariableBindings(pickerHeight, contentHeight, pickerBottomDistance);
+    NSNumber *topBarHeight = @(TopBarHeight);
+    NSDictionary *metrics = NSDictionaryOfVariableBindings(pickerHeight, contentHeight, pickerBottomDistance, topBarHeight);
     NSDictionary *views = NSDictionaryOfVariableBindings(_contentView, _topBar, _pickerView, _backgroudView);
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
     self.backgroudView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -84,7 +86,7 @@
     
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_topBar]-0-|" options:0 metrics:nil views:views]];
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_pickerView]-0-|" options:0 metrics:nil views:views]];
-    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_topBar(44)]-0-[_pickerView(pickerHeight)]-pickerBottomDistance-|" options:0 metrics:metrics views:views]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_topBar(topBarHeight)]-0-[_pickerView(pickerHeight)]-pickerBottomDistance-|" options:0 metrics:metrics views:views]];
     
     [self layoutTopBarSubviews];
 }
@@ -171,6 +173,19 @@
     return _rightButton;
 }
 
+-(CGFloat)pickerViewHeight
+{
+    if (_pickerViewHeight == 0) {
+        _pickerViewHeight = PickerViewHeight;
+    }
+    return _pickerViewHeight;
+}
+
+-(CGFloat)contentViewHeight
+{
+    return (self.pickerViewHeight+TopBarHeight);
+}
+
 #pragma mark - action
 
 -(void)doCancel:(id)sender
@@ -220,16 +235,16 @@
     self.frame = view.bounds;
     
     if (animation) {
-        self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, ContentViewHeight);
+        self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, self.contentViewHeight);
         [UIView animateWithDuration:0.35 animations:^{
             self.backgroudView.alpha = 1;
-            self.contentView.frame = CGRectMake(0, self.frame.size.height-ContentViewHeight, self.frame.size.width, ContentViewHeight);
+            self.contentView.frame = CGRectMake(0, self.frame.size.height-self.contentViewHeight, self.frame.size.width, self.contentViewHeight);
         } completion:^(BOOL finished) {
             self.hadShow = YES;
         }];
     }
     else {
-        self.contentView.frame = CGRectMake(0, self.frame.size.height-ContentViewHeight, self.frame.size.width, ContentViewHeight);
+        self.contentView.frame = CGRectMake(0, self.frame.size.height-self.contentViewHeight, self.frame.size.width, self.contentViewHeight);
     }
 }
 
@@ -239,13 +254,13 @@
     self.backgroudView.alpha = 0;
     if (animation) {
         [UIView animateWithDuration:0.35 animations:^{
-            self.frame = CGRectMake(0, ContentViewHeight+20, ScreenWidth, ScreenHeight);
+            self.frame = CGRectMake(0, self.contentViewHeight+20, ScreenWidth, ScreenHeight);
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];
     }
     else {
-        self.frame = CGRectMake(0, ContentViewHeight+20, ScreenWidth, ScreenHeight);
+        self.frame = CGRectMake(0, self.contentViewHeight+20, ScreenWidth, ScreenHeight);
     }
 }
 
