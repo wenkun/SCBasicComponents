@@ -29,10 +29,16 @@
     
 //    [NSUserDefaults standardUserDefaults]
 
-//    [self testPath];
-//    [self testLog];
-//    [self testUIApplication];
-    
+    [self testPath];
+    [self testLog];
+    [self testUIApplication];
+//    UIImage *image = [UIImage imageWithColor:[UIColor whiteColor]];
+//    [image imageByRoundCornerRadius:5];
+//    [image imageByRoundCornerRadius:5 borderWidth:2 borderColor:[UIColor redColor]];
+//    [image imageByRoundCornerRadius:3 corners:0 borderWidth:2 borderColor:[UIColor redColor] borderLineJoin:kCGLineJoinRound];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SCAppJump telPhone:@"18612032019"];
+//    });
 }
 
 - (void)didReceiveMemoryWarning

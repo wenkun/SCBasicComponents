@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (SCExtension)
-
+#pragma mark - 透明度
+- (UIImage *)imageByApplyingAlpha:(CGFloat )alpha;
 #pragma mark - color
 
 /**
@@ -18,7 +19,7 @@
  @param color Image的颜色
  @return UIImage
  */
-+(UIImage *)imageWithColor:(UIColor *)color;
++(nullable UIImage *)imageWithColor:(UIColor *)color;
 
 #pragma mark - gif
 
@@ -28,7 +29,7 @@
  @param name Gif图名称
  @return Gif图
  */
-+(UIImage *)animatedGIFNamed:(NSString *)name;
++(nullable UIImage *)animatedGIFNamed:(NSString *)name;
 
 /**
  根据二进制数据获取Gif图
@@ -36,7 +37,7 @@
  @param data Gif图的二进制数据
  @return Gif图
  */
-+(UIImage *)animatedGIFWithData:(NSData *)data;
++(nullable UIImage *)animatedGIFWithData:(NSData *)data;
 
 /**
  将Gif图self.images数组中的图片按照指定的尺寸缩放，返回一个animatedImage，一次播放的时间是self.duration
@@ -44,7 +45,7 @@
  @param size 缩放的尺寸
  @return 缩放后的Gif图
  */
--(UIImage *)animatedImageByScalingAndCroppingToSize:(CGSize)size;
+-(nullable UIImage *)animatedImageByScalingAndCroppingToSize:(CGSize)size;
 
 #pragma mark - 图片大小处理
 
@@ -69,7 +70,7 @@
  @param size 缩放或放大图片的目标size
  @return 缩放或放大后的图片
  */
--(UIImage *)scaleToSize:(CGSize)size;
+-(nullable UIImage *)scaleToSize:(CGSize)size;
 
 /**
  获取裁剪图片
@@ -77,11 +78,64 @@
  @param rect 图片需要裁剪的范围
  @return 裁剪出来的图片
  */
--(UIImage*)getSubImage:(CGRect)rect;
+-(nullable UIImage*)getSubImage:(CGRect)rect;
 /**
  Tint the image in alpha channel with the given color.
  
  @param color  The color.
  */
-- (UIImage *)imageByTintColor:(UIColor *)color;
+- (nullable UIImage *)imageByTintColor:(UIColor *)color;
+
+/**
+ Rounds a new image with a given corner size.
+ 
+ @param radius  The radius of each corner oval. Values larger than half the
+ rectangle's width or height are clamped appropriately to half
+ the width or height.
+ */
+- (nullable UIImage *)imageByRoundCornerRadius:(CGFloat)radius;
+
+/**
+ Rounds a new image with a given corner size.
+ 
+ @param radius       The radius of each corner oval. Values larger than half the
+ rectangle's width or height are clamped appropriately to
+ half the width or height.
+ 
+ @param borderWidth  The inset border line width. Values larger than half the rectangle's
+ width or height are clamped appropriately to half the width
+ or height.
+ 
+ @param borderColor  The border stroke color. nil means clear color.
+ */
+- (nullable UIImage *)imageByRoundCornerRadius:(CGFloat)radius
+                                   borderWidth:(CGFloat)borderWidth
+                                   borderColor:(nullable UIColor *)borderColor;
+
+/**
+ Rounds a new image with a given corner size.
+ 
+ @param radius       The radius of each corner oval. Values larger than half the
+ rectangle's width or height are clamped appropriately to
+ half the width or height.
+ 
+ @param corners      A bitmask value that identifies the corners that you want
+ rounded. You can use this parameter to round only a subset
+ of the corners of the rectangle.
+ 
+ @param borderWidth  The inset border line width. Values larger than half the rectangle's
+ width or height are clamped appropriately to half the width
+ or height.
+ 
+ @param borderColor  The border stroke color. nil means clear color.
+ 
+ @param borderLineJoin The border line join.
+ */
+- (nullable UIImage *)imageByRoundCornerRadius:(CGFloat)radius
+                                       corners:(UIRectCorner)corners
+                                   borderWidth:(CGFloat)borderWidth
+                                   borderColor:(nullable UIColor *)borderColor
+                                borderLineJoin:(CGLineJoin)borderLineJoin;
+
 @end
+NS_ASSUME_NONNULL_END
