@@ -199,16 +199,16 @@
 
 #pragma mark - Interface
 
--(void)show
+-(void)showWithAnimation:(BOOL)animation
 {
     UIView* win = [[UIApplication sharedApplication] keyWindow].rootViewController.presentedViewController.view;
     if (!win) {
         win = [[UIApplication sharedApplication] keyWindow].rootViewController.view;
     }
-    [self showInView:win];
+    [self showInView:win animation:animation];
 }
 
--(void)showInView:(UIView *)view
+-(void)showInView:(UIView *)view animation:(BOOL)animation
 {
     if (!self.superview) {
         [view addSubview:self];
@@ -218,24 +218,35 @@
     self.hadShow = NO;
     self.backgroudView.alpha = 0.001;
     self.frame = view.bounds;
-    self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, ContentViewHeight);
-    [UIView animateWithDuration:0.35 animations:^{
-        self.backgroudView.alpha = 1;
+    
+    if (animation) {
+        self.contentView.frame = CGRectMake(0, self.frame.size.height+10, self.frame.size.width, ContentViewHeight);
+        [UIView animateWithDuration:0.35 animations:^{
+            self.backgroudView.alpha = 1;
+            self.contentView.frame = CGRectMake(0, self.frame.size.height-ContentViewHeight, self.frame.size.width, ContentViewHeight);
+        } completion:^(BOOL finished) {
+            self.hadShow = YES;
+        }];
+    }
+    else {
         self.contentView.frame = CGRectMake(0, self.frame.size.height-ContentViewHeight, self.frame.size.width, ContentViewHeight);
-    } completion:^(BOOL finished) {
-        self.hadShow = YES;
-    }];
+    }
 }
 
--(void)dismiss
+-(void)dismissWithAnimation:(BOOL)animation
 {
     self.hadShow = NO;
     self.backgroudView.alpha = 0;
-    [UIView animateWithDuration:0.35 animations:^{
+    if (animation) {
+        [UIView animateWithDuration:0.35 animations:^{
+            self.frame = CGRectMake(0, ContentViewHeight+20, ScreenWidth, ScreenHeight);
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    }
+    else {
         self.frame = CGRectMake(0, ContentViewHeight+20, ScreenWidth, ScreenHeight);
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
+    }
 }
 
 @end

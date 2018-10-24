@@ -36,18 +36,18 @@
 /**
  添加到当前window上。
  */
--(void)show;
+-(void)showWithAnimation:(BOOL)animation;
 
 /**
  添加到指定的view
  
  @param view super view of SCPickerSuperView
  */
--(void)showInView:(UIView *)view;
+-(void)showInView:(UIView *)view animation:(BOOL)animation;
 
 /**
  隐藏
  */
--(void)dismiss;
+-(void)dismissWithAnimation:(BOOL)animation;
 
 @end

@@ -123,9 +123,9 @@
     SCAreaChoiseView *pv = [[SCAreaChoiseView alloc] init];
     pv.pickerView.dataSource = self;
     pv.pickerView.delegate = self;
-    pv.backgroudView.hidden = YES;
-    pv.topBar.hidden = YES;
-    [pv showInView:self.view];
+//    pv.backgroudView.hidden = YES;
+//    pv.topBar.hidden = YES;
+    [pv showInView:self.view animation:YES];
     
     
     
