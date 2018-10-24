@@ -12,14 +12,20 @@ typedef void (^SCPickerSuperViewBlock)(SCPickerSuperView *pickerSuperView);
 
 ///自定义覆盖全屏的PickView弹出View
 @interface SCPickerSuperView : UIView
-///PickerView，需设置其代理方法
-@property (nonatomic, strong) UIPickerView *pickerView;
 
+///PickerView，需设置其代理方法
+@property (nonatomic, readonly) UIPickerView *pickerView;
+///灰色背景
 @property (nonatomic, readonly) UIControl *backgroudView;
+///弹出框区域
 @property (nonatomic, readonly) UIView *contentView;
+///pickerView顶部的工具栏
 @property (nonatomic, readonly) UIView *topBar;
+///topBar的左侧按钮
 @property (nonatomic, readonly) UIButton *leftButton;
+///topBar的右侧按钮
 @property (nonatomic, readonly) UIButton *rightButton;
+///topBar上的顶部分割线
 @property (nonatomic, readonly) UIView *line;
 
 ///取消按钮点击回调

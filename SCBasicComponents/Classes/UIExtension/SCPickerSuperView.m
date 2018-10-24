@@ -10,6 +10,7 @@
 #import "SCDefaultsUI.h"
 
 @interface SCPickerSuperView ()
+@property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UIControl *backgroudView;
 @property (nonatomic, strong) UIView *contentView;
 @property (nonatomic, strong) UIView *topBar;
