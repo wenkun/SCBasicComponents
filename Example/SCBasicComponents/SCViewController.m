@@ -120,12 +120,15 @@
 }
 - (IBAction)popPickerView:(id)sender
 {
-    SCPickerSuperView *pv = [[SCPickerSuperView alloc] init];
+    SCAreaChoiseView *pv = [[SCAreaChoiseView alloc] init];
     pv.pickerView.dataSource = self;
     pv.pickerView.delegate = self;
-//    pv.backgroudView.hidden = YES;
-//    pv.topBar.hidden = YES;
+    pv.backgroudView.hidden = YES;
+    pv.topBar.hidden = YES;
     [pv showInView:self.view];
+    
+    
+    
 }
 
 @end

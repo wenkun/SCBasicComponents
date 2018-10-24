@@ -51,4 +51,5 @@ typedef void (^SCPickerSuperViewBlock)(SCPickerSuperView *pickerSuperView);
  隐藏
  */
 -(void)dismiss;
+
 @end
