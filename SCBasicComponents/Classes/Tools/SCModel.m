@@ -153,8 +153,8 @@
                                  [obj isKindOfClass:[NSArray class]]) {
                             [newArray addObject:obj];
                         }
-                        [desc setObject:newArray forKey:p];
                     }
+                    [desc setObject:newArray forKey:p];
                 }
             }
         }
