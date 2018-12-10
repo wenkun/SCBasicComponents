@@ -127,6 +127,7 @@
     
     return platform;
 }
+
 /**
  获取当前连接的wifi名字
  
@@ -134,18 +135,46 @@
  */
 + (NSString *)currentSSID
 {
-    id info = nil;
+    NSDictionary *info = [[self class] currentWiFiInfo];
+    NSString *ssid = nil;
+    if (info && info[@"SSID"]) {
+        ssid = [NSString stringWithFormat:@"%@", [info objectForKey:@"SSID"]];
+    }
+    return ssid;
+}
+
+/**
+ 获取当前连接WiFi的mac
+ 
+ @return 当前WiFi的mac
+ */
++(NSString *)currentBSSID
+{
+    NSDictionary *info = [[self class] currentWiFiInfo];
+    NSString *bssid = nil;
+    if (info && info[@"BSSID"]) {
+        bssid = [NSString stringWithFormat:@"%@", [info objectForKey:@"BSSID"]];
+    }
+    return bssid;
+}
+
++ (NSDictionary *)currentWiFiInfo
+{
+    NSDictionary *info = nil;
     NSArray *ifs = (__bridge id)CNCopySupportedInterfaces();
     for (NSString *ifnam in ifs) {
-        info = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
-        
-        if (info && [info count]) {
+        NSDictionary *a = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifnam);
+        if (a && [a count]) {
+            info = [[NSDictionary alloc] initWithDictionary:a];
+            CFRelease((__bridge CFTypeRef)(a));
             break;
         }
+        if (a) {
+            CFRelease((__bridge CFTypeRef)(a));
+        }
     }
-    NSDictionary *dctySSID = (NSDictionary *)info;
-    NSString *ssid = [dctySSID objectForKey:@"SSID"];
-    return ssid;
+    CFRelease((__bridge CFTypeRef)(ifs));
+    return info;
 }
 
 @end
