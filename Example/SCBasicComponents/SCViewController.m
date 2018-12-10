@@ -69,27 +69,27 @@
 #pragma mark - test
 
 - (void)testUIApplication{
-    UIApplication *app = [UIApplication sharedApplication];
-    NSURL *documentsURL = app.documentsURL;
-    NSString *documentsPath = app.documentsPath;
-    
-    NSURL *cachesURL = app.cachesURL;
-    NSString *cachesPath = app.cachesPath;
-    
-    NSURL *libraryURL = app.libraryURL;
-    NSString *libraryPath = app.libraryPath;
-    NSString *appBuildVersion = app.appBuildVersion;
-    
-    NSString *appVersion = app.appVersion;
-    NSString *appBundleID = app.appBundleID;
-    NSString *appBundleName = app.appBundleName;
-    
-    int64_t memoryUsage = app.memoryUsage;
-    float cpuUsage = app.cpuUsage;
-    
-    BOOL isAppExtension = [UIApplication isAppExtension];
-    
-    UIApplication *sharedExtensionApplication = [UIApplication sharedExtensionApplication];
+//    UIApplication *app = [UIApplication sharedApplication];
+//    NSURL *documentsURL = app.documentsURL;
+//    NSString *documentsPath = app.documentsPath;
+//    
+//    NSURL *cachesURL = app.cachesURL;
+//    NSString *cachesPath = app.cachesPath;
+//    
+//    NSURL *libraryURL = app.libraryURL;
+//    NSString *libraryPath = app.libraryPath;
+//    NSString *appBuildVersion = app.appBuildVersion;
+//    
+//    NSString *appVersion = app.appVersion;
+//    NSString *appBundleID = app.appBundleID;
+//    NSString *appBundleName = app.appBundleName;
+//    
+//    int64_t memoryUsage = app.memoryUsage;
+//    float cpuUsage = app.cpuUsage;
+//    
+//    BOOL isAppExtension = [UIApplication isAppExtension];
+//    
+//    UIApplication *sharedExtensionApplication = [UIApplication sharedExtensionApplication];
 }
 -(void)testPath
 {
