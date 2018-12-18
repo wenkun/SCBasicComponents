@@ -8,9 +8,13 @@
 
 
 extern NSString * const SErrorCodeStringKey;
-extern NSString *const SErrorCodeNotIntValue;
+extern NSString * const SErrorCodeNotIntValue;
 #import <Foundation/Foundation.h>
 
+/**
+ NSError扩展，支持String类型的错误编码。
+ 当code的值为-111111时，表示实际的错误编码为String类型，需要从codeString或者根据SErrorCodeStringKey来取出来
+ */
 @interface NSError (SCExtension)
 
 /**
