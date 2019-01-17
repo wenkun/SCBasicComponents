@@ -33,7 +33,11 @@ NSString *const SErrorCodeNotIntValue = @"-111111";
  */
 +(instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code description:(NSString *)description
 {
-    return [NSError errorWithDomain:domain code:code userInfo:@{NSLocalizedDescriptionKey : description}];
+    NSDictionary *info = nil;
+    if (description) {
+        info = @{NSLocalizedDescriptionKey : description};
+    }
+    return [NSError errorWithDomain:domain code:code userInfo:info];
 }
 
 /**
