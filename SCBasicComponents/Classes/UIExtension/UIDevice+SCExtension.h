@@ -23,4 +23,10 @@
  @return 当前的WiFi名字
  */
 + (NSString *)currentSSID;
+/**
+ 获取当前连接WiFi的mac
+ 
+ @return 当前WiFi的mac
+ */
++(NSString *)currentBSSID;
 @end
