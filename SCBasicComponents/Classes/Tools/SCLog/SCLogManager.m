@@ -10,6 +10,15 @@
 #import "SCDefaultResources.h"
 #import "UIDevice+SCExtension.h"
 
+///Log标签[ERROR]
+NSString * const SCLogErrorTag = @"[ERROR]";
+///Log标签[WARN]
+NSString * const SCLogWarnTag = @"[WARN]";
+///Log标签[INFO]
+NSString * const SCLogInfoTag = @"[INFO]";
+///Log标签[DEBUG]
+NSString * const SCLogDebugTag = @"[DEBUG]";
+
 @interface SCLogManager ()
 {
     FILE* fp;
@@ -103,11 +112,22 @@
     NSString *logFilePath = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
     NSError *error = nil;
     SCFilePathCreate(logFilePath, error);
-    SCLog(@"[Log] path = %@",logFilePath);
+    SCDebugLog(@"[Log] path = %@",logFilePath);
     if (error) {
         SCLog(@"[Log][ERROR] %@",error);
     }
     return logFilePath;
+}
+
+-(NSArray *)logFilePaths
+{
+    NSString *file = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
+    NSError *error = nil;
+    NSArray *paths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:file error:&error];
+    if (error) {
+        SCLog(@"[log][ERROR] %@", error);
+    }
+    return paths;
 }
 
 ///log文件名称

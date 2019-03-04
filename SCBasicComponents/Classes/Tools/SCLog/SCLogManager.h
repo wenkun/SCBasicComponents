@@ -6,9 +6,18 @@
 //  Copyright © 2018年 wenkun. All rights reserved.
 //
 
+///Log标签[ERROR]
+extern NSString * const SCLogErrorTag;
+///Log标签[WARN]
+extern NSString * const SCLogWarnTag;
+///Log标签[INFO]
+extern NSString * const SCLogInfoTag;
+///Log标签[DEBUG]
+extern NSString * const SCLogDebugTag;
+
 
 //在SCLogWriteToFile为1时，Log写入文件，需手动为该log加入标签
-#define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(FORMAT), ##__VA_ARGS__]
+#define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[SC]" FORMAT @"[%s]"), ##__VA_ARGS__, __FUNCTION__]
 //SCDebugLog永不写入本地，并且只有在DEBUG下才生效
 #if (SCLogWriteToFile && !DEBUG)
 #define SCDebugLog(FORMAT, ...)
@@ -29,6 +38,8 @@
 
 ///Log存储到本地的最长存储天数，默认7天
 @property (nonatomic, assign) NSInteger logSaveDays;
+///
+@property (nonatomic, readonly) NSArray *logFilePaths;
 
 ///单例
 +(instancetype)share;
@@ -46,5 +57,14 @@
  一旦启用改方法，请勿使用SCLog和SCDebugLog之外的log打印方法！！！
  */
 +(void)startLogAndWriteToFile;
+
+@end
+
+
+@protocol SCLogManagerDelegate <NSObject>
+@optional
+
+- (NSString *)logFileName;
+- (NSString *)logHeaderWithDefaultHeader:(NSString *)defaultHeader;
 
 @end

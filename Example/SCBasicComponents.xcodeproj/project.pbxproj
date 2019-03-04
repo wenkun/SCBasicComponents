@@ -420,7 +420,7 @@
 				ORGANIZATIONNAME = wenkun;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
-						DevelopmentTeam = PP27UD8NYZ;
+						DevelopmentTeam = SGR7YR7YD8;
 					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -675,7 +675,7 @@
 			baseConfigurationReference = C1D6B52CB94E45EAAF8770E5 /* Pods-SCBasicComponents_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PP27UD8NYZ;
+				DEVELOPMENT_TEAM = SGR7YR7YD8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";
@@ -691,7 +691,7 @@
 			baseConfigurationReference = DC531748A39F955B8918F69B /* Pods-SCBasicComponents_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = PP27UD8NYZ;
+				DEVELOPMENT_TEAM = SGR7YR7YD8;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCBasicComponents/SCBasicComponents-Prefix.pch";
 				INFOPLIST_FILE = "SCBasicComponents/SCBasicComponents-Info.plist";

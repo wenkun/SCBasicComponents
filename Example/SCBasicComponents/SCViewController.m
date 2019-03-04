@@ -20,6 +20,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [SCLogManager startLogAndWriteToFile];
+    
     NSLog(@"%@", @(ScreenHeight));
     NSLog(@"%@", @(self.view.frame.size.height));
     
