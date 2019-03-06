@@ -9,7 +9,7 @@
 #import "SCViewController.h"
 #import "SCBasicComponents.h"
 
-@interface SCViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SCViewController () <UIPickerViewDataSource, UIPickerViewDelegate, SCLogManagerDelegate>
 
 @end
 
@@ -20,7 +20,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [SCLogManager startLogAndWriteToFile];
+    [SCLogManager share].delegate = self;
+    
     
     NSLog(@"%@", @(ScreenHeight));
     NSLog(@"%@", @(self.view.frame.size.height));
@@ -106,14 +107,27 @@
 
 -(void)testLog
 {
+    static NSInteger index = 0;
+    index ++;
     SCLog(@"[APP]%@", [UIDevice deviceMode]);
-    SCLog(@"[TEST] Just a Test");
+    SCLog(@"[TEST] Just a Test [%@]", @(index));
     SCDebugLog(@"Can you find me?");
     //Log写入本地
     [SCLogManager startLogAndWriteToFile];
+        
+    index ++;
     SCLog(@"[APP]%@", [UIDevice deviceMode]);
     SCLog(@"[TEST] Just a Test");
     SCDebugLog(@"Can you find me?");
+    
+    NSString *path = [SCLogManager share].logFilePaths.lastObject;
+    NSError *error;
+    NSString *log = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    SCLog(@"LiCENSE : >>>>> %@", log);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self testLog];
+    });
 }
 
 -(void)test
@@ -131,6 +145,25 @@
     
     
     
+}
+
+#pragma mark - log
+
+-(NSString *)logFileName
+{
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    dateFormatter.dateFormat = @"yyyyMMdd HHmmss +0800.txt";
+//    NSString *name = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString *name = [NSString stringWithFormat:@"%@", @([[NSDate date] timeIntervalSince1970])];
+    name = [name stringByAppendingPathExtension:@"txt"];
+    
+    return name;
+}
+
+-(NSString *)logHeaderAppending
+{
+    return [NSString stringWithFormat:@" User : %@ \n", @"18612345678"];
 }
 
 @end

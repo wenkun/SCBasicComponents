@@ -69,7 +69,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     while (length > 1024) {
         NSString *subString = [body substringToIndex:1024];
         if (i > 0) {
-            NSLog(@"\n%@", subString);
+            NSLog(@"\n[S]+ %@", subString);
         }
         else {
             NSLog(@"[S] %@", subString);
@@ -79,7 +79,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
         i++;
     }
     if (i > 0) {
-        NSLog(@"\n%@", body);
+        NSLog(@"\n[S]+ %@", body);
     }
     else {
         NSLog(@"[S] %@", body);
@@ -89,7 +89,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 +(void)startLogAndWriteToFile
 {
     [[SCLogManager share] redirectNSlogToDocumentFolder];
-    SCLog(@"\n==================================================\n\n \t\t iOS LOG BEGIN \n\n  %@  \n==================================================\n ", [SCLogManager mobileMessage]);
+//    SCLog(@"\n==================================================\n\n \t\t iOS LOG BEGIN \n\n  %@  \n==================================================\n ", [SCLogManager mobileMessage]);
 }
 
 #pragma mark - Log Write To File
@@ -98,7 +98,13 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 {
     [self deleteExpireLogFile];
     
+    if ([self.delegate respondsToSelector:@selector(logFileName)]) {
+        self.logFileName = [self.delegate logFileName];
+    }
     NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.logFileName];
+    NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
+    [header writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    
     // 将log输入到文件
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stdout);
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stderr);
@@ -124,10 +130,15 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSString *file = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
     NSError *error = nil;
     NSArray *paths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:file error:&error];
+    paths = [paths sortedArrayUsingSelector:@selector(compare:)];
+    NSMutableArray *fullPaths = [[NSMutableArray alloc] init];
+    for (NSString *name in paths) {
+        [fullPaths addObject:[file stringByAppendingPathComponent:name]];
+    }
     if (error) {
         SCLog(@"[log][ERROR] %@", error);
     }
-    return paths;
+    return fullPaths;
 }
 
 ///log文件名称
@@ -167,9 +178,12 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 #pragma mark - 数据处理
 
 ///log需要的设备信息
-+(NSString *)mobileMessage
+-(NSString *)mobileMessage
 {
-    NSString *message = [NSString stringWithFormat:@"Mobile : %@ \n System: %@ \n System Version: %@ \n App Version: %@(%@)", [UIDevice deviceMode], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APPVersion, APPBuildVersion];
+    NSString *message = [NSString stringWithFormat:@"Mobile : %@ \n System: %@ \n System Version: %@ \n App Version: %@(%@) \n", [UIDevice deviceMode], [UIDevice currentDevice].systemName, [UIDevice currentDevice].systemVersion, APPVersion, APPBuildVersion];
+    if ([self.delegate respondsToSelector:@selector(logHeaderAppending)]) {
+        message = [message stringByAppendingString:[self.delegate logHeaderAppending]];
+    }
     return message;
 }
 

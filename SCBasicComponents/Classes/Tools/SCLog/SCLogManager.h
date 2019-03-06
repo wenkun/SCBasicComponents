@@ -17,7 +17,7 @@ extern NSString * const SCLogDebugTag;
 
 
 //在SCLogWriteToFile为1时，Log写入文件，需手动为该log加入标签
-#define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[SC]" FORMAT @"[%s]"), ##__VA_ARGS__, __FUNCTION__]
+#define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(FORMAT @"\n %s"), ##__VA_ARGS__, __FUNCTION__]
 //SCDebugLog永不写入本地，并且只有在DEBUG下才生效
 #if (SCLogWriteToFile && !DEBUG)
 #define SCDebugLog(FORMAT, ...)
@@ -26,6 +26,7 @@ extern NSString * const SCLogDebugTag;
 #endif
 
 #import <Foundation/Foundation.h>
+@protocol SCLogManagerDelegate;
 
 /**
  Log打印管理类。
@@ -35,10 +36,11 @@ extern NSString * const SCLogDebugTag;
     3、Log里请手动添加事件的标签，例如添加Error标签：SCLog(@"[uSDK][ERROR] = %@", error)，[uSDK]为模块标签，常用标签有：[ERROR][DEBUG][WARN][INFO]。便签功能是为了方便Log检索。
  */
 @interface SCLogManager : NSObject
-
+///代理
+@property (nonatomic, weak) id<SCLogManagerDelegate>delegate;
 ///Log存储到本地的最长存储天数，默认7天
 @property (nonatomic, assign) NSInteger logSaveDays;
-///
+///本地所有的Log文件路径
 @property (nonatomic, readonly) NSArray *logFilePaths;
 
 ///单例
@@ -65,6 +67,6 @@ extern NSString * const SCLogDebugTag;
 @optional
 
 - (NSString *)logFileName;
-- (NSString *)logHeaderWithDefaultHeader:(NSString *)defaultHeader;
+- (NSString *)logHeaderAppending;
 
 @end
