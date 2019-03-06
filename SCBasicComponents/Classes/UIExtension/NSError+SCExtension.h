@@ -8,6 +8,7 @@
 
 
 extern NSString * const SErrorCodeStringKey;
+extern NSString * const SErrorRawDataKey;
 extern NSString * const SErrorCodeNotIntValue;
 #import <Foundation/Foundation.h>
 
@@ -39,8 +40,25 @@ extern NSString * const SErrorCodeNotIntValue;
 +(instancetype)errorWithDomain:(NSErrorDomain)domain codeString:(NSString *)codeString description:(NSString *)description;
 
 /**
+ 生成一个NSError对象，针对非整型的错误码。
+ 如果错误码codeString可以转成整型，则赋值给code属性；否则code的值统一为SErrorCodeNotIntValue。
+ 
+ @param domain The error domain—this can be one of the predefined NSError domains, or an arbitrary string describing a custom domain. domain must not be nil. See Error Domains for a list of predefined domains.
+ @param codeString NSString类型的code
+ @param description 错误描述
+ @param rawData 原始错误数据
+ @return NSError对象
+ */
++(instancetype)errorWithDomain:(NSErrorDomain)domain codeString:(NSString *)codeString description:(NSString *)description rawData:(id)rawData;
+
+/**
  读取错误码字符串，部分错误码为英文字符组合，需用codeString获取
  */
 @property (nonatomic, readonly) NSString *codeString;
+
+/**
+ 原始错误数据
+ */
+@property (nonatomic, readonly) id rawData;
 
 @end
