@@ -92,6 +92,12 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 //    SCLog(@"\n==================================================\n\n \t\t iOS LOG BEGIN \n\n  %@  \n==================================================\n ", [SCLogManager mobileMessage]);
 }
 
++(void)stopLogWriteToFile
+{
+    fclose(stdout);
+    fclose(stderr);
+}
+
 #pragma mark - Log Write To File
 
 - (void)redirectNSlogToDocumentFolder

@@ -10,6 +10,7 @@
 #import "SCBasicComponents.h"
 
 @interface SCViewController () <UIPickerViewDataSource, UIPickerViewDelegate, SCLogManagerDelegate>
+@property (weak, nonatomic) IBOutlet UISwitch *logSwitch;
 
 @end
 
@@ -105,31 +106,6 @@
     
 }
 
--(void)testLog
-{
-    static NSInteger index = 0;
-    index ++;
-    SCLog(@"[APP]%@", [UIDevice deviceMode]);
-    SCLog(@"[TEST] Just a Test [%@]", @(index));
-    SCDebugLog(@"Can you find me?");
-    //Log写入本地
-    [SCLogManager startLogAndWriteToFile];
-        
-    index ++;
-    SCLog(@"[APP]%@", [UIDevice deviceMode]);
-    SCLog(@"[TEST] Just a Test");
-    SCDebugLog(@"Can you find me?");
-    
-    NSString *path = [SCLogManager share].logFilePaths.lastObject;
-    NSError *error;
-    NSString *log = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-    SCLog(@"LiCENSE : >>>>> %@", log);
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self testLog];
-    });
-}
-
 -(void)test
 {
     [self.view.topAnchor constraintEqualToAnchor:self.view.topAnchor];
@@ -149,13 +125,58 @@
 
 #pragma mark - log
 
+- (IBAction)logSwitch:(id)sender {
+    UISwitch *sw = (UISwitch *)sender;
+    if (sw.on) {
+        //Log写入本地
+        [SCLogManager startLogAndWriteToFile];
+    }
+    else {
+        [self stopLog];
+    }
+}
+
+
+-(void)stopLog
+{
+    [SCLogManager stopLogWriteToFile];
+}
+
+-(void)testLog
+{
+    static NSInteger index = 0;
+    index ++;
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test [%@]", @(index));
+    SCDebugLog(@"Can you find me?");
+    
+    if (self.logSwitch.on) {
+        [SCLogManager startLogAndWriteToFile];
+    }
+    
+    index ++;
+    SCLog(@"[APP]%@", [UIDevice deviceMode]);
+    SCLog(@"[TEST] Just a Test");
+    SCDebugLog(@"Can you find me?");
+    
+//    NSString *path = [SCLogManager share].logFilePaths.lastObject;
+//    NSError *error;
+//    NSString *log = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+    SCLog(@"LiCENSE : >>>>> %@", [SCLogManager share].logFilePaths);
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self testLog];
+    });
+}
+
 -(NSString *)logFileName
 {
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    dateFormatter.dateFormat = @"yyyyMMdd HHmmss +0800.txt";
 //    NSString *name = [dateFormatter stringFromDate:[NSDate date]];
-    
-    NSString *name = [NSString stringWithFormat:@"%@", @([[NSDate date] timeIntervalSince1970])];
+    static NSInteger index = 0;
+    index ++;
+    NSString *name = [NSString stringWithFormat:@"%@ - %@", @([[NSDate date] timeIntervalSince1970]), @(index)];
     name = [name stringByAppendingPathExtension:@"txt"];
     
     return name;

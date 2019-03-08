@@ -60,6 +60,8 @@ extern NSString * const SCLogDebugTag;
  */
 +(void)startLogAndWriteToFile;
 
++(void)stopLogWriteToFile;
+
 @end
 
 
