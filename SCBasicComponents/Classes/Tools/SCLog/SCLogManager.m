@@ -37,7 +37,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     static SCLogManager *timerManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        timerManager = [[SCLogManager alloc] init];
+        timerManager = [[[self class] alloc] init];
     });
     return timerManager;
 }
