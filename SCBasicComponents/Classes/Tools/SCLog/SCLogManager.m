@@ -24,7 +24,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     FILE* fp;
 }
 ///当前沙盒log文件的名称
-@property (nonatomic, strong) NSString *logFileName;
+@property (nonatomic, strong) NSString *currentLogFileName;
 
 @end
 
@@ -45,14 +45,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 -(instancetype)init
 {
     if (self = [super init]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+
     }
     return self;
-}
-
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Interface
@@ -105,9 +100,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     [self deleteExpireLogFile];
     
     if ([self.delegate respondsToSelector:@selector(logFileName)]) {
-        self.logFileName = [self.delegate logFileName];
+        self.currentLogFileName = [self.delegate logFileName];
     }
-    NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.logFileName];
+    NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
     NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
     [header writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
@@ -148,16 +143,16 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 }
 
 ///log文件名称
--(NSString *)logFileName
+-(NSString *)currentLogFileName
 {
-    if (!_logFileName) {
+    if (!_currentLogFileName) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd +0800"];
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.log", [dateString substringToIndex:10]];
-        _logFileName = fileName;
+        _currentLogFileName = fileName;
     }
-    return _logFileName;
+    return _currentLogFileName;
 }
 
 //删除过期log文件及压缩文件
@@ -191,23 +186,6 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
         message = [message stringByAppendingString:[self.delegate logHeaderAppending]];
     }
     return message;
-}
-
-#pragma mark - Notification
-
--(void)appWillEnterForground:(NSNotification *)not
-{
-#if SCLogWriteToFile
-    //比较当前时间与log文件的创建文件的日期，如果不同重新创建文件写入
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd +0800"];
-    NSString *currentDate = [[dateFormatter stringFromDate:[NSDate date]] substringToIndex:10];
-    NSString *fileDate = [self.logFileName substringWithRange:NSMakeRange(4, 10)];
-    if (![currentDate isEqualToString:fileDate]) {
-        self.logFileName = nil;
-        [SCLogManager startLogAndWriteToFile];
-    }
-#endif
 }
 
 @end
