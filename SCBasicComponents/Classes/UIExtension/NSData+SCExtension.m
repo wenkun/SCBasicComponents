@@ -9,6 +9,7 @@
 #import "NSData+SCExtension.h"
 #include <CommonCrypto/CommonCrypto.h>
 #include <zlib.h>
+#import "SCLogManager.h"
 
 @implementation NSData (SCExtension)
 - (NSString *)md2String {
@@ -456,7 +457,7 @@ static const short base64DecodingTable[256] = {
     NSError *error = nil;
     id value = [NSJSONSerialization JSONObjectWithData:self options:kNilOptions error:&error];
     if (error) {
-        NSLog(@"jsonValueDecoded error:%@", error);
+        SCLog(@"jsonValueDecoded error:%@", error);
     }
     return value;
 }

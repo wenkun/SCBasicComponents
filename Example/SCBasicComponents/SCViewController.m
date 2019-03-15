@@ -24,8 +24,8 @@
     [SCLogManager share].delegate = self;
     
     
-    NSLog(@"%@", @(ScreenHeight));
-    NSLog(@"%@", @(self.view.frame.size.height));
+    SCDebugLog(@"%@", @(ScreenHeight));
+    SCDebugLog(@"%@", @(self.view.frame.size.height));
     
 //    UIColor *color = RGBA(110, 110, 110, 1);
 //    UIColor *color = ColorWithHex(@"123456");
@@ -97,11 +97,11 @@
 }
 -(void)testPath
 {
-    NSLog(@"%@",SCPathHome);
-    NSLog(@"%@",SCPathLibrary);
-    NSLog(@"%@",SCPathDocument);
-    NSLog(@"%@",SCPathCaches);
-    NSLog(@"%@",SCPathTmp);
+    SCDebugLog(@"%@",SCPathHome);
+    SCDebugLog(@"%@",SCPathLibrary);
+    SCDebugLog(@"%@",SCPathDocument);
+    SCDebugLog(@"%@",SCPathCaches);
+    SCDebugLog(@"%@",SCPathTmp);
     
     
 }

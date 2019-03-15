@@ -22,7 +22,7 @@ extern NSString * const SCLogDebugTag;
 #if (SCLogWriteToFile && !DEBUG)
 #define SCDebugLog(FORMAT, ...)
 #else
-#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DEBUG]" FORMAT), ##__VA_ARGS__]
+#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
 #endif
 
 #import <Foundation/Foundation.h>

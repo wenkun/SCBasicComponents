@@ -8,6 +8,7 @@
 
 #import "SCModel.h"
 #import <objc/runtime.h>
+#import "SCLogManager.h"
 
 @implementation SCModel
 
@@ -218,7 +219,7 @@
         NSError *error;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T@\".*\"," options:0 error:&error];
         if (error) {
-            NSLog(@"NSRegularExpression error: %@", error);
+            SCLog(@"NSRegularExpression error: %@", error);
         }
         else {
             NSTextCheckingResult *check = [regex firstMatchInString:att options:0 range:NSMakeRange(0, att.length)];
@@ -247,7 +248,7 @@
                 NSError *error;
                 NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"T@\".*\"," options:0 error:&error];
                 if (error) {
-                    NSLog(@"NSRegularExpression error: %@", error);
+                    SCLog(@"NSRegularExpression error: %@", error);
                 }
                 else {
                     NSTextCheckingResult *check = [regex firstMatchInString:att options:0 range:NSMakeRange(0, att.length)];
