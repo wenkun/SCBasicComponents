@@ -34,7 +34,7 @@
 #define IsScreen_4_7 (ScreenHeight == 667)
 #define IsScreen_5_5 (ScreenHeight == 736)
 #define IsScreen_5_8 (ScreenHeight == 812)
-
+#define IsScreen_6_1 (ScreenHeight == 896) //6.1寸的XR和6.5寸的MAX相同
 
 //颜色和透明度设置
 #define RGBA(r,g,b,a) [UIColor colorWithRed:(float)r/255.0f green:(float)g/255.0f blue:(float)b/255.0f alpha:a]

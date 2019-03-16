@@ -19,6 +19,7 @@
     });
     return simu;
 }
+
 + (NSString *)deviceMode
 {
     struct utsname systemInfo;

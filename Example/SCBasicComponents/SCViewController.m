@@ -23,6 +23,7 @@
     
     [SCLogManager share].delegate = self;
     
+    SCLog(@"%@", [UIDevice deviceMode]);
     
     SCDebugLog(@"%@", @(ScreenHeight));
     SCDebugLog(@"%@", @(self.view.frame.size.height));
