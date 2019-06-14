@@ -28,6 +28,8 @@
     SCDebugLog(@"%@", @(ScreenHeight));
     SCDebugLog(@"%@", @(self.view.frame.size.height));
     
+    SCPLog(@"SCPrivateUser");
+    
 //    UIColor *color = RGBA(110, 110, 110, 1);
 //    UIColor *color = ColorWithHex(@"123456");
 //    self.view.backgroundColor = color;

@@ -18,11 +18,19 @@ extern NSString * const SCLogDebugTag;
 
 //在SCLogWriteToFile为1时，Log写入文件，需手动为该log加入标签
 #define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(FORMAT @"\n %s"), ##__VA_ARGS__, __FUNCTION__]
-//SCDebugLog永不写入本地，并且只有在DEBUG下才生效
-#if (SCLogWriteToFile && !DEBUG)
-#define SCDebugLog(FORMAT, ...)
-#else
+
+//SCDebugLog在DEBUG下才生效
+#if DEBUG
 #define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+#else
+#define SCDebugLog(FORMAT, ...)
+#endif
+
+//SCPLog为私有打印，在SCPrivateUser配置为1时生效
+#if DEBUG
+#define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+#else
+#define SCPLog(FORMAT, ...)
 #endif
 
 #import <Foundation/Foundation.h>
