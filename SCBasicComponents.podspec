@@ -22,11 +22,11 @@ Pod::Spec.new do |s|
 该组件整合了项目中经常使用的一些基础的宏和类的扩展，及自定义的一些类的集合
                        DESC
 
-  s.homepage         = 'https://10.159.46.130/iOS_pods/SCBasicComponents.git'
+  s.homepage         = 'https://10.199.96.150/iOS_pods/SCBasicComponents.git'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'wenkun' => 'duwenkun@haier.com' }
-  s.source           = { :git => 'https://10.159.46.130/iOS_pods/SCBasicComponents.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://10.199.96.150/iOS_pods/SCBasicComponents.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
