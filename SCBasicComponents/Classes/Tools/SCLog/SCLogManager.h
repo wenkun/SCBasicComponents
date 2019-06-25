@@ -27,7 +27,7 @@ extern NSString * const SCLogDebugTag;
 #endif
 
 //SCPLog为私有打印，在SCPrivateUser配置为1时生效
-#if DEBUG
+#if SCPrivateUser
 #define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
 #else
 #define SCPLog(FORMAT, ...)
