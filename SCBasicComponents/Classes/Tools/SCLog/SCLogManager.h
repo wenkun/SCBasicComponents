@@ -22,16 +22,16 @@ extern NSString * const SCLogDebugTag;
 //SCDebugLog在DEBUG下才生效
 #if DEBUG
 #define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-#else
-#define SCDebugLog(FORMAT, ...)
-#endif
-
 //SCPLog为私有打印，在SCPrivateUser配置为1时生效
 #if SCPrivateUser
 #define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+#endif
 #else
+#define SCDebugLog(FORMAT, ...)
 #define SCPLog(FORMAT, ...)
 #endif
+
+
 
 #import <Foundation/Foundation.h>
 @protocol SCLogManagerDelegate;
