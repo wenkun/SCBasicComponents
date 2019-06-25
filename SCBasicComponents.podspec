@@ -5,11 +5,11 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
-# 2019061401
+# 2019062501
 
 Pod::Spec.new do |s|
   s.name             = 'SCBasicComponents'
-  s.version          = '0.2.5'
+  s.version          = '0.2.6'
   s.summary          = '项目使用的基础组件'
 
 
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://10.159.46.130/iOS_pods/SCBasicComponents.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '9.0'
   
   s.source_files = 'SCBasicComponents/Classes/**/*.{h,m}'
 
