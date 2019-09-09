@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SCBasicComponents'
-  s.version          = '0.3.1'
+  s.version          = '0.3.2'
   s.summary          = '项目使用的基础组件'
   s.description      = <<-DESC
 该组件整合了项目中经常使用的一些基础的宏和类的扩展，及自定义的一些类的集合
