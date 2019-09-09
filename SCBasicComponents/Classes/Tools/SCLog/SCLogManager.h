@@ -22,7 +22,7 @@ typedef enum : NSUInteger {
     SCLogLevelNone,
     SCLogLevelProduct,
     SCLogLevelDebug,
-    SCLogLevelLevelPrivate,
+    SCLogLevelPrivate,
 } SCLogLevel;
 
 //生产log
