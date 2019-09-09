@@ -45,7 +45,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 -(instancetype)init
 {
     if (self = [super init]) {
-
+        [self deleteExpireLogFile];
     }
     return self;
 }
@@ -83,7 +83,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 
 +(void)startLogAndWriteToFile
 {
-    [[SCLogManager share] redirectNSlogToDocumentFolder];
+    if ([SCLogManager share].level > SCLogLevelNone) {
+        [[SCLogManager share] redirectNSlogToDocumentFolder];
+    }
 //    SCLog(@"\n==================================================\n\n \t\t iOS LOG BEGIN \n\n  %@  \n==================================================\n ", [SCLogManager mobileMessage]);
 }
 
@@ -101,6 +103,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     
     if ([self.delegate respondsToSelector:@selector(logFileName)]) {
         self.currentLogFileName = [self.delegate logFileName];
+    }
+    if (self.currentLogFileName.length == 0) {
+        return;
     }
     NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
     NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];

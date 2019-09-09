@@ -6,6 +6,8 @@
 //  Copyright © 2018年 wenkun. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 ///Log标签[ERROR]
 extern NSString * const SCLogErrorTag;
 ///Log标签[WARN]
@@ -15,29 +17,22 @@ extern NSString * const SCLogInfoTag;
 ///Log标签[DEBUG]
 extern NSString * const SCLogDebugTag;
 
+///Log等级
+typedef enum : NSUInteger {
+    SCLogLevelNone,
+    SCLogLevelProduct,
+    SCLogLevelDebug,
+    SCLogLevelLevelPrivate,
+} SCLogLevel;
 
-//在SCLogWriteToFile为1时，Log写入文件，需手动为该log加入标签
-#define SCLog(FORMAT, ...) [SCLogManager logWithFormat:(FORMAT @"\n %s"), ##__VA_ARGS__, __FUNCTION__]
-
-//SCDebugLog在DEBUG下才生效
-#if DEBUG
-#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-
-//SCPLog为私有打印，在SCPrivateUser配置为1时生效
-#if SCPrivateUser
-#define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-#else
-#define SCPLog(FORMAT, ...)
-#endif
-
-#else
-#define SCDebugLog(FORMAT, ...)
-#define SCPLog(FORMAT, ...)
-#endif
+//生产log
+#define SCLog(FORMAT, ...) if([SCLogManager share].level >= SCLogLevelProduct) [SCLogManager logWithFormat:(FORMAT @"\n %s"), ##__VA_ARGS__, __FUNCTION__]
+//debug log
+#define SCDebugLog(FORMAT, ...) if(DEBUG || [SCLogManager share].level >= SCLogLevelDebug) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+//私有log
+#define SCPLog(FORMAT, ...) if(DEBUG || [SCLogManager share].level >= SCLogLevelLevelPrivate) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
 
 
-
-#import <Foundation/Foundation.h>
 @protocol SCLogManagerDelegate;
 
 /**
@@ -50,6 +45,8 @@ extern NSString * const SCLogDebugTag;
 @interface SCLogManager : NSObject
 ///代理
 @property (nonatomic, weak) id<SCLogManagerDelegate>delegate;
+///Log等级
+@property (nonatomic, assign) SCLogLevel level;
 ///Log存储到本地的最长存储天数，默认7天
 @property (nonatomic, assign) NSInteger logSaveDays;
 ///本地所有的Log文件路径
