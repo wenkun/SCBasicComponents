@@ -74,12 +74,12 @@ typedef enum : NSUInteger {
  开始log写入本地文件。
  一旦启用改方法，请勿使用SCLog和SCDebugLog之外的log打印方法！！！
  */
-+(void)startLogAndWriteToFile;
+-(void)startLogAndWriteToFile;
 
 /**
  停止log输出
  */
-+(void)stopLogWriteToFile;
+-(void)stopLogWriteToFile;
 
 @end
 

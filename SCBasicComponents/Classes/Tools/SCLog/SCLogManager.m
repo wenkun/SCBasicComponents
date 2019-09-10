@@ -81,15 +81,13 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     }
 }
 
-+(void)startLogAndWriteToFile
+-(void)startLogAndWriteToFile
 {
-    if ([SCLogManager share].level > SCLogLevelNone) {
-        [[SCLogManager share] redirectNSlogToDocumentFolder];
-    }
+    [self redirectNSlogToDocumentFolder];
 //    SCLog(@"\n==================================================\n\n \t\t iOS LOG BEGIN \n\n  %@  \n==================================================\n ", [SCLogManager mobileMessage]);
 }
 
-+(void)stopLogWriteToFile
+-(void)stopLogWriteToFile
 {
     fclose(stdout);
     fclose(stderr);

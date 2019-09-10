@@ -132,7 +132,7 @@
     UISwitch *sw = (UISwitch *)sender;
     if (sw.on) {
         //Log写入本地
-        [SCLogManager startLogAndWriteToFile];
+        [[SCLogManager share] startLogAndWriteToFile];
     }
     else {
         [self stopLog];
@@ -142,7 +142,7 @@
 
 -(void)stopLog
 {
-    [SCLogManager stopLogWriteToFile];
+    [[SCLogManager share] stopLogWriteToFile];
 }
 
 -(void)testLog
@@ -154,7 +154,7 @@
     SCDebugLog(@"Can you find me?");
     
     if (self.logSwitch.on) {
-        [SCLogManager startLogAndWriteToFile];
+        [[SCLogManager share] startLogAndWriteToFile];
     }
     
     index ++;
