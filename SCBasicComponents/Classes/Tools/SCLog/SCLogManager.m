@@ -100,7 +100,10 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     [self deleteExpireLogFile];
     
     if ([self.delegate respondsToSelector:@selector(logFileName)]) {
-        self.currentLogFileName = [self.delegate logFileName];
+        NSString *name = [self.delegate logFileName];
+        if (name) {
+            self.currentLogFileName = name;
+        }
     }
     if (self.currentLogFileName.length == 0) {
         return;
@@ -150,7 +153,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 {
     if (!_currentLogFileName) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd +0800"];
+        [dateFormatter setDateFormat:@"yyyyMMddhh +0800"];
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.log", [dateString substringToIndex:10]];
         _currentLogFileName = fileName;
@@ -165,10 +168,10 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
         NSString *path = self.logFilePath;
         NSArray *array = [[NSFileManager defaultManager] subpathsAtPath:path];
         for (NSString *subPath in array) {
-            if (subPath.length == 18) {
-                NSString *fDateStr = [subPath substringWithRange:NSMakeRange(4, 10)];
+            if (subPath.length == 14) {
+                NSString *fDateStr = [subPath stringByDeletingPathExtension];
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd +0800"];
+                [dateFormatter setDateFormat:@"yyyyMMddhh +0800"];
                 NSDate *fDate = [dateFormatter dateFromString:[fDateStr stringByAppendingString:@" +0800"]];
                 NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:fDate];
                 if (interval > 60*60*24*self.logSaveDays) {
