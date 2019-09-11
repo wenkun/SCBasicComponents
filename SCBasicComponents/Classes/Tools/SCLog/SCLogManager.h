@@ -37,7 +37,7 @@ typedef enum : NSUInteger {
 #if DEBUG
 #define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
 #else
-#define SCPLog(FORMAT, ...) if([SCLogManager share].level >= SCLogLevelLevelPrivate) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+#define SCPLog(FORMAT, ...) if([SCLogManager share].level == SCLogLevelPrivate) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
 #endif
 
 @protocol SCLogManagerDelegate;
