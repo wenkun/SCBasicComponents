@@ -54,7 +54,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) id<SCLogManagerDelegate>delegate;
 ///Log等级
 @property (nonatomic, assign) SCLogLevel level;
-///Log存储到本地的最长存储天数，默认7天
+///Log存储到本地的最长存储天数，默认5天
 @property (nonatomic, assign) NSInteger logSaveDays;
 ///本地所有的Log文件路径
 @property (nonatomic, readonly) NSArray *logFilePaths;
@@ -80,6 +80,9 @@ typedef enum : NSUInteger {
  停止log输出
  */
 -(void)stopLogWriteToFile;
+
+//删除过期log文件及压缩文件
+-(void)deleteExpireLogFile;
 
 @end
 
