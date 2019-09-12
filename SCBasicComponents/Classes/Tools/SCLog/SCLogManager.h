@@ -66,7 +66,6 @@ typedef enum : NSUInteger {
  重定义log打印，对于长度长于1024字节的进行循环打印
 
  @param format :A format string. See Formatting String Objects for examples of how to use this method, and String Format Specifiers for a list of format specifiers. This value must not be nil.
-
  */
 +(void)logWithFormat:(NSString *)format, ...;
 

@@ -32,13 +32,6 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 
 #pragma mark - Life Cycle
 
-+ (void)load
-{
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[SCLogManager share] deleteExpireLogFile];
-    });
-}
-
 +(instancetype)share
 {
     static SCLogManager *timerManager;
