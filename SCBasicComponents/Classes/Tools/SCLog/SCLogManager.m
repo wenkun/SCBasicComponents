@@ -110,11 +110,13 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     }
     NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
     NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
-    [header writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//    [header writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     // 将log输入到文件
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stdout);
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stderr);
+   
+    SCLog(@"\n\nLog Begin\n%@", header);
 }
 
 #pragma mark - Log File

@@ -154,6 +154,7 @@
     SCDebugLog(@"Can you find me?");
     
     if (self.logSwitch.on) {
+        [SCLogManager share].level = SCLogLevelPrivate;
         [[SCLogManager share] startLogAndWriteToFile];
     }
     
@@ -172,18 +173,18 @@
     });
 }
 
--(NSString *)logFileName
-{
+//-(NSString *)logFileName
+//{
 //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 //    dateFormatter.dateFormat = @"yyyyMMdd HHmmss +0800.txt";
 //    NSString *name = [dateFormatter stringFromDate:[NSDate date]];
-    static NSInteger index = 0;
-    index ++;
-    NSString *name = [NSString stringWithFormat:@"%@ - %@", @([[NSDate date] timeIntervalSince1970]), @(index)];
-    name = [name stringByAppendingPathExtension:@"txt"];
-    
-    return name;
-}
+//    static NSInteger index = 0;
+//    index ++;
+//    NSString *name = [NSString stringWithFormat:@"%@ - %@", @([[NSDate date] timeIntervalSince1970]), @(index)];
+//    name = [name stringByAppendingPathExtension:@"txt"];
+//
+//    return name;
+//}
 
 -(NSString *)logHeaderAppending
 {
