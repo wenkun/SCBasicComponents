@@ -116,7 +116,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stdout);
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stderr);
    
-    SCLog(@"\n\nLog Begin\n%@", header);
+    NSLog(@"Begin\n%@", header);
 }
 
 #pragma mark - Log File
@@ -155,7 +155,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 {
     if (!_currentLogFileName) {
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyyMMddhh +0800"];
+        [dateFormatter setDateFormat:@"yyyyMMddHH +0800"];
         NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.log", [dateString substringToIndex:10]];
         _currentLogFileName = fileName;

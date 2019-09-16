@@ -16,6 +16,11 @@
 
 @implementation SCViewController
 
++ (void)load
+{
+    [[SCLogManager share] startLogAndWriteToFile];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -155,7 +160,6 @@
     
     if (self.logSwitch.on) {
         [SCLogManager share].level = SCLogLevelPrivate;
-        [[SCLogManager share] startLogAndWriteToFile];
     }
     
     index ++;
