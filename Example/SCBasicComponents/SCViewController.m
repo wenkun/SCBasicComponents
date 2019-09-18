@@ -18,7 +18,12 @@
 
 + (void)load
 {
+    [SCLogManager share].level = SCLogLevelPrivate;
     [[SCLogManager share] startLogAndWriteToFile];
+    
+//    NSString *path = [SCPathDocument stringByAppendingPathComponent:@"t2"];
+//    NSError *error;
+//    SCFilePathCreate(path, error);
 }
 
 - (void)viewDidLoad

@@ -36,7 +36,7 @@
 //沙盒tmp目录路径
 #define SCPathTmp NSTemporaryDirectory()
 //在沙盒路径中创建路径文件夹
-#define SCFilePathCreate(filePath, error) if (![[NSFileManager defaultManager] fileExistsAtPath:logFilePath]) [[NSFileManager defaultManager] createDirectoryAtPath:logFilePath withIntermediateDirectories:YES attributes:nil error:&error];
+#define SCFilePathCreate(filePath, error) if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) [[NSFileManager defaultManager] createDirectoryAtPath:filePath withIntermediateDirectories:YES attributes:nil error:&error];
 
 
 //从storyboard里获取ViewController
