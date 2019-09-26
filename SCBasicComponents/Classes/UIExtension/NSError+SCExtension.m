@@ -7,6 +7,7 @@
 //
 
 
+NSString * const SErrorTypeKey = @"SErrorTypeKey";
 NSString * const SErrorCodeStringKey = @"SCodeStringKey";
 NSString * const SErrorRawDataKey = @"SErrorRawDataKey";
 NSString * const SErrorCodeNotIntValue = @"-111111";
@@ -14,6 +15,12 @@ NSString * const SErrorCodeNotIntValue = @"-111111";
 #import "NSError+SCExtension.h"
 
 @implementation NSError (SCExtension)
+
+- (NSInteger)errorType
+{
+    NSNumber *type = [self.userInfo objectForKey:SErrorCodeStringKey];
+    return [type integerValue];
+}
 
 -(NSString *)codeString
 {
@@ -39,9 +46,16 @@ NSString * const SErrorCodeNotIntValue = @"-111111";
  */
 +(instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code description:(NSString *)description
 {
-    NSDictionary *info = nil;
+    return [NSError errorWithDomain:domain code:code description:description type:0];
+}
++(instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code description:(NSString *)description type:(NSInteger)errorType
+{
+    NSMutableDictionary *info = [NSMutableDictionary new];
     if (description) {
-        info = @{NSLocalizedDescriptionKey : description};
+        [info setObject:description forKey:NSLocalizedDescriptionKey];
+    }
+    if (0 != errorType) {
+        [info setObject:@(errorType) forKey:SErrorTypeKey];
     }
     return [NSError errorWithDomain:domain code:code userInfo:info];
 }
@@ -59,6 +73,10 @@ NSString * const SErrorCodeNotIntValue = @"-111111";
 {
     return [NSError errorWithDomain:domain codeString:codeString description:description rawData:nil];
 }
++(instancetype)errorWithDomain:(NSErrorDomain)domain codeString:(NSString *)codeString description:(NSString *)description type:(NSInteger)errorType
+{
+    return [NSError errorWithDomain:domain codeString:codeString description:description rawData:nil type:errorType];
+}
 
 /**
  生成一个NSError对象，针对非整型的错误码。
@@ -72,28 +90,36 @@ NSString * const SErrorCodeNotIntValue = @"-111111";
  */
 +(instancetype)errorWithDomain:(NSErrorDomain)domain codeString:(NSString *)codeString description:(NSString *)description rawData:(id)rawData
 {
+    return [NSError errorWithDomain:domain codeString:codeString description:description rawData:rawData type:0];
+}
++(instancetype)errorWithDomain:(NSErrorDomain)domain codeString:(NSString *)codeString description:(NSString *)description rawData:(id)rawData type:(NSInteger)errorType
+{
     NSInteger code = 0;
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:2];
-    
-    if (codeString) {
-        code = [codeString integerValue];
-        if (code == 0) {
-            code = [SErrorCodeNotIntValue integerValue];
-        }
-        
-        [userInfo setObject:codeString forKey:SErrorCodeStringKey];
-    }
-    
-    if (description) {
-        [userInfo setObject:description forKey:NSLocalizedDescriptionKey];
-    }
-    
-    if (rawData) {
-        [userInfo setObject:rawData forKey:SErrorRawDataKey];
-    }
-    
-    NSError *error = [NSError errorWithDomain:domain code:code userInfo:userInfo];
-    return error;
+       NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:4];
+       
+       if (codeString) {
+           code = [codeString integerValue];
+           if (code == 0) {
+               code = [SErrorCodeNotIntValue integerValue];
+           }
+           
+           [userInfo setObject:codeString forKey:SErrorCodeStringKey];
+       }
+       
+       if (description) {
+           [userInfo setObject:description forKey:NSLocalizedDescriptionKey];
+       }
+       
+       if (rawData) {
+           [userInfo setObject:rawData forKey:SErrorRawDataKey];
+       }
+       
+       if (0 != errorType) {
+           [userInfo setObject:@(errorType) forKey:SErrorTypeKey];
+       }
+       
+       NSError *error = [NSError errorWithDomain:domain code:code userInfo:userInfo];
+       return error;
 }
 
 @end
