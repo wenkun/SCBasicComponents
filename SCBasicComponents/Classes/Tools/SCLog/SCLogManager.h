@@ -25,19 +25,25 @@ typedef enum : NSUInteger {
     SCLogLevelPrivate,
 } SCLogLevel;
 
+
+#if DEBUG
+
+//生产log
+#define SCLog(FORMAT, ...) if([SCLogManager share].level >= SCLogLevelProduct) [SCLogManager logWithFormat:(FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+//debug log
+#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+//私有log
+#define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+
+#else
+
 //生产log
 #define SCLog(FORMAT, ...) if([SCLogManager share].level >= SCLogLevelProduct) [SCLogManager logWithFormat:(FORMAT @"\n %s"), ##__VA_ARGS__, __FUNCTION__]
 //debug log
-#if DEBUG
-#define SCDebugLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-#else
 #define SCDebugLog(FORMAT, ...) if([SCLogManager share].level >= SCLogLevelDebug) [SCLogManager logWithFormat:(@"[D]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-#endif
 //私有log
-#if DEBUG
-#define SCPLog(FORMAT, ...) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
-#else
 #define SCPLog(FORMAT, ...) if([SCLogManager share].level == SCLogLevelPrivate) [SCLogManager logWithFormat:(@"[DP]" FORMAT @"\n %s[%d]"), ##__VA_ARGS__, __FUNCTION__, __LINE__]
+
 #endif
 
 @protocol SCLogManagerDelegate;
