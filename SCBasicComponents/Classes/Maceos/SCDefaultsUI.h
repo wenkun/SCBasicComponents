@@ -19,6 +19,7 @@
 #define IsIOS10 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 10.0? YES : NO)
 #define IsIOS11 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 11.0? YES : NO)
 #define IsIOS12 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 12.0? YES : NO)
+#define IsIOS13 ([[[UIDevice currentDevice] systemVersion] doubleValue] >= 13.0? YES : NO)
 
 //屏幕宽高
 #define ScreenWidth ([UIScreen mainScreen].bounds.size.width)

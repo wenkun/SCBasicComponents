@@ -19,7 +19,7 @@
 + (void)load
 {
     [SCLogManager share].level = SCLogLevelPrivate;
-    [[SCLogManager share] startLogAndWriteToFile];
+//    [[SCLogManager share] startLogAndWriteToFile];
     
 //    NSString *path = [SCPathDocument stringByAppendingPathComponent:@"t2"];
 //    NSError *error;
@@ -33,7 +33,8 @@
     
     [SCLogManager share].delegate = self;
     
-    SCLog(@"%@", [UIDevice deviceMode]);
+    SCLog(@"Device Model： %@", [UIDevice deviceMode]);
+    SCLog(@"Device System：%@", [[UIDevice currentDevice] systemVersion]);
     
     SCDebugLog(@"%@", @(ScreenHeight));
     SCDebugLog(@"%@", @(self.view.frame.size.height));
