@@ -10,7 +10,20 @@
 NSString * const SErrorTypeKey = @"SErrorTypeKey";
 NSString * const SErrorCodeStringKey = @"SCodeStringKey";
 NSString * const SErrorRawDataKey = @"SErrorRawDataKey";
+
+/// 无错误类型定义
+NSInteger const SErrorTypeNone = 0;
+/// 自定义错误类型
+NSInteger const SErrorTypeCustom = 1;
+/// HTTP网络错误类型
+NSInteger const SErrorTypeHTTP = 2;
+/// 服务端返回的业务错误类型
+NSInteger const SErrorTypeServerBusiness = 3;
+/// 外接设备返回错误类型
+NSInteger const SErrorTypeExternalDevice = 4;
+
 NSString * const SErrorCodeNotIntValue = @"-111111";
+
 
 #import "NSError+SCExtension.h"
 
