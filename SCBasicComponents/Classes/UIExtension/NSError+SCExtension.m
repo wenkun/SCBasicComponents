@@ -31,7 +31,7 @@ NSString * const SErrorCodeNotIntValue = @"-111111";
 
 - (NSInteger)errorType
 {
-    NSNumber *type = [self.userInfo objectForKey:SErrorCodeStringKey];
+    NSNumber *type = [self.userInfo objectForKey:SErrorTypeKey];
     return [type integerValue];
 }
 
