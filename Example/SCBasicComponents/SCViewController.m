@@ -21,7 +21,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [SCLogManager share].delegate = self;
+//    [SCLogManager share].delegate = self;
+    [SCLogManager share].logSaveDays = 5;
+    [SCLogManager share].maxLogFileSize = 10.;
+    [SCLogManager startLogAndWriteToFile];
+    
     
     SCLog(@"%@", [UIDevice deviceMode]);
     

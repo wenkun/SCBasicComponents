@@ -185,7 +185,6 @@
 			children = (
 				25DD9767202D5D03000874D4 /* Tools */,
 				25BA0486202B40D1004461ED /* Maceos */,
-				25BA0488202B40D1004461ED /* UIExtension */,
 				25BA048B202B40D1004461ED /* SCBasicComponents.h */,
 			);
 			name = Classes;
@@ -197,6 +196,7 @@
 			children = (
 				25BA0487202B40D1004461ED /* SCDefaultsUI.h */,
 				25DD976C202D6478000874D4 /* SCDefaultResources.h */,
+				25BA0488202B40D1004461ED /* UIExtension */,
 			);
 			path = Maceos;
 			sourceTree = "<group>";
