@@ -32,6 +32,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [SCLogManager share].delegate = self;
+    [SCLogManager share].logSaveDays = 5;
+    [SCLogManager share].maxLogFileSize = 0.01;
+    [SCLogManager share].maxLogFileCount = 6;
+    [[SCLogManager share] startLogAndWriteToFile];
+    
     
     SCLog(@"Device Model： %@", [UIDevice deviceMode]);
     SCLog(@"Device System：%@", [[UIDevice currentDevice] systemVersion]);
@@ -183,18 +188,18 @@
     });
 }
 
-//-(NSString *)logFileName
-//{
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    dateFormatter.dateFormat = @"yyyyMMdd HHmmss +0800.txt";
-//    NSString *name = [dateFormatter stringFromDate:[NSDate date]];
+-(NSString *)logFileName
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyyMMdd HHmmss +0800.txt";
+    NSString *name = [dateFormatter stringFromDate:[NSDate date]];
 //    static NSInteger index = 0;
 //    index ++;
 //    NSString *name = [NSString stringWithFormat:@"%@ - %@", @([[NSDate date] timeIntervalSince1970]), @(index)];
 //    name = [name stringByAppendingPathExtension:@"txt"];
-//
-//    return name;
-//}
+
+    return name;
+}
 
 -(NSString *)logHeaderAppending
 {

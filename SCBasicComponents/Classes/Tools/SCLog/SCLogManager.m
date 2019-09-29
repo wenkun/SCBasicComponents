@@ -25,6 +25,8 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 }
 ///当前沙盒log文件的名称
 @property (nonatomic, strong) NSString *currentLogFileName;
+/// 文件大小检测timer
+@property (nonatomic, strong) dispatch_source_t timer;
 
 @end
 
@@ -93,12 +95,57 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     fclose(stderr);
 }
 
+- (void)setMaxLogFileSize:(CGFloat)maxLogFileSize
+{
+    _maxLogFileSize = maxLogFileSize;
+    if (maxLogFileSize > 0) {
+        [self beginFileSizeCheckTimer];
+    }
+}
+
+#pragma mark - Timer
+
+- (void)beginFileSizeCheckTimer
+{
+    if (self.timer) {
+        return;
+    }
+    
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    __weak typeof(self) weakself = self;
+    dispatch_source_set_event_handler(timer, ^{
+        if (weakself.maxLogFileSize > 0) {
+            if (weakself.currentLogFilePath) {
+                CGFloat size = [self fileSizeWithPath:self.currentLogFilePath];
+                if (size >= self.maxLogFileSize) {
+                    weakself.currentLogFileName = nil;
+                    [weakself startLogAndWriteToFile];
+                }
+            }
+        }
+        else {
+            [weakself stopFileSizeCheckTimer];
+        }
+    });
+    dispatch_resume(timer);
+    
+    self.timer = timer;
+}
+
+- (void)stopFileSizeCheckTimer
+{
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+        self.timer = nil;
+    }
+}
+
 #pragma mark - Log Write To File
 
 - (void)redirectNSlogToDocumentFolder
 {
-    [self deleteExpireLogFile];
-    
     if ([self.delegate respondsToSelector:@selector(logFileName)]) {
         NSString *name = [self.delegate logFileName];
         if (name) {
@@ -106,17 +153,19 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
         }
     }
     if (self.currentLogFileName.length == 0) {
+        [self deleteExpireLogFile];
         return;
     }
     NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
     NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
-//    [header writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
     
     // 将log输入到文件
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stdout);
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stderr);
    
     NSLog(@"Begin\n%@", header);
+    
+    [self deleteExpireLogFile];
 }
 
 #pragma mark - Log File
@@ -163,12 +212,34 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     return _currentLogFileName;
 }
 
+- (NSString *)currentLogFilePath
+{
+    NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return path;
+    }
+    return nil;
+}
+
 //删除过期log文件及压缩文件
 -(void)deleteExpireLogFile
 {
+    if ([self.delegate respondsToSelector:@selector(startWriteLogToFile)]) {
+        [self.delegate startWriteLogToFile];
+        return;
+       }
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *path = self.logFilePath;
         NSArray *array = [[NSFileManager defaultManager] subpathsAtPath:path];
+        // 移除超出数量的Log
+        if (self.maxLogFileCount > 0 && array.count > self.maxLogFileCount) {
+            NSArray *sortArray = [self.logFilePaths sortedArrayUsingSelector:@selector(compare:)];
+            NSArray *removeArray = [sortArray subarrayWithRange:NSMakeRange(0, sortArray.count-self.maxLogFileCount)];
+            [removeArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [[NSFileManager defaultManager] removeItemAtPath:obj error:nil];
+            }];
+        }
         for (NSString *subPath in array) {
             if (subPath.length == 14) {
                 NSString *fDateStr = [subPath stringByDeletingPathExtension];
@@ -182,6 +253,14 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
             }
         }
     });
+}
+
+- (CGFloat)fileSizeWithPath:(NSString *)path
+{
+    NSError *error;
+    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:&error];
+    unsigned long long size = [attributes[NSFileSize] unsignedLongLongValue];
+    return (size/1024./1024.);
 }
 
 #pragma mark - 数据处理

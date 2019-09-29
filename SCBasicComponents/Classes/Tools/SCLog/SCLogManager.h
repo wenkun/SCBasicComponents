@@ -62,8 +62,14 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) SCLogLevel level;
 ///Log存储到本地的最长存储天数，默认5天
 @property (nonatomic, assign) NSInteger logSaveDays;
+///Log存储到本地的最多文件数量(包含正在写入的文件)，0为不限制数量，默认为0
+@property (nonatomic, assign) NSInteger maxLogFileCount;
+///Log存储到本地的文件最大大小，单位M，0为不限，超过大小后更换新文件写入，默认为0
+@property (nonatomic, assign) CGFloat maxLogFileSize;
 ///本地所有的Log文件路径
 @property (nonatomic, readonly) NSArray *logFilePaths;
+///当前沙盒log文件的名称
+@property (nonatomic, readonly) NSString *currentLogFilePath;
 
 ///单例
 +(instancetype)share;
@@ -86,7 +92,7 @@ typedef enum : NSUInteger {
  */
 -(void)stopLogWriteToFile;
 
-//删除过期log文件及压缩文件
+//删除过期log文件及压缩文件, 用于默认Log文件名称
 -(void)deleteExpireLogFile;
 
 @end
@@ -95,7 +101,11 @@ typedef enum : NSUInteger {
 @protocol SCLogManagerDelegate <NSObject>
 @optional
 
+/// 默认为 yyyyMMddHHmmss
 - (NSString *)logFileName;
+/// Log头部描述添加
 - (NSString *)logHeaderAppending;
+/// 开始将Log写入本地文件，包括切换新Log文件
+- (void)startWriteLogToFile;
 
 @end
