@@ -25,6 +25,8 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 }
 ///当前沙盒log文件的名称
 @property (nonatomic, strong) NSString *currentLogFileName;
+/// 文件大小检测timer
+@property (nonatomic, strong) dispatch_source_t timer;
 
 @end
 
@@ -93,6 +95,52 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     fclose(stderr);
 }
 
+- (void)setMaxLogFileSize:(CGFloat)maxLogFileSize
+{
+    _maxLogFileSize = maxLogFileSize;
+    if (maxLogFileSize > 0) {
+        [self beginFileSizeCheckTimer];
+    }
+}
+
+#pragma mark - Timer
+
+- (void)beginFileSizeCheckTimer
+{
+    if (self.timer) {
+        return;
+    }
+    
+    dispatch_queue_t queue = dispatch_get_main_queue();
+    dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+    dispatch_source_set_timer(timer, DISPATCH_TIME_NOW, 60 * NSEC_PER_SEC, 0 * NSEC_PER_SEC);
+    __weak typeof(self) weakself = self;
+    dispatch_source_set_event_handler(timer, ^{
+        if (weakself.maxLogFileSize > 0) {
+            if (self.currentLogFilePath) {
+                CGFloat size = [self fileSizeWithPath:self.currentLogFilePath];
+                if (size >= 10) {
+                    self.currentLogFileName = nil;
+                }
+            }
+        }
+        else {
+            [weakself stopFileSizeCheckTimer];
+        }
+    });
+    dispatch_resume(timer);
+    
+    self.timer = timer;
+}
+
+- (void)stopFileSizeCheckTimer
+{
+    if (self.timer) {
+        dispatch_source_cancel(self.timer);
+        self.timer = nil;
+    }
+}
+
 #pragma mark - Log Write To File
 
 - (void)redirectNSlogToDocumentFolder
@@ -155,6 +203,15 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     return _currentLogFileName;
 }
 
+- (NSString *)currentLogFilePath
+{
+    NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        return path;
+    }
+    return nil;
+}
+
 //删除过期log文件及压缩文件
 -(void)deleteExpireLogFile
 {
@@ -174,6 +231,14 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
             }
         }
     });
+}
+
+- (CGFloat)fileSizeWithPath:(NSString *)path
+{
+    NSError *error;
+    NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:&error];
+    unsigned long long size = [attributes[NSFileSize] unsignedLongLongValue];
+    return (size/1024./1024.);
 }
 
 #pragma mark - 数据处理

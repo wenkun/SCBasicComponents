@@ -48,8 +48,14 @@ extern NSString * const SCLogDebugTag;
 @property (nonatomic, weak) id<SCLogManagerDelegate>delegate;
 ///Log存储到本地的最长存储天数，默认7天
 @property (nonatomic, assign) NSInteger logSaveDays;
+///Log存储到本地的最多文件数量(包含正在写入的文件)，0为不限制数量，默认为0
+@property (nonatomic, assign) NSInteger maxLogFileCount;
+///Log存储到本地的文件最大大小，单位M，0为不限，超过大小后更换新文件写入，默认为0
+@property (nonatomic, assign) CGFloat maxLogFileSize;
 ///本地所有的Log文件路径
 @property (nonatomic, readonly) NSArray *logFilePaths;
+///当前沙盒log文件的名称
+@property (nonatomic, readonly) NSString *currentLogFilePath;
 
 ///单例
 +(instancetype)share;
@@ -79,7 +85,9 @@ extern NSString * const SCLogDebugTag;
 @protocol SCLogManagerDelegate <NSObject>
 @optional
 
+/// 默认为 yyyyMMddHHmmss
 - (NSString *)logFileName;
+/// Log头部描述添加
 - (NSString *)logHeaderAppending;
 
 @end
