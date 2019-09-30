@@ -33,7 +33,7 @@
     
     [SCLogManager share].delegate = self;
     [SCLogManager share].logSaveDays = 5;
-    [SCLogManager share].maxLogFileSize = 0.01;
+    [SCLogManager share].maxLogFileSize = 0.1;
     [SCLogManager share].maxLogFileCount = 6;
     [[SCLogManager share] startLogAndWriteToFile];
     

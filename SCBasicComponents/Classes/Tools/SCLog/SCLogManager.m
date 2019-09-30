@@ -101,6 +101,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     if (maxLogFileSize > 0) {
         [self beginFileSizeCheckTimer];
     }
+    else {
+        [self stopFileSizeCheckTimer];
+    }
 }
 
 #pragma mark - Timer
@@ -230,26 +233,32 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
        }
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSString *path = self.logFilePath;
-        NSArray *array = [[NSFileManager defaultManager] subpathsAtPath:path];
+        NSArray *dateSortArray = [self sortFilePathWithCreateDate];
         // 移除超出数量的Log
-        if (self.maxLogFileCount > 0 && array.count > self.maxLogFileCount) {
-            NSArray *sortArray = [self.logFilePaths sortedArrayUsingSelector:@selector(compare:)];
-            NSArray *removeArray = [sortArray subarrayWithRange:NSMakeRange(0, sortArray.count-self.maxLogFileCount)];
+        if (self.maxLogFileCount > 0 && dateSortArray.count > self.maxLogFileCount) {
+            NSArray *removeArray = [dateSortArray subarrayWithRange:NSMakeRange(0, dateSortArray.count-self.maxLogFileCount)];
             [removeArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [[NSFileManager defaultManager] removeItemAtPath:obj error:nil];
             }];
         }
-        for (NSString *subPath in array) {
-            if (subPath.length == 14) {
-                NSString *fDateStr = [subPath stringByDeletingPathExtension];
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyyMMddhh +0800"];
-                NSDate *fDate = [dateFormatter dateFromString:[fDateStr stringByAppendingString:@" +0800"]];
-                NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:fDate];
-                if (interval > 60*60*24*self.logSaveDays) {
-                    [[NSFileManager defaultManager] removeItemAtPath:[path stringByAppendingPathComponent:subPath] error:nil];
+        for (NSInteger i=0; i<dateSortArray.count-1; i++) {
+            NSString *subPath = dateSortArray[i];
+            NSDictionary *atts = [[NSFileManager defaultManager] attributesOfItemAtPath:subPath error:nil];
+            BOOL needRemove = YES;
+            if ([atts isKindOfClass:NSDictionary.class]) {
+                NSDate *createDate = [atts fileCreationDate];
+                if (createDate) {
+                    NSTimeInterval difftime = [[NSDate date] timeIntervalSinceDate:createDate];
+                    if (difftime < self.logSaveDays*24*60*60) {
+                        needRemove = NO;
+                    }
                 }
+            }
+            if (needRemove) {
+                [[NSFileManager defaultManager] removeItemAtPath:subPath error:nil];
+            }
+            else {
+                break;
             }
         }
     });
@@ -261,6 +270,33 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:&error];
     unsigned long long size = [attributes[NSFileSize] unsignedLongLongValue];
     return (size/1024./1024.);
+}
+
+- (NSArray *)sortFilePathWithCreateDate
+{
+    NSArray *sortArray = [self.logFilePaths sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
+        NSDictionary *att1 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
+        NSDictionary *att2 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
+        NSDate *cDate1 = nil;
+        NSDate *cDate2 = nil;
+        if ([att1 isKindOfClass:[NSDictionary class]] ) {
+            cDate1 = att1[NSFileCreationDate];
+        }
+        if ([att2 isKindOfClass:[NSDictionary class]]) {
+            cDate2 = att2[NSFileCreationDate];
+        }
+        if ([cDate1 isKindOfClass:[NSDate class]] && [cDate2 isKindOfClass:[NSDate class]]) {
+            return [cDate1 compare:cDate2];
+        }
+        else if (cDate1 == nil) {
+            return NSOrderedAscending;
+        }
+        else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    return sortArray;
 }
 
 #pragma mark - 数据处理
