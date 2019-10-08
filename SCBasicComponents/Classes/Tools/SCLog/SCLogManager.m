@@ -169,6 +169,10 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSLog(@"Begin\n%@", header);
     
     [self deleteExpireLogFile];
+    
+    if ([self.delegate respondsToSelector:@selector(startWriteLogToFile)]) {
+        [self.delegate startWriteLogToFile];
+   }
 }
 
 #pragma mark - Log File
@@ -191,15 +195,38 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSString *file = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
     NSError *error = nil;
     NSArray *paths = [[NSFileManager defaultManager] subpathsOfDirectoryAtPath:file error:&error];
-    paths = [paths sortedArrayUsingSelector:@selector(compare:)];
+    if (error) {
+        SCLog(@"[log][ERROR] %@", error);
+    }
     NSMutableArray *fullPaths = [[NSMutableArray alloc] init];
     for (NSString *name in paths) {
         [fullPaths addObject:[file stringByAppendingPathComponent:name]];
     }
-    if (error) {
-        SCLog(@"[log][ERROR] %@", error);
-    }
-    return fullPaths;
+    
+    // 按时间给Log文件排序
+    NSArray *sortArray = [fullPaths sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
+        NSDictionary *att1 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
+        NSDictionary *att2 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
+        NSDate *cDate1 = nil;
+        NSDate *cDate2 = nil;
+        if ([att1 isKindOfClass:[NSDictionary class]] ) {
+            cDate1 = att1[NSFileCreationDate];
+        }
+        if ([att2 isKindOfClass:[NSDictionary class]]) {
+            cDate2 = att2[NSFileCreationDate];
+        }
+        if ([cDate1 isKindOfClass:[NSDate class]] && [cDate2 isKindOfClass:[NSDate class]]) {
+            return [cDate1 compare:cDate2];
+        }
+        else if (cDate1 == nil) {
+            return NSOrderedAscending;
+        }
+        else {
+            return NSOrderedSame;
+        }
+    }];
+    
+    return sortArray;
 }
 
 ///log文件名称
@@ -227,13 +254,8 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 //删除过期log文件及压缩文件
 -(void)deleteExpireLogFile
 {
-    if ([self.delegate respondsToSelector:@selector(startWriteLogToFile)]) {
-        [self.delegate startWriteLogToFile];
-        return;
-       }
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *dateSortArray = [self sortFilePathWithCreateDate];
+        NSArray *dateSortArray = [self logFilePaths];
         // 移除超出数量的Log
         if (self.maxLogFileCount > 0 && dateSortArray.count > self.maxLogFileCount) {
             NSArray *removeArray = [dateSortArray subarrayWithRange:NSMakeRange(0, dateSortArray.count-self.maxLogFileCount)];
@@ -270,33 +292,6 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:&error];
     unsigned long long size = [attributes[NSFileSize] unsignedLongLongValue];
     return (size/1024./1024.);
-}
-
-- (NSArray *)sortFilePathWithCreateDate
-{
-    NSArray *sortArray = [self.logFilePaths sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
-        NSDictionary *att1 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
-        NSDictionary *att2 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
-        NSDate *cDate1 = nil;
-        NSDate *cDate2 = nil;
-        if ([att1 isKindOfClass:[NSDictionary class]] ) {
-            cDate1 = att1[NSFileCreationDate];
-        }
-        if ([att2 isKindOfClass:[NSDictionary class]]) {
-            cDate2 = att2[NSFileCreationDate];
-        }
-        if ([cDate1 isKindOfClass:[NSDate class]] && [cDate2 isKindOfClass:[NSDate class]]) {
-            return [cDate1 compare:cDate2];
-        }
-        else if (cDate1 == nil) {
-            return NSOrderedAscending;
-        }
-        else {
-            return NSOrderedSame;
-        }
-    }];
-    
-    return sortArray;
 }
 
 #pragma mark - 数据处理

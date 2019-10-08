@@ -51,9 +51,8 @@ typedef enum : NSUInteger {
 /**
  Log打印管理类。
  使用说明：
-    1、开启Log写入本地沙盒功能，需先在Macros里设置SCLogWriteToFile为1，然后调用[startLogAndWriteToFile]方法启动Log写入本地功能。
-    2、用户隐私信息请不要使用SCLog打印。
-    3、Log里请手动添加事件的标签，例如添加Error标签：SCLog(@"[uSDK][ERROR] = %@", error)，[uSDK]为模块标签，常用标签有：[ERROR][DEBUG][WARN][INFO]。便签功能是为了方便Log检索。
+ 1、用户隐私信息请使用SCPLog打印。
+ 2、Log里请手动添加事件的标签，例如添加Error标签：SCLog(@"[uSDK][ERROR] = %@", error)，[uSDK]为模块标签，常用标签有：[ERROR][DEBUG][WARN][INFO]。便签功能是为了方便Log检索。
  */
 @interface SCLogManager : NSObject
 ///代理
@@ -66,8 +65,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSInteger maxLogFileCount;
 ///Log存储到本地的文件最大大小，单位M，0为不限，超过大小后更换新文件写入，默认为0
 @property (nonatomic, assign) CGFloat maxLogFileSize;
-///本地所有的Log文件路径
-@property (nonatomic, readonly) NSArray *logFilePaths;
 ///当前沙盒log文件的名称
 @property (nonatomic, readonly) NSString *currentLogFilePath;
 
@@ -92,8 +89,11 @@ typedef enum : NSUInteger {
  */
 -(void)stopLogWriteToFile;
 
-//删除过期log文件及压缩文件, 用于默认Log文件名称
+/// 删除过期log文件及压缩文件
 -(void)deleteExpireLogFile;
+
+/// 返回所有Log文件路径，按文件创建时间排序
+-(NSArray *)logFilePaths;
 
 @end
 
