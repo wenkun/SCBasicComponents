@@ -206,7 +206,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     // 按时间给Log文件排序
     NSArray *sortArray = [fullPaths sortedArrayUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
         NSDictionary *att1 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
-        NSDictionary *att2 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj1 error:nil];
+        NSDictionary *att2 = [[NSFileManager defaultManager] attributesOfItemAtPath:obj2 error:nil];
         NSDate *cDate1 = nil;
         NSDate *cDate2 = nil;
         if ([att1 isKindOfClass:[NSDictionary class]] ) {
