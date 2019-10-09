@@ -325,9 +325,12 @@
             [super setValue:model forKey:key];
         }
     }
-    else if (![value isKindOfClass:[NSNull class]]) {
+    else if ([value isKindOfClass:cla]) {
         [super setValue:value forKey:key];
     }
+//    else if (![value isKindOfClass:[NSNull class]]) {
+//        [super setValue:value forKey:key];
+//    }
 }
 
 -(void)setValue:(id)value forUndefinedKey:(nonnull NSString *)key
