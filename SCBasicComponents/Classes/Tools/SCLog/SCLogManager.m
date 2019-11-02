@@ -61,6 +61,8 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSString *body = [[NSString alloc] initWithFormat:format arguments:ap];
     va_end (ap);
     
+//    [[SCLogManager share] writeToEndOfFileWithLogString:body];
+    
     NSInteger length = body.length;
     NSInteger i = 0;
     while (length > 1024) {
@@ -160,7 +162,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
         return;
     }
     NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
-    NSString *header = [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
+    NSString *header = [self logHeader];
     
     // 将log输入到文件
     freopen([path cStringUsingEncoding:NSASCIIStringEncoding],"a", stdout);
@@ -175,6 +177,28 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
    }
 }
 
+- (void)writeToEndOfFileWithLogString:(NSString *)log
+{
+#if DEBUG
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss.SSS +0800"];
+    NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
+    
+    NSString *string = [NSString stringWithFormat:@"%@ - %@\n", dateString, log];
+    
+    NSString *path = [[self logFilePath] stringByAppendingPathComponent:self.currentLogFileName];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        NSString *logHeader = [self logHeader];
+        [logHeader writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:nil];
+    }
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:path];
+    [fileHandle seekToEndOfFile];
+    [fileHandle writeData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandle closeFile];
+#endif
+}
+
 #pragma mark - Log File
 
 ///log文件路径
@@ -183,9 +207,9 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     NSString *logFilePath = [NSString stringWithFormat:@"%@/Logs", SCPathDocument];
     NSError *error = nil;
     SCFilePathCreate(logFilePath, error);
-    SCDebugLog(@"[Log] path = %@",logFilePath);
+//    SCDebugLog(@"[Log] path = %@",logFilePath);
     if (error) {
-        SCLog(@"[Log][ERROR] %@",error);
+//        SCLog(@"[Log][ERROR] %@",error);
     }
     return logFilePath;
 }
@@ -295,6 +319,12 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
 }
 
 #pragma mark - 数据处理
+
+/// log文件的初始数据
+- (NSString *)logHeader
+{
+    return [NSString stringWithFormat:@"==================================================\n\n %@  \n==================================================\n ", [self mobileMessage]];
+}
 
 ///log需要的设备信息
 -(NSString *)mobileMessage

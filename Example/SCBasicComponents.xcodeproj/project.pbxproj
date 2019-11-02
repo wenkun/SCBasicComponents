@@ -17,6 +17,7 @@
 		258E20E020A2E6850024B997 /* SCModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20DF20A2E6850024B997 /* SCModel.m */; };
 		258E20E320A2E6A20024B997 /* SCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20E120A2E6A20024B997 /* SCAlertController.m */; };
 		258E20E620A2EBD10024B997 /* SCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 258E20E520A2EBD10024B997 /* SCButton.m */; };
+		25AA0F75236D632E00675E4C /* SCNetworkReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AA0F74236D632E00675E4C /* SCNetworkReachability.m */; };
 		25AA70622033CD30008E835D /* UIView+SCRotate.m in Sources */ = {isa = PBXBuildFile; fileRef = 25AA70602033CD2F008E835D /* UIView+SCRotate.m */; };
 		25BA048D202B40D1004461ED /* UIColor+SCHexadecimal.m in Sources */ = {isa = PBXBuildFile; fileRef = 25BA048A202B40D1004461ED /* UIColor+SCHexadecimal.m */; };
 		25DD9736202B4F66000874D4 /* UIImage+SCExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25DD9735202B4F66000874D4 /* UIImage+SCExtension.m */; };
@@ -83,6 +84,8 @@
 		258E20E220A2E6A20024B997 /* SCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAlertController.h; sourceTree = "<group>"; };
 		258E20E420A2EBD10024B997 /* SCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCButton.h; sourceTree = "<group>"; };
 		258E20E520A2EBD10024B997 /* SCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCButton.m; sourceTree = "<group>"; };
+		25AA0F73236D632E00675E4C /* SCNetworkReachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCNetworkReachability.h; sourceTree = "<group>"; };
+		25AA0F74236D632E00675E4C /* SCNetworkReachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCNetworkReachability.m; sourceTree = "<group>"; };
 		25AA70602033CD2F008E835D /* UIView+SCRotate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SCRotate.m"; sourceTree = "<group>"; };
 		25AA70612033CD2F008E835D /* UIView+SCRotate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SCRotate.h"; sourceTree = "<group>"; };
 		25BA0487202B40D1004461ED /* SCDefaultsUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCDefaultsUI.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 				25228DB920C77696003998A9 /* SCAppJump.m */,
 				258E20DE20A2E6850024B997 /* SCModel.h */,
 				258E20DF20A2E6850024B997 /* SCModel.m */,
+				25AA0F73236D632E00675E4C /* SCNetworkReachability.h */,
+				25AA0F74236D632E00675E4C /* SCNetworkReachability.m */,
 				25DD976B202D5EA5000874D4 /* SCLog */,
 			);
 			path = Tools;
@@ -495,6 +500,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25AA0F75236D632E00675E4C /* SCNetworkReachability.m in Sources */,
 				3341977520AFED69004E4A26 /* SCPickerSuperView.m in Sources */,
 				25DD976F202D73FD000874D4 /* SCLogManager.m in Sources */,
 				6003F59E195388D20070C39A /* SCAppDelegate.m in Sources */,

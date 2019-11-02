@@ -8,6 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    SCUIDeviceErrorNone = 0,
+    SCUIDeviceErrorWIFINotOpen = 101,
+    SCUIDeviceErrorWIFINotReachable = 102,
+    SCUIDeviceErrorLocationServicesUnable = 111,
+    SCUIDeviceErrorOther,
+} SCUIDeviceError;
+
+typedef enum : NSUInteger {
+    SCDeviceNetWorkStatusNotReachable = 0,
+    SCDeviceNetWorkStatusUnknown = 1,
+    SCDeviceNetWorkStatusWWAN2G = 2,
+    SCDeviceNetWorkStatusWWAN3G = 3,
+    SCDeviceNetWorkStatusWWAN4G = 4,
+    SCDeviceNetWorkStatusWiFi = 9,
+} SCDeviceNetWorkStatus;
+
 @interface UIDevice (SCExtension)
 /// Whether the device is a simulator.
 @property (nonatomic, readonly) BOOL isSimulator;
@@ -23,10 +40,15 @@
  @return 当前的WiFi名字
  */
 + (NSString *)currentSSID;
+/// 读取SSID，若没开启定位，则返回失败信息
+/// @param result 读取结果
++ (void)readCurrentSSID:(void(^)(NSString *ssid, NSError *error))result;
 /**
  获取当前连接WiFi的mac
  
  @return 当前WiFi的mac
  */
 +(NSString *)currentBSSID;
+/// 是否打开的手机WIFI
++(BOOL)isWiFiOpened;
 @end

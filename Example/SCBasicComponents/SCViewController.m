@@ -35,7 +35,7 @@
     [SCLogManager share].logSaveDays = 5;
     [SCLogManager share].maxLogFileSize = 0.1;
     [SCLogManager share].maxLogFileCount = 6;
-    [[SCLogManager share] startLogAndWriteToFile];
+//    [[SCLogManager share] startLogAndWriteToFile];
     
     
     SCLog(@"Device Model： %@", [UIDevice deviceMode]);
@@ -62,6 +62,12 @@
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(4 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [SCAppJump telPhone:@"18612032019"];
 //    });
+    
+    [UIDevice readCurrentSSID:^(NSString *ssid, NSError *error) {
+        SCLog(@"error = %@", error);
+        SCDebugLog(@"read ssid finish");
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning

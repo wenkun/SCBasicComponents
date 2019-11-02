@@ -9,6 +9,14 @@
 #import "UIDevice+SCExtension.h"
 #import "sys/utsname.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import <CoreLocation/CoreLocation.h>
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <ifaddrs.h>
+#import <net/if.h>
+#import "SCDefaultsUI.h"
+#import "NSError+SCExtension.h"
+#import "SCNetworkReachability.h"
+
 @implementation UIDevice (SCExtension)
 
 - (BOOL)isSimulator {
@@ -131,6 +139,26 @@
     return ssid;
 }
 
++ (void)readCurrentSSID:(void(^)(NSString *ssid, NSError *error))result
+{
+    if (![UIDevice isWiFiOpened]) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:SCUIDeviceErrorWIFINotOpen description:@"WiFi not open!"];
+        SCSafeBlock(result, nil, error);
+    }
+    else if ([[SCNetworkReachability reachabilityForInternetConnection] currentReachabilityStatus] != SCDeviceNetWorkStatusWiFi) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:SCUIDeviceErrorWIFINotReachable description:@"WiFi not reachable!"];
+        SCSafeBlock(result, nil, error);
+    }
+    else if (IsIOS13 && ![CLLocationManager locationServicesEnabled]) {
+        NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:SCUIDeviceErrorLocationServicesUnable description:@"Need user enable location services first!"];
+        SCSafeBlock(result, nil, error);
+    }
+    else {
+        NSString *ssid = [UIDevice currentSSID];
+        SCSafeBlock(result, ssid, nil);
+    }
+}
+
 /**
  获取当前连接WiFi的mac
  
@@ -163,6 +191,24 @@
     }
     CFRelease((__bridge CFTypeRef)(ifs));
     return info;
+}
+
+
++(BOOL)isWiFiOpened
+{
+    NSCountedSet * cset = [NSCountedSet new];
+    struct ifaddrs *interfaces;
+    if(!getifaddrs(&interfaces) )
+    {
+        for( struct ifaddrs *interface = interfaces; interface; interface = interface->ifa_next)
+        {
+            if ( (interface->ifa_flags & IFF_UP) == IFF_UP )
+            {
+                [cset addObject:[NSString stringWithUTF8String:interface->ifa_name]];
+            }
+        }
+    }
+    return [cset countForObject:@"awdl0"] > 1 ? YES : NO;
 }
 
 @end
