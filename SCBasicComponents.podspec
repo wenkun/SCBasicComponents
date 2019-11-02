@@ -5,11 +5,11 @@
 # Any lines starting with a # are optional, but their use is encouraged
 # To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
 #
-# 2019110201
+# 2019110202
 
 Pod::Spec.new do |s|
   s.name             = 'SCBasicComponents'
-  s.version          = '0.5.3'
+  s.version          = '0.5.4'
   s.summary          = '项目使用的基础组件'
   s.description      = <<-DESC
 该组件整合了项目中经常使用的一些基础的宏和类的扩展，及自定义的一些类的集合
