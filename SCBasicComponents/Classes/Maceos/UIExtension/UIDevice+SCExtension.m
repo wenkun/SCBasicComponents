@@ -149,7 +149,10 @@
         NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:SCUIDeviceErrorWIFINotReachable description:@"WiFi not reachable!"];
         SCSafeBlock(result, nil, error);
     }
-    else if (IsIOS13 && ![CLLocationManager locationServicesEnabled]) {
+    else if (IsIOS13 &&
+             (![CLLocationManager locationServicesEnabled]  &&
+              ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways ||
+               [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse))) {
         NSError *error = [NSError errorWithDomain:NSStringFromClass([self class]) code:SCUIDeviceErrorLocationServicesUnable description:@"Need user enable location services first!"];
         SCSafeBlock(result, nil, error);
     }
