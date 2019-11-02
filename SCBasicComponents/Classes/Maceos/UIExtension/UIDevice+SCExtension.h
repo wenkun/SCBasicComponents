@@ -16,15 +16,6 @@ typedef enum : NSUInteger {
     SCUIDeviceErrorOther,
 } SCUIDeviceError;
 
-typedef enum : NSUInteger {
-    SCDeviceNetWorkStatusNotReachable = 0,
-    SCDeviceNetWorkStatusUnknown = 1,
-    SCDeviceNetWorkStatusWWAN2G = 2,
-    SCDeviceNetWorkStatusWWAN3G = 3,
-    SCDeviceNetWorkStatusWWAN4G = 4,
-    SCDeviceNetWorkStatusWiFi = 9,
-} SCDeviceNetWorkStatus;
-
 @interface UIDevice (SCExtension)
 /// Whether the device is a simulator.
 @property (nonatomic, readonly) BOOL isSimulator;
