@@ -38,6 +38,7 @@
 #import "SCButton.h"
 #import "SCButton_Badge.h"
 #import "SCAlertController.h"
+#import "SHMutiCalendarView.h"
 //Tools
 #import "SCLogManager.h"
 #import "SCAppJump.h"
