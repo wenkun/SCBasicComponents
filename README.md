@@ -2,7 +2,6 @@
 ## Installation
 
 ```ruby
-source 'https://github.com/wenkun/SCBasicComponents.git'
 pod 'SCBasicComponents'
 ```
 
