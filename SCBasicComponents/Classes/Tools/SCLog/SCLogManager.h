@@ -64,7 +64,7 @@ typedef enum : NSUInteger {
 ///Log存储到本地的最多文件数量(包含正在写入的文件)，0为不限制数量，默认为0
 @property (nonatomic, assign) NSInteger maxLogFileCount;
 ///Log存储到本地的文件最大大小，单位M，0为不限，超过大小后更换新文件写入，默认为0
-@property (nonatomic, assign) CGFloat maxLogFileSize;
+@property (nonatomic, assign) float maxLogFileSize;
 ///当前沙盒log文件的名称
 @property (nonatomic, readonly) NSString *currentLogFilePath;
 
