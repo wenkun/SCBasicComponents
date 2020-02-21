@@ -441,6 +441,8 @@
         newImage = CGImageCreateWithImageInRect(image.CGImage, frame);
     }
     
-    return [UIImage imageWithCGImage:newImage];
+    UIImage *image = [[UIImage alloc] initWithCGImage:newImage];
+    CGImageRelease(newImage);
+    return image;
 }
 @end
