@@ -1,0 +1,6 @@
+framework module SCBasicComponentsKit {
+  umbrella header "SCBasicComponentsKit.h"
+
+  export *
+  module * { export * }
+}
