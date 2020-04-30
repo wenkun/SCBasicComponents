@@ -24,7 +24,8 @@
         [NSLayoutConstraint activateConstraints:@[
             [self.textL.heightAnchor constraintEqualToAnchor:self.textL.widthAnchor],
             [self.textL.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
-            [self.textL.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor]
+            [self.textL.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
+            [self.textL.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor]
         ]];
     }
 }
