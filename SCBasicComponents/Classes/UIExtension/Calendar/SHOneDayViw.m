@@ -104,7 +104,7 @@
 {
     self.dayL.textColor = ColorWithHex(@"ffffff");
     self.monthL.textColor = ColorWithHex(@"ffffff");
-    self.contentV.backgroundColor = ColorWithHex(@"5F84EE");
+    self.contentV.backgroundColor = ColorWithHex(@"2283E2");
     self.weekdayL.textColor = ColorWithHex(@"AAAAAA");
 }
 -(void)setDefaultState
