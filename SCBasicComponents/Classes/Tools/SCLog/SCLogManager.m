@@ -97,7 +97,7 @@ NSString * const SCLogDebugTag = @"[DEBUG]";
     fclose(stderr);
 }
 
-- (void)setMaxLogFileSize:(CGFloat)maxLogFileSize
+- (void)setMaxLogFileSize:(float)maxLogFileSize
 {
     _maxLogFileSize = maxLogFileSize;
     if (maxLogFileSize > 0) {
