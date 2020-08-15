@@ -45,4 +45,26 @@
     return NO;
 }
 
+
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView
+{
+    [NSLayoutConstraint equalConstraintFromView:fromView toView:toView sameConstant:0];
+}
+
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView sameConstant:(float)constant
+{
+    [NSLayoutConstraint equalConstraintFromView:fromView toView:toView edgeInsets:UIEdgeInsetsMake(constant, constant, constant, constant)];
+}
+
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView edgeInsets:(UIEdgeInsets)edgeInsets
+{
+    fromView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [fromView.leftAnchor constraintEqualToAnchor:toView.leftAnchor constant:edgeInsets.left],
+        [fromView.topAnchor constraintEqualToAnchor:toView.topAnchor constant:edgeInsets.top],
+        [fromView.rightAnchor constraintEqualToAnchor:toView.rightAnchor constant:-edgeInsets.right],
+        [fromView.bottomAnchor constraintEqualToAnchor:toView.bottomAnchor constant:-edgeInsets.bottom],
+       ]];
+}
+
 @end

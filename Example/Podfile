@@ -1,15 +1,7 @@
 #use_frameworks!
 
-platform :ios, '8.0'
+platform :ios, '9.0'
 
 target 'SCBasicComponents_Example' do
-#  pod 'SCBasicComponents', :path => '../'
-#  pod 'STopAlertView', :git => 'https://10.159.46.130/iOS_pods/STopAlertView.git'
-#    pod 'MBProgressHUD'
-
-#  target 'SCBasicComponents_Tests' do
-#    inherit! :search_paths
-#
-#
-#  end
+  pod 'SCBasicComponents', :path => '../'
 end

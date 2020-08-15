@@ -1,0 +1,1 @@
+../../../../../SCBasicComponents/Classes/Tools/SCLog/SCLogManager.h

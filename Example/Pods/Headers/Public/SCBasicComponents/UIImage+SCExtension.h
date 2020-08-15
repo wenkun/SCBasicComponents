@@ -1,0 +1,1 @@
+../../../../../SCBasicComponents/Classes/UIExtension/UIImage+SCExtension.h

@@ -17,7 +17,11 @@
 ///是否是相同位置和相同约束关系的约束，即Item、Attribute、relation相同
 -(BOOL)isSamePositionAndRelotionTo:(NSLayoutConstraint *)another;
 
-/////若已存在相同位置的约束，则更新约束，返回YES；若不存在，则添加此约束，返回NO
-//-(BOOL)update;
+/// 设置fromView的边缘约束等于toView
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView;
+/// 基于toView设置fromView的边缘约束
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView sameConstant:(float)constant;
+/// 基于toView设置fromView的边缘约束
++ (void)equalConstraintFromView:(UIView *)fromView toView:(UIView *)toView edgeInsets:(UIEdgeInsets)edgeInsets;
 
 @end

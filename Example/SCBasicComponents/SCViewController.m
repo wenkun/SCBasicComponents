@@ -68,6 +68,11 @@
         SCDebugLog(@"read ssid finish");
     }];
     
+    
+//    UIView *view = [[UIView alloc] init];
+//    view.backgroundColor = [UIColor redColor];
+//    [self.view addSubview:view];
+//    [NSLayoutConstraint equalConstraintFromView:view toView:self.view edgeInsets:UIEdgeInsetsMake(100, 100, 100, 100)];
 }
 
 - (void)didReceiveMemoryWarning

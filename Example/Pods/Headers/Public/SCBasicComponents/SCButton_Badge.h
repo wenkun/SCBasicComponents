@@ -1,0 +1,1 @@
+../../../../../SCBasicComponents/Classes/UIExtension/SCButton_Badge.h
