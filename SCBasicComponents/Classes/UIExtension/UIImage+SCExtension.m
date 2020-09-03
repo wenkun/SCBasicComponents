@@ -41,6 +41,42 @@
     return image;
 }
 
+/// 转为黑白图片
+- (UIImage *)convertImageToGrey
+{
+    CIImage *beginImage = [CIImage imageWithCGImage:self.CGImage];
+    CIFilter * filter = [CIFilter filterWithName:@"CIColorControls"];
+    [filter setValue:beginImage forKey:kCIInputImageKey];
+    //饱和度 0---2 默认为1
+    [filter setValue:[NSNumber numberWithFloat:0] forKey:@"inputSaturation"];
+    // 得到过滤后的图片
+    CIImage *outputImage = [filter outputImage];
+    // 转换图片, 创建基于GPU的CIContext对象
+    CIContext *context = [CIContext contextWithOptions: nil];
+    CGImageRef cgimg = [context createCGImage:outputImage fromRect:[outputImage extent]];
+    UIImage *newImg = [UIImage imageWithCGImage:cgimg scale:self.scale orientation:self.imageOrientation];
+    // 释放C对象
+    CGImageRelease(cgimg);
+
+    return newImg;
+}
+
+/// 黑边反转（镂空部位为黑色）
+- (UIImage *)convertImageToReverse
+{
+    CGSize size = self.originalSize;
+    CGRect imageRect = CGRectMake(0, 0, size.width, size.height);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+　　 CGContextRef context = CGBitmapContextCreate(nil, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaNone);  CGContextDrawImage(context, imageRect, [self CGImage]);
+    CGImageRef imageRef = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:imageRef scale:self.scale orientation:self.imageOrientation];
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(context);
+    CFRelease(imageRef);
+
+    return newImage;
+}
+
 #pragma mark - gif
 
 +(UIImage *)animatedGIFWithData:(NSData *)data {

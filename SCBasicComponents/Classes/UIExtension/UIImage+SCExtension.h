@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @interface UIImage (SCExtension)
 #pragma mark - 透明度
+/// 透明度
 - (UIImage *)imageByApplyingAlpha:(CGFloat )alpha;
 #pragma mark - color
 
@@ -20,6 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
  @return UIImage
  */
 +(nullable UIImage *)imageWithColor:(UIColor *)color;
+
+/// 转为黑白图片
+- (UIImage *)convertImageToGrey;
+
+/// 黑边反转（镂空部位为黑色）
+- (UIImage *)convertImageToReverse;
+
 
 #pragma mark - gif
 
